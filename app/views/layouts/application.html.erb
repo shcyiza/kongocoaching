@@ -5,16 +5,15 @@
     <title><%= content_for?(:title) ? yield(:title) : "Kongocoaching" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kongocoaching" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
       <%= render 'layouts/navigation' %>
-    </header>
     <main role="main">
        <%= render 'layouts/messages' %>
+       <%= render 'layouts/header_modals' %>
        <%= yield %>
     </main>
   </body>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
 </html>

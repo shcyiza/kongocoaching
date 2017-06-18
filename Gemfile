@@ -12,6 +12,25 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem "paperclip", git: "https://github.com/thoughtbot/paperclip.git"
+gem 'access-granted', '~> 1.1.0'
+#gems for the emails
+gem 'sidekiq'
+gem 'inky-rb', require: 'inky'
+gem 'premailer-rails' # Stylesheet inlining for email **
+gem 'mailjet', git: 'https://github.com/mailjet/mailjet-gem.git'
+#end gems for emails
+gem 'will_paginate'
+gem 'mail_form'
+gem 'truncate_html'
+gem 'foundation-icons-sass-rails'
+
+group :production do
+  gem 'rails_12factor'
+  gem 'aws-sdk', '~> 2.3'
+  gem 'exception_notification'
+end
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
@@ -28,6 +47,7 @@ gem 'high_voltage'
 gem 'pg'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
+
 group :development do
   gem 'better_errors'
   gem 'guard-bundler'
@@ -40,11 +60,13 @@ group :development do
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
 end
+
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
 end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'

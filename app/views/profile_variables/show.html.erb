@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @profile_variable.profile %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @profile_variable.name %>
+</p>
+
+<p>
+  <strong>Variable:</strong>
+  <%= @profile_variable.variable %>
+</p>
+
+<%= link_to 'Edit', edit_profile_variable_path(@profile_variable) %> |
+<%= link_to 'Back', profile_variables_path %>

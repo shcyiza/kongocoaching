@@ -1,0 +1,27 @@
+<div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form', class: "popup-form", id:"myRegister"}) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="form-group ">
+          <%= f.text_field :name, :autofocus => true, class: 'form-control form-white', placeholder: "Name" %>
+        </div>
+        <div class="form-group">
+          <%= f.email_field :email, class: 'form-control form-white', placeholder: "Email" %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password, class: 'form-control form-white', placeholder: "Password" %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password_confirmation, class: 'form-control form-white', placeholder: "Password confirmation"  %>
+        </div>
+        <%= fields_for :profile do |profile_f| %>
+          <div class="form-inputs">
+            <%= profile_f.date_select :birth_date %>
+            <%= profile_f.select :sex, [['femme', 1], ['homme', 0]] %>
+          </div>
+        <% end %>
+
+         <%= f.submit 'Sign up', :class => 'btn btn-submit' %>
+      <% end %>
+  </div>
+</div>

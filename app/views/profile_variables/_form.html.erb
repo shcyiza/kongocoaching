@@ -1,0 +1,13 @@
+<%= simple_form_for(@profile_variable) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :profile %>
+    <%= f.input :name %>
+    <%= f.input :variable %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
