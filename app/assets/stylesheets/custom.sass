@@ -1,6 +1,22 @@
 @charset "UTF-8"
 /* Your custom styles */
 
+$loepard: #5e7942
+
+body
+  background-color: #eee
+  width: 100%
+  height: 100%
+  margin: 0px
+  padding: 0px
+
+main
+  background-color: rgba(#c98a60, 0)
+  width: 100%
+  margin: 0px
+  padding: 0px
+  padding-top: 4rem
+
 .popup-form select
   background-color: rgba(#ffffff, 0)
   color: white
@@ -18,3 +34,59 @@
   border-bottom: 2px solid white
   &:focus
     border-bottom: 0px solid white
+
+.step .form-control
+  color: black
+  border: 0px solid #a0a0a0
+  border-bottom: 2px solid #a0a0a0
+  &:focus
+    border-bottom: 3px solid #4088DA
+  select
+    padding: 2rem
+
+input:not(:empty)
+  color: black
+
+.step-form
+  width: 90%
+  max-width: 775px
+  margin: 30px auto
+
+.hero
+  position: relative
+  width: 100%
+  padding: 5em 0
+  overflow: hidden
+  // Hide overflow to contain the background
+
+.hero__background
+  position: absolute
+  top: 0
+  left: 0
+  width: 200%
+  // Where the magic happens
+  -webkit-filter: blur(5px)
+  -webkit-transform: translate3d(0, 0, 0)
+
+.hero__title
+  background: white
+  position: relative
+  text-align: center
+  color: $loepard
+
+.btn_outline
+  padding: 12px 20px
+
+.form_title h3 strong
+  background-color: $loepard
+
+a
+  color: rgba(green, 0.7)
+  &:hover
+    font-weight: bold
+    background: none
+    color: $loepard
+
+a.btn_full
+  &:hover
+    color: white

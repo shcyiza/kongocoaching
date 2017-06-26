@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Coaches crew:</strong>
+  <%= @kickstar.coaches_crew %>
+</p>
+
+<p>
+  <strong>Crew:</strong>
+  <%= @kickstar.crew %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @kickstar.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @kickstar.end_time %>
+</p>
+
+<%= link_to 'Edit', edit_kickstar_path(@kickstar) %> |
+<%= link_to 'Back', kickstars_path %>

@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # Training belongs to coaches_crew so we can keep track of what crew organize the training session and what coaches trains him
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
-  has_many :profile_variables, dependent: :destroy
+  has_many :profile_variables, through: :profile
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -11,7 +11,23 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
-//= require_tree ./app_default
+//= require_tree .
+//= require turbolinks
+
+function animate( elementId, animation ) {
+  var element = document.getElementById( elementId );
+  element.classList.add("animated", animation );
+};
+
+function activateClass( elementId ) {
+  var element = document.getElementById(elementId);
+  element.classList.add("active");
+};
+
+function disActivateClass( elementId ) {
+  var element = document.getElementById(elementId);
+  element.classList.remove("active");
+};

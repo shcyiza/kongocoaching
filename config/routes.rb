@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :kickstars
   resources :profile_variables
   resources :profiles
-  root to: 'visitors#index'
-  devise_for :users
+  root to: 'crews#show', id: '1'
+  devise_for :users, controllers: { registrations: "crews/registrations" }
   resources :users
 
   resources :participants

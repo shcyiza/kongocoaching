@@ -48,7 +48,7 @@ class AccessPolicy
     end
 
     role :client, proc { |user| user.client? } do
-      can [:show], Profile do |profile, user|
+      can :show, Profile do |profile, user|
         user == profile.user
       end
     end

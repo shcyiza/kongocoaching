@@ -1,42 +1,125 @@
-<br>
-<div class="modal-dialog">
-  <div class="modal-content modal-popup">
-    <h3>Commencez vôtre Kickstar</h3>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form', class: "popup-form", id:"myRegister"}) do |f| %>
-      <%= devise_error_messages! %>
-      <div class="form-group ">
-        <%= f.text_field :name, :autofocus => true, class: 'form-control form-white', placeholder: "Nom" %>
-      </div>
-      <%= fields_for :profile do |profile_f| %>
-        <div class="form-inputs row">
-          <%= profile_f.hidden_field :crew_id, value: @crew.id, readonly: true %>
-          <div class="col-lg-8">
-            <%= profile_f.text_field :birth_date, class: 'form-control form-white', 'data-toggle' => 'datepicker', placeholder: "Date de naissance" %>
-          </div>
-          <div class="col-lg-4">
-            <%= profile_f.select :sex, [['femme', 1], ['homme', 0]], {:prompt => 'Sex'} %>
-          </div>
+
+<div class="hero">
+  <img class="hero__background" src="/assets/back-dc9f65e7a5bb8629f835522dded76a2d14de4b6eed172e23d1ffdab60828fcaf.jpg">
+    <h1 class="hero__title"><b>Commencez vôtre Kickstar</b></h1>
+    <h4 class="hero__title">Incription en quelque clique</h4>
+  </p>
+
+<div id="step-form" class="step-form animated fadeInDown">
+  <!--  Tabs -->
+  <ul class="nav nav-tabs">
+    <li id="step1tab" class="active"><a href="#step1" data-toggle="tab" aria-expanded="true">1</a>
+    </li>
+    <li id="step2tab" class=""><a href="#step2" data-toggle="tab" aria-expanded="false">2</a>
+    </li>
+    <li class=""><a >3</a>
+    </li>
+  </ul>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form', id:"myRegister"}) do |f| %>
+  <%= devise_error_messages! %>
+
+	<div class="tab-content">
+		<div class="tab-pane active" id="step1">
+      <!--première etape du formulaire-->
+      <div class="form_title">
+				<h3><strong>1</strong>Etape 1</h3>
+				<p>
+					Qui êtes vous?
+				</p>
+			</div>
+      <div class="step">
+
+        <div class="form-group">
+          <label>Nom:</label>
+          <%= f.text_field :name, :autofocus => true, class: 'form-control', placeholder: "Nom" %>
         </div>
-      <% end %>
-      <div class="form-group">
-        <%= f.email_field :email, class: 'form-control form-white', placeholder: "e-mail" %>
-      </div>
-      <div class="form-group">
-        <%= f.password_field :password, class: 'form-control form-white', placeholder: "mot de passe" %>
-      </div>
-      <div class="form-group">
-        <%= f.password_field :password_confirmation, class: 'form-control form-white', placeholder: "confirmation du mot de passe"  %>
-      </div>
+        <%= fields_for :profile do |profile_f| %>
+          <div class="form-inputs row">
+            <%= profile_f.hidden_field :crew_id, value: @crew.id, readonly: true %>
+            <div class="col-lg-8">
+              <label>Date de naissance:</label>
+              <%= profile_f.text_field :birth_date, class: 'form-control', 'data-toggle' => 'datepicker', placeholder: "Date de naissance" %>
+            </div>
+            <div class="col-lg-4">
+              <label>sex:</label>
+              <%= profile_f.select :sex, [['femme', 1], ['homme', 0]], {}, {class: 'form-control'} %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label>Téléphone:</label>
+            <%= profile_f.text_field :phonenr, class: 'form-control', placeholder: "Téléphone" %>
+          </div>
+        <% end %>
 
-       <%= f.submit 'Kickstar!', class: 'btn btn-submit' %>
-    <% end %>
-  </div>
+      </div>
+      <a href="#step2" class="btn_full" data-toggle="tab" aria-expanded="true" onclick="animateTrigger( 'step2', 'step1', 'fadeInRight', activeTab );" onclick="animateTrigger('step1tab', 'step2tab');">
+        Etape 2 <span data-icon="9"></span>
+      </a>
+      <!--fin 1er etape-->
+		</div>
+		<div class="tab-pane" id="step2">
+      <div class="form_title">
+				<h3><strong>2</strong>Etape 2</h3>
+				<p>
+					Securisé votre compte.
+				</p>
+			</div>
+      <div class="step">
+
+        <div class="form-group">
+          <label>email:</label>
+          <%= f.email_field :email, class: 'form-control', placeholder: "exemple@kongo.com", id: "email_booking" %>
+        </div>
+        <div class="form-group">
+          <label>mot de passe:</label>
+          <%= f.password_field :password, class: 'form-control', placeholder: "mot de passe" %>
+        </div>
+        <div class="form-group">
+          <label>confirmation du mot de passe:</label>
+          <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "confirmation du mot de passe"  %>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <a href="#step1" class="btn_outline" data-toggle="tab" aria-expanded="true" onclick="animateTrigger( 'step1', 'step2', 'fadeInLeft', activeTab );" >
+            <span data-icon="&#x38;" onhover="animated infinate fadeOutRight"></span> Etape 1
+          </a>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <%= button_tag class: 'btn_full', type: :submit do %>
+           Etape 3 <span data-icon="9"></span></a>
+          <% end %>
+        </div>
+      </div>
+    <!--fin 2er etape-->
+    </div>
+	</div>
+  <% end %>
 </div>
-
+</div>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<%= javascript_include_tag 'datepicker.js', 'data-turbolinks-track' => 'reload' %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.5.3/datepicker.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
   $('[data-toggle="datepicker"]').datepicker({
-    autoHide: true
+    format: 'dd/mm/yyyy',
+    autoHide: true,
+    weekStart: 1,
+    daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+    language: "fr-FR",
   });
+
+  function activeTab( elOutId, elInId ) {
+    disActivateClass( elOutId );
+    activateClass( elInId );
+  };
+
+  function animateTrigger( elOutId, elInId, animation, fn ) {
+    if (arguments[3]) {
+      fn( elInId+"tab", elOutId+"tab"  );
+    };
+    animate( elOutId, animation );
+  };
 </script>

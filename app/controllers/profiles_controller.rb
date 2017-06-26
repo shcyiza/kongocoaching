@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    authorize! :show, @profile
   end
 
   # GET /profiles/new
