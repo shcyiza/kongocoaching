@@ -1,0 +1,18 @@
+<div class="hero">
+  <img class="hero__background" src="/assets/back-dc9f65e7a5bb8629f835522dded76a2d14de4b6eed172e23d1ffdab60828fcaf.jpg">
+    <h1 class="hero__title"><b>Commencez vôtre Kickstar</b></h1>
+    <h4 class="hero__title">Quand voulez prendre RDV?</h4>
+  </p>
+<div class="container hero__title" style="padding: 100px;">
+  <%= render 'form', kickstart: @kickstart %>
+</div>
+</div>
+<%= simple_form_for(@profile) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :motivation %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

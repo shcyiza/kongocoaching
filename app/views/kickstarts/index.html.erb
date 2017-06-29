@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kickstarts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Coaches crew</th>
+      <th>Crew</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kickstarts.each do |kickstart| %>
+      <tr>
+        <td><%= kickstart.coaches_crew %></td>
+        <td><%= kickstart.crew %></td>
+        <td><%= kickstart.start_time %></td>
+        <td><%= kickstart.end_time %></td>
+        <td><%= link_to 'Show', kickstart %></td>
+        <td><%= link_to 'Edit', edit_kickstart_path(kickstart) %></td>
+        <td><%= link_to 'Destroy', kickstart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kickstart', new_kickstart_path %>

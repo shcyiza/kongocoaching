@@ -1,0 +1,2 @@
+module KickstartsHelper
+end

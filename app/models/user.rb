@@ -111,6 +111,12 @@ end
     return result
   end
 
+  def his_crew
+    if self.client?
+      result = self.profile.crew
+    end
+  end
+
 #----------------------methods for all -----------------------------------
   def actif?
     if CoachesCrew.where(coach_id: self.coach.id).count >= 1 || self.has_crew?

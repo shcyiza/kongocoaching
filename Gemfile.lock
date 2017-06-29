@@ -338,6 +338,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
+    time_splitter (1.1.0)
     truncate_html (0.9.3)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
@@ -414,6 +415,7 @@ DEPENDENCIES
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   therubyracer
+  time_splitter
   truncate_html
   turbolinks (~> 5)
   tzinfo-data

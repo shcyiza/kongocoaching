@@ -52,6 +52,11 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def addmotivation
+    @profile = Profile.find(params[:id])
+    Profile.update( motivation: params[:motivation] )
+  end
+
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
@@ -70,6 +75,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_id, :crew_id, :coaches_crew_id, :birth_date, :sex)
+      params.require(:profile).permit(:user_id, :crew_id, :coaches_crew_id, :birth_date, :sex, :motivation, :phonenr)
     end
 end

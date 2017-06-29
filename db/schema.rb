@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170624220044) do
+ActiveRecord::Schema.define(version: 20170628062221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,22 +41,23 @@ ActiveRecord::Schema.define(version: 20170624220044) do
     t.string   "name"
   end
 
-  create_table "kickstars", force: :cascade do |t|
+  create_table "kickstarts", force: :cascade do |t|
     t.integer  "coaches_crew_id"
     t.integer  "crew_id"
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["coaches_crew_id"], name: "index_kickstars_on_coaches_crew_id", using: :btree
-    t.index ["crew_id"], name: "index_kickstars_on_crew_id", using: :btree
+    t.index ["coaches_crew_id"], name: "index_kickstarts_on_coaches_crew_id", using: :btree
+    t.index ["crew_id"], name: "index_kickstarts_on_crew_id", using: :btree
   end
 
   create_table "participants", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "traning_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "enrollable_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "enrollable_type"
   end
 
   create_table "profile_variables", force: :cascade do |t|
@@ -127,8 +128,8 @@ ActiveRecord::Schema.define(version: 20170624220044) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "kickstars", "coaches_crews"
-  add_foreign_key "kickstars", "crews"
+  add_foreign_key "kickstarts", "coaches_crews"
+  add_foreign_key "kickstarts", "crews"
   add_foreign_key "profile_variables", "profiles"
   add_foreign_key "profiles", "coaches_crews"
   add_foreign_key "profiles", "crews"

@@ -22,9 +22,21 @@ function animate( elementId, animation ) {
   element.classList.add("animated", animation );
 };
 
+function animateByElement( element, animation ) {
+  element.classList.add("animated", animation );
+};
+
 function activateClass( elementId ) {
   var element = document.getElementById(elementId);
   element.classList.add("active");
+};
+
+function addStyle( el, styleClass ) {
+  el.classList.add(styleClass);
+};
+
+function removeStyle( el, styleClass ) {
+  el.classList.remove(styleClass);
 };
 
 function disActivateClass( elementId ) {

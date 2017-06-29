@@ -12,7 +12,7 @@
 // Variables
 // -----------------------------------------------------------------------------
 
-$brand-color: #39f;
+$brand-color: #00872a;
 
 
 // Container
@@ -161,25 +161,30 @@ $brand-color: #39f;
       background-color: #fff;
 
       &:hover {
-        background-color: lighten($brand-color, 35%);
+        background-color: rgba(#64b46c, 1);
+
       }
 
-      &.muted,
+      &.muted{
+        color: rgba(#64b46c, 1);
+      }
       &.muted:hover {
-        color: #999;
+        color: white;
       }
 
       &.highlighted {
-        background-color: lighten($brand-color, 35%);
+        text-decoration: underline;
       }
 
       &.highlighted:hover {
-        background-color: lighten($brand-color, 30%);
+        color: black;
       }
 
       &.picked,
       &.picked:hover {
-        color: $brand-color;
+        background-color: $brand-color;
+        color: white;
+
       }
 
       &.disabled,
@@ -190,7 +195,8 @@ $brand-color: #39f;
         background-color: #fff;
 
         &.highlighted {
-          background-color: lighten($brand-color, 35%);
+          color: $brand-color;
+          font-weight: bolder;
         }
       }
 

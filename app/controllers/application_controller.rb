@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   rescue_from "AccessGranted::AccessDenied" do |exception|
     redirect_back(fallback_location: root_path, alert: "You don't have permission to access this page.")
   end
+
+  def add_participant enrollable
+    Participant.create! user: current_user, enrollable: enrollable
+  end
+
   protected
 
   def configure_permitted_parameters

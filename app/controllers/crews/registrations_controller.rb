@@ -19,7 +19,7 @@ class Crews::RegistrationsController < Devise::RegistrationsController
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         respond_to do |format|
-          format.html { redirect_to new_kickstar_path, notice: 'La dernière étape!!' }
+          format.html { redirect_to new_kickstart_path, notice: 'La dernière étape!!' }
         end
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
