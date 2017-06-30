@@ -31,15 +31,23 @@ function activateClass( elementId ) {
   element.classList.add("active");
 };
 
-function addStyle( el, styleClass ) {
-  el.classList.add(styleClass);
-};
-
-function removeStyle( el, styleClass ) {
-  el.classList.remove(styleClass);
-};
-
 function disActivateClass( elementId ) {
   var element = document.getElementById(elementId);
   element.classList.remove("active");
+};
+
+function activateClassByElement( element ) {
+  element.classList.add("active");
+};
+
+function disActivateClassByElement( element ) {
+  element.classList.remove("active");
+};
+
+function addStyleTo( el, styleClass ) {
+  el.classList.add(styleClass);
+};
+
+function removeStyleTo( el, styleClass ) {
+  el.classList.remove(styleClass);
 };
