@@ -17,7 +17,7 @@ class KickstartsController < ApplicationController
   # GET /kickstarts/new
   def new
     @profile = current_user.profile
-    @kickstart = current_user.his_crew.kickstarts.build
+    @kickstart = current_user.his_crew_as_client.kickstarts.build
   end
 
   # GET /kickstarts/1/edit
@@ -27,18 +27,26 @@ class KickstartsController < ApplicationController
   # POST /kickstarts
   # POST /kickstarts.json
   def create
-    end_time =
-    @kickstart = current_user.his_crew.kickstarts.build(kickstart_params)
-
-    respond_to do |format|
-      if @kickstart.save
-        add_participant @kickstart
-        format.html { redirect_to @kickstart, notice: 'Kickstart was successfully created.' }
-        format.json { render :show, status: :created, location: @kickstart }
-      else
+    @kickstart = current_user.his_crew_as_client.kickstarts.build(kickstart_params)
+    if @kickstart.save
+      add_participant @kickstart
+      respond_to do |format|
+        format.js #remote true enable this send sends ajax callbacks
+      end
+    else
+      respond_to do |format|
         format.html { render :new }
         format.json { render json: @kickstart.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def after_creation_actions
+    @kickstart = current_user.his_kickstart_as_client
+    NewKickstartMailer.new_registered_kickstart(current_user).deliver_now
+    respond_to do |format|
+      format.html { redirect_to @kickstart, notice: "Votre RDV à bien été pris et attend un confirmation de la date det l'heure." }
+      format.json { render :show, status: :created, location: @kickstart }
     end
   end
 

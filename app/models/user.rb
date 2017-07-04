@@ -1,13 +1,14 @@
 class User < ApplicationRecord
   has_many :participants, dependent: :destroy
-  has_many :trainings, through: :participants #As a client he can participates to many trainings
+  has_many :trainings, through: :participants, source: :enrollable, source_type: "Training" #As a client he can participates to many trainings
+  has_many :kickstarts, through: :participants, source: :enrollable, source_type: "Kickstart" #As a client he can do many kickstart
   has_one :coordinator, dependent: :destroy #a user can be a crew coordinator only once
   has_one :coach, dependent: :destroy #a user be assigned coach only once
   has_many :crews, through: :coordinator #As a coordinator which crew does he manage?
   has_many :coaches_crews, through: :coach #As a coach for what crews is he working?
-  has_many :trainings, through: :coaches_crew #As a coach for wich crew is he giving a particular training
   # Training belongs to coaches_crew so we can keep track of what crew organize the training session and what coaches trains him
   has_one :profile, dependent: :destroy
+  #having user attributes and his profile's attributes at the same place
   accepts_nested_attributes_for :profile
   has_many :profile_variables, through: :profile
 
@@ -62,6 +63,21 @@ end
      end
    end
 
+   def his_crew_as_coord
+     if self.coordinator? && has_crew?
+       return current_user.coordinator.crews.last
+     else
+       return false
+     end
+   end
+
+   def all_crew_as_coord
+     if self.coordinator? && has_crew?
+       return current_user.coordinator.crews
+     else
+       return false
+     end
+   end
 # ------------------------methods for coaches--------------------------------------
    def coach? #is the selected user a coach or a coordinator (in the real world coordinators often gives training too)
      if self.coach
@@ -111,10 +127,28 @@ end
     return result
   end
 
-  def his_crew
-    if self.client?
+  def his_crew_as_client
+    result = false
+    if self.client? &&  self.profile.crew != nil
       result = self.profile.crew
     end
+    return result
+  end
+
+  def his_kickstart_as_client
+    result = false
+    if self.client?
+      result = self.kickstarts.last
+    end
+    return result
+  end
+
+  def all_kickstart_as_client
+    result = false
+    if self.client?
+      result = self.kickstarts
+    end
+    return result
   end
 
 #----------------------methods for all -----------------------------------
@@ -130,15 +164,6 @@ end
     result = false
     if self.crew_owner?(crew) || self.coach_for?(crew) || self.client_of?(crew)
       result = true
-    end
-    return result
-  end
-
-
-  def affiliation #returns name of crew he is affiliated with, retun false if no affiliation
-    result = false
-    if self.client? &&  self.profile.crew != nil
-      result = self.profile.crew
     end
     return result
   end

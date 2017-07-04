@@ -36,6 +36,8 @@ end
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-byebug'
+  gem "letter_opener"
+  gem 'capybara-email'
 end
 group :development do
   gem 'web-console', '>= 3.3.0'

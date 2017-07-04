@@ -8,4 +8,7 @@ class Crew < ApplicationRecord
 
   accepts_nested_attributes_for :coaches, allow_destroy: true
 
+  def owner
+    self.coordinator.user
+  end
 end

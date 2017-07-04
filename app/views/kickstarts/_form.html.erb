@@ -5,7 +5,7 @@
       Choisisez la date du votre RDV..
     </p>
   </div>
-<%= simple_form_for(@kickstart) do |f| %>
+<%= simple_form_for @kickstart, remote: true do |f| %>
   <%= f.error_notification %>
 <hr>
   <div class="form-inputs row" id="date_form">

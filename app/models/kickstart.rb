@@ -4,4 +4,5 @@ class Kickstart < ApplicationRecord
   has_one :participant, as: :enrollable
   extend TimeSplitter::Accessors
   split_accessor :start_time
+
 end
