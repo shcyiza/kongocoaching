@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :clubs
   root to: 'kongo_coaching_pages#home'
   resources :kickstarts
   resources :profile_variables

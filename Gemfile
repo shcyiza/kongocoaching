@@ -26,6 +26,7 @@ gem 'will_paginate'
 gem 'mail_form'
 gem 'truncate_html'
 gem 'foundation-icons-sass-rails'
+gem 'geocoder'
 
 group :production do
   gem 'rails_12factor'

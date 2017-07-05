@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628062221) do
+ActiveRecord::Schema.define(version: 20170705164658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clubs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float    "latitude"
+    t.float    "longitude"
+  end
+
+  create_table "clubs_crews", force: :cascade do |t|
+    t.integer  "club_id"
+    t.integer  "crew_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_clubs_crews_on_club_id", using: :btree
+    t.index ["crew_id"], name: "index_clubs_crews_on_crew_id", using: :btree
+  end
 
   create_table "coaches", force: :cascade do |t|
     t.integer  "user_id"
@@ -128,6 +146,8 @@ ActiveRecord::Schema.define(version: 20170628062221) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "clubs_crews", "clubs"
+  add_foreign_key "clubs_crews", "crews"
   add_foreign_key "kickstarts", "coaches_crews"
   add_foreign_key "kickstarts", "crews"
   add_foreign_key "profile_variables", "profiles"

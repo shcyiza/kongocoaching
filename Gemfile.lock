@@ -138,6 +138,7 @@ GEM
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
     foundation_emails (2.2.1.0)
+    geocoder (1.4.4)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     guard (2.14.1)
@@ -386,6 +387,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   foundation-icons-sass-rails
+  geocoder
   guard-bundler
   guard-rails
   guard-rspec

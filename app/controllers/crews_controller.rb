@@ -12,10 +12,11 @@ class CrewsController < ApplicationController
   # GET /crews/1
   # GET /crews/1.json
   def show
+    @club = @crew.club
   end
 
   def sign_up
-    
+
   end
 
   # GET /crews/new
