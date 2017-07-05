@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :kickstarts
   resources :profile_variables
   resources :profiles
-  devise_for :users
+  devise_for :users, controllers: { registrations: "crews/registrations" }
   resources :users
   resources :participants
   resources :trainings
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :coaches
   resources :crews
   get '/crews/:id/signup', to: 'crews#sign_up'
-  get '/update_motivation', to: 'kickstarts#update_motivation'
-  get "/after_kickstart_creation", to: 'kickstarts#after_kickstart_creation'
+  post '/add_motivation', to: 'kickstarts#add_motivation'
+  post '/after_kickstart_creation', to: 'kickstarts#after_creation_actions'
 
 end

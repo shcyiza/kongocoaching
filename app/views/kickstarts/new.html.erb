@@ -11,14 +11,21 @@
 <div class="modal fade" id="motivation" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content modal-popup">
-      <%= simple_form_for(@profile) do |f| %>
+      <%= simple_form_for(@profile, url: {action: "add_motivation", controller: 'kickstarts'}, method: 'post') do |f| %>
         <div class="form-inputs">
           <%= f.input :motivation %>
         </div>
 
-        <div class="form-actions">
-          <%= f.button :submit %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= link_to "Je le ferais avec mon coach...", '/after_kickstart_creation', method: :post %>
         </div>
+        <div class="form-actions col-md-6">
+          <%= button_tag class: 'btn_full', type: :submit do %>
+           Envoyer!
+          <% end %>
+        </div>
+      </div>
       <% end %>
     </div>
   </div>

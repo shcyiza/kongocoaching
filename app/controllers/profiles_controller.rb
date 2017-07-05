@@ -52,11 +52,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def addmotivation
-    @profile = Profile.find(params[:id])
-    Profile.update( motivation: params[:motivation] )
-  end
-
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
