@@ -1,0 +1,114 @@
+<div>
+  <div class="form_title">
+    <h3><strong>3</strong>Etape Final</h3>
+    <p>
+      Choisisez la date du votre RDV..
+    </p>
+  </div>
+<%= simple_form_for @kickstart, remote: true do |f| %>
+  <%= f.error_notification %>
+<hr>
+  <div class="form-inputs row" id="date_form">
+    <div class="col-md-3 container">
+      <div class="form_title">
+        <h3>La date?</h3>
+      </div>
+      <%= f.input :start_time_date, as: :string, label: false, input_html: {  data: {toggle: 'datepicker'} } %>
+      <%= f.input :end_time, as: :string, as: :hidden, input_html: {  id: "end_time_input" } %>
+    </div>
+
+    <div class="col-md-9 hidden" id="time_form">
+      <div class="form_title">
+        <h3>Quelle moment de la journée?</h3>
+      </div>
+      <div class="col-md-3" data-turbolinks="false" data-starthour="08:00" data-endhour="11:00">
+        <a class="btn">
+          <font size="200" color="#5b5b5b"><i class="icon-stopwatch-1"></i></font><br>
+          Matin<br>
+          De 8h - 11h
+        </a>
+      </div>
+      <div class="col-md-3" data-turbolinks="false" data-starthour="11:00" data-endhour="14:00">
+        <a class="btn">
+          <font size="200" color="#e0d101"><i class="icon-sun"></i></font><br>
+          Midi <br>
+          De 11h - 14h
+        </a>
+      </div>
+      <div class="col-md-3" data-turbolinks="false" data-starthour="14:00" data-endhour="17:00">
+        <a class="btn" data-turbolinks="false">
+          <font size="200" color="#e08001"><i class="icon-certificate"></i></font><br>
+          Après-midi <br>
+          De 14h - 17h
+        </a>
+      </div>
+      <div class="col-md-3" data-turbolinks="false" data-starthour="17:00" data-endhour="20:00">
+        <a class="btn" data-turbolinks="false">
+          <font size="200" color="#380094"><i class=" icon-moon"></i></font><br>
+          Soir <br>
+          De 17h - 20h
+        </a>
+      </div>
+
+      <%= f.input :start_time_time,as: :string, as: :hidden, label: false, input_html: {  id:"time_input" } %>
+    </div>
+
+  </div>
+<hr>
+  <div class="hidden" id="sumbit">
+    <%= button_tag class: 'btn_full', type: :submit do %>
+     <font size="100px">Finit <span class="icon-check-3"></span></font>
+    <% end %>
+  </div>
+<% end %>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.5.3/datepicker.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  date_input = $('[data-toggle="datepicker"]');
+
+  date_input.datepicker({
+    format: 'dd/mm/yyyy',
+    autoHide: true,
+    weekStart: 1,
+    daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+    language: "fr-FR",
+    startDate: new Date
+  });
+
+  time_buttons = document.querySelectorAll('[data-starthour]')
+  time_input = document.querySelector('#time_input');
+  time_form = document.querySelector('#time_form');
+  end_time = document.querySelector('#end_time_input');
+  sumbit_btn = document.querySelector('#sumbit');
+
+  date_input.on('pick.datepicker', unhideTimeForm);
+
+  time_buttons.forEach(button => button.addEventListener('click', setTimeInputValues));
+
+  function setTimeInputValues (event) {
+    time_input.value = event.currentTarget.dataset.starthour;
+    end_time.value = date_input.val() + " " + event.currentTarget.dataset.endhour;
+    changeStyle(event.currentTarget.firstElementChild);
+    unhideSumbit();
+  }
+
+  function changeStyle (el) {
+    time_buttons.forEach(button => button.firstElementChild.classList.remove('active'));
+    addStyleTo( el ,'active');
+  }
+
+  function unhideTimeForm () {
+    if (Array.from(time_form.classList).includes('hidden')) {
+      time_form.classList.remove('hidden');
+      animateByElement( time_form, "fadeInRight");
+    }
+  }
+
+  function unhideSumbit () {
+    if (Array.from(sumbit_btn.classList).includes('hidden')) {
+      sumbit_btn.classList.remove('hidden');
+      animateByElement( sumbit_btn, "fadeIn");
+    }
+  }
+</script>

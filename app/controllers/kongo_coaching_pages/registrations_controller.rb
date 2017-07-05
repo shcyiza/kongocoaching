@@ -1,5 +1,5 @@
-class Crews::RegistrationsController < Devise::RegistrationsController
-
+class KongoCoachingPages::RegistrationsController < Devise::RegistrationsController
+  include ApplicationHelper
   def new
     build_resource({})
     yield resource if block_given?
@@ -19,7 +19,7 @@ class Crews::RegistrationsController < Devise::RegistrationsController
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         respond_to do |format|
-          format.html { redirect_to new_kickstart_path, notice: 'La dernière étape!!' }
+          format.html { redirect_to '/1/kickstarts/new', notice: 'La dernière étape!!' }
         end
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"

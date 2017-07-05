@@ -35,7 +35,7 @@ class KickstartsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :new }
+        format.html { redirect_back(fallback_location: root_path) }
         format.json { render json: @kickstart.errors, status: :unprocessable_entity }
       end
     end
@@ -52,7 +52,7 @@ class KickstartsController < ApplicationController
 
   def add_motivation
     @profile = current_user.profile
-    @profile.update( motivation: params[:motivation] )
+    @profile.update( motivation: params[:profile][:motivation] )
     after_creation_actions
   end
 
