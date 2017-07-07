@@ -68,7 +68,7 @@ jQuery(function($) {
 /* ==============================================
 	Collapse filter close on mobile
 =============================================== */
-var collapsefilters = $("#filters_col").find(".collapse");	
+var collapsefilters = $("#filters_col").find(".collapse");
 if( $(this).width() < 991 )
 {
 collapsefilters.removeClass('in');
@@ -85,8 +85,8 @@ Common
 =============================================== */
 /* Tooltip*/
 $('.tooltip-1').tooltip({html:true});
-	
-/* Accordion*/	
+
+/* Accordion*/
 function toggleChevron(e) {
 	'use strict';
     $(e.target)
@@ -113,14 +113,14 @@ $('.parallax-window').parallax({}); /* Parallax modal*/
 $('.magnific-gallery').each(function() {
 	'use strict';
     $(this).magnificPopup({
-        delegate: 'a', 
+        delegate: 'a',
         type: 'image',
         gallery:{enabled:true}
     });
-}); 
+});
 
 /* Hamburger icon*/
-var toggles = document.querySelectorAll(".cmn-toggle-switch"); 
+var toggles = document.querySelectorAll(".cmn-toggle-switch");
   for (var i = toggles.length - 1; i >= 0; i--) {
     var toggle = toggles[i];
     toggleHandler(toggle);
@@ -131,21 +131,21 @@ var toggles = document.querySelectorAll(".cmn-toggle-switch");
       (this.classList.contains("active") === true) ? this.classList.remove("active") : this.classList.add("active");
     });
   };
-  
+
   /* Scroll to top*/
   $(window).scroll(function() {
 		if($(this).scrollTop() != 0) {
-			$('#toTop').fadeIn();	
+			$('#toTop').fadeIn();
 		} else {
 			$('#toTop').fadeOut();
 		}
 	});
 	$('#toTop').on("click",function() {
 		$('body,html').animate({scrollTop:0},500);
-	});	
-	});	
-	
-/* Cat nav onclick active */		
+	});
+	});
+
+/* Cat nav onclick active */
 var cat_nav = $("#cat_nav").find("li a");
 cat_nav.on('click', function(){
 	'use strict';

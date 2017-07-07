@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require_tree ./app_default
 //= require turbolinks
+
 
 
 function animate( elementId, animation ) {

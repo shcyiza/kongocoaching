@@ -1,5 +1,5 @@
 var HeaderVideo = (function ($, document) {
-    
+
     var settings = {
         container: $('.header-video'),
         header: $('.header-video--media'),
@@ -15,7 +15,7 @@ var HeaderVideo = (function ($, document) {
         setFluidContainer();
         bindClickAction();
         settings.videoCloseTrigger.hide();
-        
+
         if(videoDetails.teaser) {
             appendTeaserVideo();
         }
@@ -71,13 +71,13 @@ var HeaderVideo = (function ($, document) {
     };
 
     var appendTeaserVideo = function() {
-        if(Modernizr.video && !isMobile()) {
+        if(!isMobile()) {
             var source = videoDetails.teaser,
                 html = '<video autoplay="true" loop="loop" muted id="teaser-video" class="teaser-video"><source src="'+source+'.mp4" type="video/mp4"><source src="'+source+'.ogv" type="video/ogg"></video>';
             settings.container.append(html);
         }
     };
-    
+
     var createFrame = function() {
         // Added an ID attribute to be able to remove the video element when the user clicks on the remove button
         if(videoDetails.provider === 'youtube') {
@@ -123,7 +123,7 @@ var HeaderVideo = (function ($, document) {
     };
 
     var isMobile = function () {
-        if($(window).width() < 900 && Modernizr.touch) {
+        if($(window).width() < 900 ) {
             return true;
         }
         else {
@@ -135,5 +135,5 @@ var HeaderVideo = (function ($, document) {
     return {
         init: init
     };
-    
+
 })(jQuery, document);

@@ -1,0 +1,96 @@
+<%# navigation styled for Bootstrap 3.0 %>
+<header class="">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-3">
+					<%= link_to root_path, id:'logo' do %>
+            <%= image_tag "biglogo.png", width:"95", height:"27", class:"logo_normal" %>
+            <%= image_tag "biglogo.png", width:"95", height:"27", class:"logo_sticky" %>
+					<% end %>
+				</div>
+				<nav class="col-xs-9">
+					<ul id="access_top">
+						<li><%= link_to "se connecter", "/1/login", class:"hidden-xs navlinks" %>
+						</li>
+						<li> <%= link_to "Commencez mon kickstart!", "/1/signup", class:"hidden-xs navlinks" %>
+						</li>
+					</ul>
+					<a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
+					<div class="main-menu">
+						<div id="header_menu">
+							<%= image_tag "biglogo.png", width:"95", height:"27" %>
+						</div>
+						<a href="#" class="open_close" id="close_in"><i class="icon_close"></i></a>
+						<ul>
+							<li class="submenu">
+								<a href="javascript:void(0);" class="show-submenu">Pages<i class="icon-down-open-mini"></i></a>
+								<ul>
+									<li><a href="#0">Home versions</a>
+										<ul>
+											<li><a href="index.html">Home Video Bg</a>
+											</li>
+											<li><a href="index_2.html">Home Layer Slider</a>
+											</li>
+											<li><a href="index_3.html">Home Cookie Bar</a>
+											</li>
+											<li><a href="index_4.html">Home Pop Up</a>
+											</li>
+										</ul>
+									</li>
+									<li><a href="fitness-course-1.html">Workout page</a>
+									</li>
+									<li><a href="fitness-course-2.html">Workout page 2</a>
+									</li>
+									<li><a href="about.html">About Us</a>
+									</li>
+									<li><a href="subscribe-working.html">Subscribe working</a>
+									</li>
+									<li><a href="#0">Cart section</a>
+										<ul>
+											<li><a href="cart-page-1.html">Cart section 1</a>
+											</li>
+											<li><a href="cart-page-2.html">Cart section 2</a>
+											</li>
+											<li><a href="cart-page-3.html">Cart section 3</a>
+											</li>
+										</ul>
+									</li>
+									<li><a href="faq.html">Faq</a>
+									</li>
+									<li><a href="blog.html">Blog</a>
+									</li>
+									<li><a href="gallery.html">Gallery</a>
+									</li>
+									<li><a href="trainer-profile.html">Trainer profile</a>
+									</li>
+									<li><a href="contacts.html">Contacts</a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#0">Other elements<i class="icon-down-open-mini"></i></a>
+								<ul>
+									<li><a href="shortcodes.html">Shortcodes</a>
+									</li>
+									<li><a href="pricing-tables.html">Pricing tables</a>
+									</li>
+									<li><a href="coming_soon/index.html">Site launch</a>
+									</li>
+									<li><a href="icon_pack_1.html">Icon pack 1</a>
+									</li>
+									<li><a href="icon_pack_2.html">Icon pack 2</a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="/1/login" data-toggle="modal" data-target="#login" class="visible-xs">connection</a>
+							</li>
+							<li><%= link_to "Commencez mon kickstart!", "/1/signup", class:"visible-xs"%>
+							</li>
+						</ul>
+					</div>
+					<!-- End main-menu -->
+				</nav>
+			</div>
+			<!-- End row -->
+		</div>
+		<!-- End container -->
+	</header>

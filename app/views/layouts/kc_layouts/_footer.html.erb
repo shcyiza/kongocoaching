@@ -1,0 +1,55 @@
+<footer>
+		<div class="container">
+			<div class="row ">
+				<div class="col-md-3 col-sm-12">
+					<p>
+						<%= image_tag "biglogo.png", width:"250", height:"27", alt:"Lovefit" %>
+            <font color="white" class="text-centered" style="font-family: 'Cabin Sketch', cursive;">
+              <b>COACHING SPORTIF</b>
+            </font>
+					</p>
+					<div id="social">
+						<ul>
+							<li><a href="#"><i class="icon-facebook"></i></a>
+							</li>
+							<li><a href="#"><i class="icon-twitter"></i></a>
+							</li>
+							<li><a href="#"><i class="icon-google"></i></a>
+							</li>
+							<li><a href="#"><i class="icon-linkedin"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<h4>About</h4>
+					<ul>
+						<li><a href="#">About us</a>
+						</li>
+            <li><a href="#">Faq</a>
+						</li>
+            <li><a href="#">Terms and condition</a>
+						</li>
+						<li><a href="#">Register</a>
+						</li>
+						<li><a href="#">Contact us</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<h4>Nos clubs</h4>
+					<ul>
+            <% @clubs.each do |club| %>
+  						<li><%= link_to_gmaps club, club.name %>
+  						</li>
+            <% end %>
+					</ul>
+				</div>
+				<div class="col-md-3 hidden-sm hidden-xs">
+          <%= static_map_for @club %>
+				</div>
+			</div>
+			<!-- End row -->
+		</div>
+		<!-- End container -->
+	</footer>

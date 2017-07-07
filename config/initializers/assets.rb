@@ -11,3 +11,5 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w( datepicker.js )
+Rails.application.config.assets.precompile += %w( lovefit/video_header.js )
+Rails.application.config.assets.precompile += %w( lovefit/bootstrap-portfilter )

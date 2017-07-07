@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Kongocoaching" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kongocoaching" %>">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+      <%= render 'layouts/kc_layouts/navigation' %>
+    <main role="main">
+     <%= render 'layouts/kc_layouts/messages' %>
+     <%= yield %>
+    </main>
+    <%= render 'layouts/kc_layouts/footer' %>
+  </body>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+<% if params[:controller] == "kongo_coaching_pages" %>
+  <% if params[:action] == "home" %>
+    <%= javascript_include_tag 'lovefit/video_header', 'data-turbolinks-track' => 'load' %>
+    <%= javascript_include_tag "lovefit/bootstrap-portfilter", 'data-turbolinks-track' => 'load' %>
+    <script>
+      HeaderVideo.init({
+        container: $('.header-video'),
+        header: $('.header-video--media'),
+        videoTrigger: $("#video-trigger"),
+        autoPlayVideo: true
+      });
+    </script>
+  <% end %>
+<% end %>
+</html>

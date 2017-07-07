@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :crews
 
   get '/1/signup', to: 'kongo_coaching_pages#sign_up'
+  get '/1/login', to: 'kongo_coaching_pages#login'
   get '/1/kickstarts/new', to: "kongo_coaching_pages#new_kickstart"
 
   post '/add_motivation', to: 'kickstarts#add_motivation'

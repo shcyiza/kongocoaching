@@ -7,10 +7,10 @@
 
 <p>
   <strong>Address:</strong>
-  <%= link_to_gmaps @club %>
+  <%= link_to_gmaps @club, @club.address %>
 </p>
 
-<%= static_map_for @club %>
+<%= link_map_for @club %>
 
 <%= link_to 'Edit', edit_club_path(@club) %> |
 <%= link_to 'Back', clubs_path %>
