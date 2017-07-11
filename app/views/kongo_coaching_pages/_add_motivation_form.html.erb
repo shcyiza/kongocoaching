@@ -1,13 +1,15 @@
 <%= simple_form_for(@profile, url: {action: "add_motivation", controller: 'kickstarts'}, method: 'post') do |f| %>
+  <h1><font color="lightgreen">(Optionel!)</font></h1>
+  <h3> Pour un Kickstart sur mesure, dites nous pourqouoi vous voulez vous entrainer?</h3>
   <div class="form-inputs">
-    <%= f.input :motivation %>
+    <%= f.input :motivation, label: "PS: il n'y pas de mauvaise réponse...", input_html: {style: "min-height: 150px;"} %>
   </div>
 
 <div class="row">
-  <div class="col-md-6">
-    <%= link_to "Je le ferais avec mon coach...", '/after_kickstart_creation', method: :post %>
+  <div class="col-xs-6" style="margin-bottom: 20px;">
+    <%= link_to "Je le ferais avec mon coach!", '/after_kickstart_creation', method: :post %>
   </div>
-  <div class="form-actions col-md-6">
+  <div class="form-actions col-xs-6">
     <%= button_tag class: 'btn_full', type: :submit do %>
      Envoyer!
     <% end %>

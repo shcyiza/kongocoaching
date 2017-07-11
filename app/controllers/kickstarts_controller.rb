@@ -45,7 +45,7 @@ class KickstartsController < ApplicationController
     @kickstart = current_user.his_kickstart_as_client
     NewKickstartMailer.new_registered_kickstart(current_user).deliver_now
     respond_to do |format|
-      format.html { redirect_to @kickstart, notice: "Votre RDV à bien été pris et attend une confirmation de la date et de l'heure." }
+      format.html { redirect_to "/1/kickstarts/#{@kickstart.id}", notice: "Votre RDV à bien été pris et attend une confirmation de la date et de l'heure." }
       format.json { render :show, status: :created, location: @kickstart }
     end
   end

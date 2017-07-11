@@ -18,10 +18,32 @@
  @import url("https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700"); 		/* Fonts */
  @import url("https://fonts.googleapis.com/css?family=Kalam:400,700"); 		/* Fonts */
 
- @import url("animate.min.css"); 									/* Animate */
+ @import url("animate.css"); 									/* Animate */
  @import url("menu.css");													/* Menu styles */
  @import url("style.css");													/* Main theme styles */
  @import url("responsive.css");											/* Responsive */
  @import url("icon_fonts/css/all_icons.min.css");			/* Icons */
- @import url("magnific-popup.min.css");						/* Modal */
+ @import url("magnific-popup.css");						/* Modal */
  @import url("custom.sass");												/* Your custom css */
+
+.alert {
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  width: 25%;
+  -webkit-animation-duration: 2s;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+  position: relative;
+  top: -2px;
+  right: -2px;
+  color: inherit;
+}
+
+.verticalLine {
+  border-right: 2px solid black;
+  -webkit-box-shadow: 19px 5px 13px -13px rgba(0,0,0,0.75);
+  -moz-box-shadow: 19px 5px 13px -13px rgba(0,0,0,0.75);
+  box-shadow: 19px 5px 13px -13px rgba(0,0,0,0.75);
+}

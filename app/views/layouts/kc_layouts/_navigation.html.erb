@@ -10,10 +10,7 @@
 				</div>
 				<nav class="col-xs-9">
 					<ul id="access_top">
-						<li><%= link_to "se connecter", "/1/login", class:"hidden-xs navlinks" %>
-						</li>
-						<li> <%= link_to "Commencez mon kickstart!", "/1/signup", class:"hidden-xs navlinks" %>
-						</li>
+						<%= render 'layouts/kc_layouts/nav_links_for_auth' %>
 					</ul>
 					<a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
 					<div class="main-menu">
@@ -94,3 +91,6 @@
 		</div>
 		<!-- End container -->
 	</header>
+	<div class="footer navbar-fixed-bottom">
+		<%= render 'layouts/messages' %>
+	</div>

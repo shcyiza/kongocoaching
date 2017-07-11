@@ -2,17 +2,17 @@
   <div id="hero_video">
     <div id="sub_content">
       <div class="mobile_fix">
-                <div class="wow fadeInDown animated" data-wow-delay="0.4s">
+                <div>
                   <%= image_tag "biglogo" %>
                   <h1 >Coaching</h1>
                 </div>
-                  <h3 style="color: lightgrey"><t class="wow fadeIn animated" data-wow-delay="0.8s">Un <strong>Chemin,</strong></t><t class="wow fadeIn animated" data-wow-delay="1.2s"> Des <strong>Resultats</strong></h3></t>
+                  <h3 style="color: lightgrey"><t class="wow fadeIn animated" data-wow-delay="0.4s">Un <strong>Chemin,</strong></t><t class="wow fadeIn animated" data-wow-delay="0.8s"> Des <strong>Resultats</strong></h3></t>
       </div>
     </div>
     <!-- End sub_content -->
   </div>
   <img src="/assets/video_fix-6f064b11007507ecebb88b25c6b21a41e51189b079c5a30342c8dc8950019c0c.png" alt="" class="header-video--media" data-video-src="/assets/intro-1744d23323c4af1b8313e311195732dfa202574567966ea9886aca7a30166926.mp4" data-teaser-source="/assets/intro-1744d23323c4af1b8313e311195732dfa202574567966ea9886aca7a30166926" data-provider="" data-video-width="1920" data-video-height="960">
-  <div id="count" class="text-center wow fadeIn animated" data-wow-delay="1.6s">
+  <div id="count" class="text-center">
           <%= link_to "/1/signup", class:"btn_1" do %>
             <h2 style="color:white;"><i class="icon-heart"></i>Commencez mon kickstar!</h2>
           <% end %>
@@ -57,7 +57,6 @@
 
 <p id="notice"><%= notice %></p>
 <h1><%= @crew.name %></h1>
-  <%= image_tag "intro.mp4" %>
 <br>
 <br>
 <%= link_to kc_kistart_register_path, class:"btn_1_outline", turbolinks: false do %>

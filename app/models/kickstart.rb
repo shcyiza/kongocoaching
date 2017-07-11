@@ -5,4 +5,11 @@ class Kickstart < ApplicationRecord
   extend TimeSplitter::Accessors
   split_accessor :start_time
 
+  def confirmed?
+    result = false
+    if self.created_at != self.updated_at
+      result = true
+    end
+    return result
+  end
 end

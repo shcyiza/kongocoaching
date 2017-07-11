@@ -1,9 +1,31 @@
 <%# Rails flash messages styled for Bootstrap 3.0 %>
 <% flash.each do |name, msg| %>
   <% if msg.is_a?(String) %>
-    <div class="alert alert-dismissible alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <div class="alert alert-dismissible alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %> animated bounce" id="flash_message">
+      <button type="button" class="close" onclick="animateOut()">&times;</button>
+      <b><%= content_tag :div, msg, :id => "flash_#{name}" %></b>
     </div>
+    <script type="text/javascript">
+      var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+      function animateOut() {
+        const el = $('#flash_message');
+          el.addClass("fadeOut")
+          el.one(animationEnd, function(){
+          el.addClass("hidden")
+        });
+        console.log("flash message is closed")
+      };
+
+      function ifHiddenExit(){
+        const el = $('#flash_message');
+        if (el.hasClass("hidden")) {
+          console.log("flash message alredy closed")
+        }else {
+          animateOut()
+        }
+      };
+      setTimeout( ifHiddenExit, 8000);
+
+    </script>
   <% end %>
 <% end %>

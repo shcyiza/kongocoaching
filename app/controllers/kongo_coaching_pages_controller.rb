@@ -40,10 +40,18 @@ class KongoCoachingPagesController < ApplicationController
   def login
     #code
   end
-  
+
   def new_kickstart
     @profile = current_user.profile
     @kickstart = current_user.his_crew_as_client.kickstarts.build
+  end
+
+  def edit_kickstart
+    #code
+  end
+
+  def show_kickstart
+    @kickstart = current_user.his_kickstart_as_client
   end
 
 end

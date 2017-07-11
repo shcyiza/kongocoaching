@@ -1,0 +1,55 @@
+<section class="hero">
+  <%= image_tag "http://static-img-a.hgcdn.net/Media/_640x360/DFHG056_sneakers-shape-ups-shoes_FS.jpg", class: "hero__background" %>
+	<div class="container">
+		<h2 class="main_title  hero__title" style="color:green; width:100%;">
+      Votre RDV pour un kickstart a bien été enregistré!
+    </h2>
+  </div>
+</section>
+<div class="alert-dismissible alert-success">
+  <h2 class="text-center" style="color:green; margin-top:0px">
+    Dans les 24h le coordinateur de notre équipe va vous contacter pour confirmer le RDV
+  </h2>
+  <h3 class="text-center" style="color:green; margin:0px">
+    <i class="icon-warning-empty"></i>Restez bien joignable sur votre numéro <b><%= current_user.profile.phonenr %></b><i class="icon-warning-empty"></i>
+  </h3>
+</div>
+<div style="padding: 5rem">
+  <div class="row">
+    <div class="col-md-6">
+      <h3><b>Details du RDV:</b> </h3><br>
+      <div class="col-md-6 left">
+        <%= link_map_for @club %>
+      </div>
+      <div class="col-md-6 verticalLine">
+        <h4>
+          <b>Où?</b><br>
+            <h3><%= @club.name %></h3>
+            <strong>Address:</strong><br>
+            <h4><%= @club.address %></h4>
+            <%= link_to_gmaps @club, "<t class='btn_1_outline'><i class='icon-direction-2'></i> Allez sur Google maps</t>".html_safe %>
+        </h4>
+        <hr>
+        <h4>
+          <b>Quand?</b><br>
+          Le <b><%= l(@kickstart.start_time, format: '%a, %d/%m/%y') %></b>
+          Entre <b><%= @kickstart.start_time.hour %> heure</b> et <b><%= @kickstart.end_time.hour %> heure</b><br>
+          <br>
+          <i>(à confirmer au téléphone par le coordinateur)</i>
+        </h4>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h3><b>Que devez-vous amenené?</b> </h3><br>
+      <h1>
+        <div class="text-center">
+        <font color="green" size="50rem">15€</font><br>
+        <u>à payer sur place</u>
+        </div>
+        <ul>
+          <li>Des vetement adapté a une activité sportive</li>
+        </ul>
+      </h1>
+    </div>
+  </div>
+</div>

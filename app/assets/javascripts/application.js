@@ -15,8 +15,6 @@
 //= require_tree ./app_default
 //= require turbolinks
 
-
-
 function animate( elementId, animation ) {
   var element = document.getElementById( elementId );
   element.classList.add("animated", animation );
