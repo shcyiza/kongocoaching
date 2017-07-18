@@ -3,6 +3,7 @@
 /* Your custom styles */
 
 $loepard: #5e7942
+$secondary: #27927e
 
 body
   background-color: white
@@ -138,3 +139,31 @@ a.btn.active
   border-radius: 3px
   padding: 8px 20px
   width: 100%
+
+#testimonials
+  background: $secondary
+
+a.btn_white_outline
+  border: 2px solid white
+  font-family: inherit
+  font-size: 20px
+  color: white
+  width: 100%
+  cursor: pointer
+  padding: 8px 20px
+  display: inline-block
+  outline: none
+  -webkit-transition: all 0.3s
+  -moz-transition: all 0.3s
+  transition: all 0.3s
+  -webkit-border-radius: 3px
+  -moz-border-radius: 3px
+  border-radius: 3px
+  text-transform: uppercase
+  display: block
+  text-align: center
+  font-weight: 600
+  text-transform: none
+  &:hover
+    color: $secondary
+    background-color: white

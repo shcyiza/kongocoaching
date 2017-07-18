@@ -27,7 +27,9 @@ gem 'mail_form'
 gem 'truncate_html'
 gem 'foundation-icons-sass-rails'
 gem 'geocoder'
+# locals and languages
 gem 'rails-i18n', '~> 5.0.0'
+gem 'devise-i18n'
 
 group :production do
   gem 'rails_12factor'

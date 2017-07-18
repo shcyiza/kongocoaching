@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Kongocoaching" %></title>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kongocoaching" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= csrf_meta_tags %>
@@ -15,7 +16,6 @@
     </main>
     <%= render 'layouts/kc_layouts/footer' %>
   </body>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
   <% if params[:controller] == "kongo_coaching_pages" %>
     <% if params[:action] == "home" %>
       <%= javascript_include_tag 'lovefit/video_header', 'data-turbolinks-track' => 'load' %>

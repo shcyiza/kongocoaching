@@ -12,54 +12,140 @@
     <!-- End sub_content -->
   </div>
   <img src="/assets/video_fix-6f064b11007507ecebb88b25c6b21a41e51189b079c5a30342c8dc8950019c0c.png" alt="" class="header-video--media" data-video-src="/assets/intro-1744d23323c4af1b8313e311195732dfa202574567966ea9886aca7a30166926.mp4" data-teaser-source="/assets/intro-1744d23323c4af1b8313e311195732dfa202574567966ea9886aca7a30166926" data-provider="" data-video-width="1920" data-video-height="960">
-  <div id="count" class="text-center">
-          <%= link_to "/1/signup", class:"btn_1" do %>
-            <h2 style="color:white;"><i class="icon-heart"></i>Commencez mon kickstar!</h2>
-          <% end %>
+  <div id="count" class="text-center hidden-xs">
+    <%= link_to "/1/signup", class:"btn_1" do %>
+      <h2 style="color:white;"><i class="icon-heart"></i>Commencez mon kickstar!</h2>
+    <% end %>
   </div>
 </section>
+<section class="text-center hidden-lg" style="padding: 12px; background: #333;">
+  <%= link_to kc_kistart_register_path, class:"btn_1", turbolinks: false do %>
+    <h4 style="color: white;"><i class=" icon-heart"></i> Commencez mon kickstar!</h4>
+  <% end %>
+</section>
 <section class="hero">
-        <%= image_tag "back.jpg", class: "hero__background" %>
-		<div class="container">
-			<h2 class="main_title  hero__title" style="color:green; width:100%;">
-                <em></em>
-                Des Professionels
-                <span style="color:white">Un <strong>Chemin,</strong> Des <strong>Resultats</strong></span>
-            </h2>
-			<p class="lead styled  hero__title">
-				Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos.
-			</p>
-			<div class="row hero__title">
-				<div class="col-sm-4 wow fadeIn animated" data-wow-delay="0.4s">
-					<div class="box_feat" id="">
-						<h3>Videos Workout</h3>
-						<p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos. </p>
-					</div>
-				</div>
-				<div class="col-sm-4 wow fadeIn animated" data-wow-delay="0.8s">
-					<div class="box_feat" id="">
-						<h3>Expert Trainers</h3>
-						<p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos. </p>
-					</div>
-				</div>
-				<div class="col-sm-4 wow fadeIn animated" data-wow-delay="1.2s">
-					<div class="box_feat" id="">
-						<h3>Play Everywhere</h3>
-						<p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos. </p>
-					</div>
+      <%= image_tag "back.jpg", class: "hero__background" %>
+	<div class="container">
+		<h2 class="main_title  hero__title" style="color:green; width:100%;">
+              <em></em>
+              Des Professionels
+              <span style="color:white">Un <strong>Chemin,</strong> Des <strong>Resultats</strong></span>
+          </h2>
+		<p class="lead styled  hero__title">
+			Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos.
+		</p>
+		<div class="row hero__title">
+			<div class="col-sm-4 wow fadeIn animated" data-wow-delay="0.4s">
+				<div class="box_feat" id="">
+					<h3>Videos Workout</h3>
+					<p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos. </p>
 				</div>
 			</div>
-			<!-- End row -->
+			<div class="col-sm-4 wow fadeIn animated" data-wow-delay="0.8s">
+				<div class="box_feat" id="">
+					<h3>Expert Trainers</h3>
+					<p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos. </p>
+				</div>
+			</div>
+			<div class="col-sm-4 wow fadeIn animated" data-wow-delay="1.2s">
+				<div class="box_feat" id="">
+					<h3>Play Everywhere</h3>
+					<p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos. </p>
+				</div>
+			</div>
 		</div>
-		<!-- End container -->
-	</section>
+		<!-- End row -->
+	</div>
+	<!-- End container -->
+</section>
 	<!-- End section -->
 
-<p id="notice"><%= notice %></p>
-<h1><%= @crew.name %></h1>
-<br>
-<br>
-<%= link_to kc_kistart_register_path, class:"btn_1_outline", turbolinks: false do %>
-  <i class=" icon-heart"></i> Kickstar!
-<% end %>
-<br>
+<div class="container_styled_1">
+	<div class="container margin_60_35">
+		<h2 class="main_title" style="color:green"><em></em>Nos Services</h2>
+		<div class="row">
+			<div class="col-md-4" data-tag="Yoga">
+				<div class="course_container">
+					<div class="ribbon top"><span>Top Sell</span>
+					</div>
+					<figure>
+						<a href="fitness-course-1.html">
+							<img src="img/course_1.jpg" width="800" height="533" class="img-responsive" alt="Image">
+							<div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
+						</a>
+					</figure>
+					<div class="course_title">
+						<div class="type"><span>Yoga</span>
+						</div>
+						<h3><a href="fitness-course-1.html">Yoga Fundamentals</a></h3>
+						<div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span class="users">450</span>
+						</div>
+					</div>
+				</div>
+				<!-- End box course_container -->
+			</div>
+			<div class="col-md-4" data-tag="Yoga">
+				<div class="course_container">
+					<div class="ribbon top"><span>Top sell</span>
+					</div>
+					<figure>
+						<a href="fitness-course-1.html">
+							<img src="img/course_2.jpg" width="800" height="533" class="img-responsive" alt="Image">
+							<div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
+						</a>
+					</figure>
+					<div class="course_title">
+						<div class="type"><span>Yoga</span>
+						</div>
+						<h3><a href="fitness-course-1.html">Total Body Stretching </a></h3>
+						<div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span class="users">450</span>
+						</div>
+					</div>
+				</div>
+				<!-- End box course_container -->
+			</div>
+			<div class="col-md-4">
+				<a href="explore-1.html" id="view_all"><span><i class="arrow_carrot-right_alt2"></i>Voir tout nos services</span></a>
+			</div>
+		</div>
+		<!-- End row -->
+	</div>
+	<!-- End container -->
+</div>
+
+<section class="margin_60_35" id="testimonials">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Pouquoi faire Kickstar?</h3>
+        <b><font size="12">15€</font></b><h5> à payer sur place</h5>
+				<p class="lead">Lorem ipsum dolor sit amet, dolore deleniti appareat per no. In ius aliquam suavitate repudiare, pro an quidam inimicus, duo liber labitur repudiandae in.</p>
+				<p>
+					</p><p>Lorem ipsum dolor sit amet, dolore deleniti appareat per no. In ius aliquam suavitate repudiare, pro an quidam inimicus, duo liber labitur repudiandae in. Nec no tamquam delenit, sit equidem ornatus accommodare at, pro graeco debitis deterruisset no. Eam at veri oratio principes, sit ad vero ipsum affert.</p>
+			</div>
+			<div class="col-md-6">
+        <%= image_tag "https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAALiAAAAJDYzZTg0Y2QxLTE4MmUtNDlhZC05NjMxLTFlMmQ1ZWEwNWVhYQ.jpg" %>
+        <br><br>
+          <%= link_to kc_kistart_register_path, class:"btn_white_outline", turbolinks: false do %>
+            <i class=" icon-heart"></i> Mon kickstar en 3 étapes!
+          <% end %>
+			</div>
+		</div>
+		<!--  End row -->
+	</div>
+	<!--  End container-->
+</section>
+<div id="newsletter_container">
+	<div class="container margin_60">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1 text-center">
+				<h3>Subscribe to our Newsletter for latest news.</h3>
+				<div id="message-newsletter"></div>
+				<form method="post" action="assets/newsletter.php" name="newsletter" id="newsletter" class="form-inline">
+					<input name="email_newsletter" id="email_newsletter" type="email" value="" placeholder="Your Email" class="form-control">
+					<button id="submit-newsletter" class="btn_1"> Subscribe</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
