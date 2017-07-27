@@ -4,7 +4,7 @@ class Coach < ApplicationRecord
   has_many :crews, through: :coaches_crews
   has_many :training, through: :coaches_crews
   has_many :video_links, as: :watchable, dependent: :destroy
-  accepts_nested_attributes_for :watchable
+  accepts_nested_attributes_for :video_links
   validates :user_id, uniqueness: true, if: :new_record?
 
 end

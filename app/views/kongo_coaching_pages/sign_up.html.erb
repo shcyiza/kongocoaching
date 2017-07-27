@@ -37,11 +37,11 @@
         <%= fields_for :profile do |profile_f| %>
           <div class="form-inputs row">
             <%= profile_f.hidden_field :crew_id, value: @crew.id, readonly: true %>
-            <div class="col-lg-8">
+            <div class="col-lg-7">
               <label>Date de naissance:</label>
-              <%= profile_f.text_field :birth_date, class: 'form-control', 'data-toggle' => 'datepicker', placeholder: "Date de naissance" %>
+              <%= profile_f.date_field :birth_date, class: 'form-control' %>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-5">
               <label>sex:</label>
               <%= profile_f.select :sex, [['femme', 1], ['homme', 0]], {}, {class: 'form-control'} %>
             </div>
@@ -95,25 +95,9 @@
         </div>
       </div>
     <!--fin 2er etape-->
-    </div>
-	</div>
-  <% end %>
-</div>
-</div>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript">
-  $('[data-toggle="datepicker"]').datepicker({
-    format: 'dd/mm/yyyy',
-    autoHide: true,
-    weekStart: 1,
-    daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
-    language: "fr-FR",
-  });
-
-  function activeTab( elOutId, elInId ) {
-    disActivateClass( elOutId );
-    activateClass( elInId );
-  };
+    </div> </div> <% end %> </div> </div> <script type="text/javascript">
+    function activeTab( elOutId, elInId ) { disActivateClass( elOutId );
+    activateClass( elInId ); };xdRGY -È,HBUXGYÈ-R(WS)
 
   function animateTrigger( elOutId, elInId, animation, fn ) {
     if (arguments[3]) {

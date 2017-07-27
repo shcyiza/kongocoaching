@@ -9,6 +9,14 @@ class ApplicationController < ActionController::Base
     Participant.create! user: current_user, enrollable: enrollable
   end
 
+  def add_avatar attached, attachable
+    Avatar.create! photo: attached, attachable: attachable
+  end
+
+  def add_videolink link, watchable
+    VideoLink.create! video_path: link, watchable: watchable
+  end
+
   protected
 
   def configure_permitted_parameters

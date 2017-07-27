@@ -25,9 +25,10 @@ class TrainingTypesController < ApplicationController
   # POST /training_types.json
   def create
     @training_type = TrainingType.new(training_type_params)
-
     respond_to do |format|
       if @training_type.save
+        add_avatar params[:avatar][:photo], @training_type
+        add_videolink params[:video_links][:video_path], @training_type
         format.html { redirect_to @training_type, notice: 'Training type was successfully created.' }
         format.json { render :show, status: :created, location: @training_type }
       else
@@ -56,7 +57,7 @@ class TrainingTypesController < ApplicationController
   def destroy
     @training_type.destroy
     respond_to do |format|
-      format.html { redirect_to training_types_url, notice: 'Training type was successfully destroyed.' }
+      format.html { redirect_to training_types_path, notice: 'Training type was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +70,6 @@ class TrainingTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def training_type_params
-      params.require(:training_type).permit(:type, :description, :duration_hours, :duration_minutes)
+      params.require(:training_type).permit(:name, :description, :duration_hours, :duration_minutes)
     end
 end

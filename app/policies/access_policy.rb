@@ -20,7 +20,7 @@ class AccessPolicy
       can :create, TrainingType
       cannot :index, Crew
       cannot :index, User
-      can [:update, :destroy], Crew do |crew, user|
+      can [:show, :update, :destroy], Crew do |crew, user|
         user.crew_owner?(crew) == true
       end
       can :create, CoachesCrew do |crew, user|

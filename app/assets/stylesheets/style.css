@@ -835,7 +835,7 @@ video {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	background: url(../img/shadow_box.png) repeat-x left bottom;
+	background: url(shadow_box.png) repeat-x left bottom;
 	width: 100%;
 	padding: 12px 10px 12px 10px;
 	color: #fff;

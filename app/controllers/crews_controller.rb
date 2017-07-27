@@ -1,5 +1,5 @@
 class CrewsController < ApplicationController
-  before_action :set_crew, only: [:show, :edit, :update, :destroy, :sign_up]
+  before_action :set_crew, only: [:show, :edit, :update, :destroy, :sign_up, :kickstarts]
   before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
   # GET /crews
   # GET /crews.json
@@ -13,7 +13,14 @@ class CrewsController < ApplicationController
   # GET /crews/1.json
   def show
     @club = @crew.club
+    authorize! :show, @crew
   end
+
+  def kickstarts
+    @kickstarts = @crew.kickstarts
+    authorize! :show, @crew
+  end
+
 
   def sign_up
 
