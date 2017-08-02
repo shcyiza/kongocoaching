@@ -21,5 +21,6 @@ Rails.application.routes.draw do
 
   post '/add_motivation', to: 'kickstarts#add_motivation'
   post '/after_kickstart_creation', to: 'kickstarts#after_creation_actions'
+  post '/admin_confirmation', to: 'kickstarts#admin_confirmation'
 
 end

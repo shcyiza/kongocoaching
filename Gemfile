@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.5'
 gem "paperclip", git: "https://github.com/thoughtbot/paperclip.git"
 gem 'access-granted', '~> 1.1.0'
 gem "time_splitter"
+gem 'will_paginate'
 #gems for the emails
 gem 'sidekiq'
 gem 'inky-rb', require: 'inky'

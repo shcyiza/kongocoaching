@@ -15,6 +15,8 @@
       </div>
       <%= f.input :start_time_date, as: :string, label: false, input_html: {  data: {toggle: 'datepicker'} } %>
       <%= f.input :end_time, as: :string, as: :hidden, input_html: {  id: "end_time_input" } %>
+      <div id="datepicker_container">
+      </div>
     </div>
 
     <div class="col-md-9 hidden" id="time_form">
@@ -72,7 +74,9 @@
     weekStart: 1,
     daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
     language: "fr-FR",
-    startDate: new Date
+    startDate: new Date,
+    container: '#datepicker_container',
+    inline: true,
   });
 
   time_buttons = document.querySelectorAll('[data-starthour]')

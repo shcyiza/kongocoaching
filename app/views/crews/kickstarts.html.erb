@@ -1,2 +1,194 @@
-<br><br><br>
-<%= @kickstarts.count %>
+<%= javascript_include_tag 'datepicker', 'data-turbolinks-track' => 'load' %>
+<section class="hero">
+  <%= image_tag "", class: "hero__background" %>
+	<div class="container">
+		<h2 class="main_title  hero__title" style="color:green; width:100%;">
+      Vos demande de kickstarts non confirmés?
+    </h2>
+  </div>
+</section>
+<br>
+<div class="container">
+  <h3>Vous avez <font color="red"><b><%= unconfirmed_kickstar_count %> </b></font>demande de kickstarts non-confimés </h3>
+</div>
+<br>
+
+<div class="">
+  <% @kickstarts.each do |k| %>
+
+    <div class="panel panel-default container">
+      <div class="panel-heading row">
+      	<div class="panel-title col-md-10 col-xs-8">
+          <h4>
+            <b><%= k.user.name %></b> voudrait un RDV le <b><%=l(k.start_time, format: '%a, %d/%m/%y') %></b><br>
+            entre <b><%= k.start_time.hour %> heure</b> et <b><%= k.end_time.hour %> heure</b>
+          </h4>
+        </div>
+        <div class="btn_1 col-md-2 col-xs-4 text-centered" onclick='$("#<%= k.id %>").modal("show");'>
+          Lui donner un RDV...
+        </div>
+      </div>
+    	<div class="panel-body">
+        <h4><u>Motivations et Objectifs:</u></h4>
+    		<% if k.user.profile.motivation %>
+    		  <%= k.user.profile.motivation %>
+        <% else %>
+          <font color="red">Motivation à voir l'hors du rdv</font>
+    		<% end %>
+    	</div>
+    </div>
+    <div class="modal fade" id="<%= k.id %>" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content modal-popup">
+          <%= k.id %>
+          <%= simple_form_for k, url: {action: "admin_confirmation", controller: 'kickstarts', id:"#{k.id}" }, method: 'post' do |f| %>
+            <div class="row">
+              <div class="col-xs-7">
+                <%= f.input :start_time_date, as: :string, label: false, input_html: {  id: "datepicker_#{k.id}", value: "#{l(k.start_time.to_date, format: '%d/%m/%Y')}" } %>
+                <div id="datepicker_container_<%= k.id %>">
+                </div>
+                <script type="text/javascript">
+                  form_id = <%= k.id %>
+                  date_input = $("#datepicker_" + form_id);
+
+                  date_input.datepicker({
+                    format: 'dd/mm/yyyy',
+                    autoHide: true,
+                    weekStart: 1,
+                    daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                    language: "fr-FR",
+                    startDate: new Date,
+                    container: $('#datepicker_container_' + form_id),
+                    inline: true,
+                  });
+                </script>
+              </div>
+
+              <div class="col-xs-2">
+                <button type="button" name="button" class="btn_1"
+                id="change_time" data-instance="<%= k.id %>" data-operation="plus" data-for="hour">
+                  +
+                </button>
+                <%= f.input :start_time_hour, label: false, input_html: { id:"input_hour_#{k.id}", class: "hour" } %>
+                <button type="button" name="button" class="btn_1" id="change_time" data-instance="<%= k.id %>" data-operation="minus" data-for="hour">
+                  -
+                </button>
+              </div>
+              <div class="col-xs-1" style="margin-top: 45px;">
+                <b>:</b>
+              </div>
+              <div class="col-xs-2">
+                <button type="button" name="button" class="btn_1" id="change_time" data-instance="<%= k.id %>" data-operation="plus" data-for="min">
+                  +
+                </button>
+                <%= f.input :start_time_min, label: false, input_html: { id:"input_min_#{k.id}", class: "minute" } %>
+                <button type="button" name="button" class="btn_1" id="change_time" data-instance="<%= k.id %>" data-operation="minus" data-for="min">
+                  -
+                </button>
+              </div>
+            </div>
+            <hr>
+            <div class="" id="sumbit">
+              <%= button_tag class: 'btn_full', type: :submit do %>
+               <font size="12px">Confirmer <span class="icon-check-3"></span></font>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+
+    </script>
+  <% end %>
+</div>
+
+
+<div class="flickr_pagination">2017-07-29
+  <h4 class="text-center"><%= will_paginate @kickstarts, previous_label: '<', next_label: '>' %></h4>
+</div>
+
+
+<script type="text/javascript">
+  const buttons = document.querySelectorAll('#change_time');
+  const hour_inputs = document.querySelectorAll('.hour');
+  const minute_inputs = document.querySelectorAll('.minute');
+
+  function changeTime (event) {
+    const id = event.currentTarget.dataset.instance;
+    const hour_min = event.currentTarget.dataset.for;
+    const operation = event.currentTarget.dataset.operation;
+    const field = document.getElementById('input_' + hour_min + "_" + id);
+    if (hour_min === "hour") {
+      changeHour(field, operation);
+    } else {
+      changeMinute(field, operation);
+    }
+
+  }
+
+  function changeHour (field, operation) {
+    const field_val = Number(field.value);
+
+    if (operation === "plus") {
+      let value_plus = field_val + 1;
+      if (value_plus >= 24) {
+        field.value = 0
+      } else {
+        field.value = value_plus ;
+      }
+    }
+    else if (operation === "minus") {
+      let value_minus = field_val - 1 ;
+      if (value_minus < 0) {
+        field.value = 23
+      } else {
+        field.value = value_minus ;
+      }
+    }
+  }
+
+  function changeMinute (field, operation) {
+    const field_val = Number(field.value);
+
+    if (operation === "plus") {
+      let value_plus = field_val + 5;
+      if (value_plus >= 60) {
+        field.value = 0
+      } else {
+        field.value = value_plus ;
+      }
+    }
+
+    else if (operation === "minus") {
+      let value_minus = field_val - 5 ;
+      if (value_minus < 0) {
+        field.value = 55
+      } else {
+        field.value = value_minus ;
+      }
+    }
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', changeTime));
+  hour_inputs.forEach(i => i.addEventListener('input', checkHourValue));
+  minute_inputs.forEach(i => i.addEventListener('input', checkMinuteValue));
+
+  function checkHourValue (event) {
+    const input = event.currentTarget
+    if (input.value >= 24) {
+      input.value = 23
+    } else if (input.value < 0){
+      input.value = 0
+    }
+  }
+
+  function checkMinuteValue (event) {
+    const input = event.currentTarget
+    if (input.value >= 60) {
+      input.value = 55
+    } else if (input.value < 0){
+      input.value = 0
+    }
+  }
+</script>

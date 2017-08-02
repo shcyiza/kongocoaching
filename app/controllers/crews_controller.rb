@@ -17,7 +17,7 @@ class CrewsController < ApplicationController
   end
 
   def kickstarts
-    @kickstarts = @crew.kickstarts
+    @kickstarts = @crew.kickstarts.order(:start_time).paginate(:page => params[:page], :per_page => 7)
     authorize! :show, @crew
   end
 

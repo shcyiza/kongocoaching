@@ -27,7 +27,7 @@
           Le <b><%= l(@kickstart.start_time, format: '%a, %d/%m/%y') %></b>
           Entre <b><%= @kickstart.start_time.hour %> heure</b> et <b><%= @kickstart.end_time.hour %> heure</b><br>
           <br>
-          <% unless @kickstart.confirmed? %><b>status:</b> <i>à confirmer au téléphone par le coordinateur</i><% end %>
+          <% unless @kickstart.is_confirmed? %><b>status:</b> <i>à confirmer au téléphone par le coordinateur</i><% end %>
         </h4>
       </div>
     </div>

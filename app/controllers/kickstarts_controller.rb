@@ -1,5 +1,5 @@
 class KickstartsController < ApplicationController
-  before_action :set_kickstart, only: [:show, :edit, :update, :destroy]
+  before_action :set_kickstart, only: [:show, :edit, :update, :admin_confirmation, :destroy]
   before_action :authenticate_user!
 
 
@@ -30,8 +30,14 @@ class KickstartsController < ApplicationController
     @kickstart = current_user.his_crew_as_client.kickstarts.build(kickstart_params)
     if @kickstart.save
       add_participant @kickstart
-      respond_to do |format|
-        format.js #remote true enable this send sends ajax callbacks
+      set_as_confirmable @kickstart
+      if @kickstart.participant && @kickstart.is_confirmable?
+        respond_to do |format|
+          format.js #remote true enable this send sends ajax callbacks
+        end
+      else
+        # redirect to and error page
+        format.json { render json: @kickstart.errors, status: :unprocessable_entity }
       end
     else
       respond_to do |format|
@@ -61,10 +67,28 @@ class KickstartsController < ApplicationController
   def update
     respond_to do |format|
       if @kickstart.update(kickstart_params)
-        format.html { redirect_to @kickstart, notice: 'Kickstart was successfully updated.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Kickstart was successfully updated.' }
         format.json { render :show, status: :ok, location: @kickstart }
       else
         format.html { render :edit }
+        format.json { render json: @kickstart.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def admin_confirmation
+    respond_to do |format|
+      if @kickstart.update(kickstart_params)
+        confirm_this @kickstart
+        if @kickstart.is_confirmed?
+          format.html { redirect_back fallback_location: root_path, notice: 'RDV le Kickstart a bien été confirmer.' }
+          format.json { render :show, status: :ok, location: @kickstart }
+        else
+          # redirect to and error page
+          format.json { render json: @kickstart.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { redirect_back(fallback_location: root_path) }
         format.json { render json: @kickstart.errors, status: :unprocessable_entity }
       end
     end
@@ -88,6 +112,15 @@ class KickstartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kickstart_params
-      params.require(:kickstart).permit(:coaches_crew_id, :crew_id, :start_time, :start_time_date, :start_time_time, :end_time)
+      params.require(:kickstart).permit(
+      :coaches_crew_id,
+      :crew_id,
+      :start_time,
+      :start_time_date,
+      :start_time_time,
+      :start_time_min,
+      :start_time_hour,
+      :end_time
+      )
     end
 end

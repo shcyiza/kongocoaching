@@ -17,6 +17,18 @@ class ApplicationController < ActionController::Base
     VideoLink.create! video_path: link, watchable: watchable
   end
 
+  def add_participant enrollable
+    Participant.create! user: current_user, enrollable: enrollable
+  end
+
+  def set_as_confirmable confirmable
+    Confirmation.create! confirmable: confirmable
+  end
+
+  def confirm_this confirmable
+    confirmable.confirmation.update! confirmed: true, confirmed_by: current_user
+  end
+
   protected
 
   def configure_permitted_parameters
