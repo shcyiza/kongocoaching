@@ -1,0 +1,15 @@
+<div class="admin_content">
+  <div class="row">
+    <% @services.each do |service| %>
+      <div class="col-md-6">
+        <% unless service.id == nil %>
+          <%= render 'crews/services/service_instance', service: service %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <h1>New Training Type</h1>
+  <hr>
+  <%= render 'crews/services/form_service' %>
+</div>

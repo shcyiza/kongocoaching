@@ -70,6 +70,9 @@ class TrainingTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def training_type_params
-      params.require(:training_type).permit(:name, :description, :duration_hours, :duration_minutes)
+      params.require(:training_type).permit(:name, :description, :duration_hours, :duration_minutes,
+                                            avatars_attributes: [:photo],
+                                            video_links_attributes: [:video_path]
+                                            )
     end
 end

@@ -404,7 +404,7 @@ a.btn_1.white:hover,
 
 /* Header */
 
-header {
+header#nav {
 	padding: 5px 10px;
 	width: 100%;
 	position: fixed;
@@ -414,7 +414,7 @@ header {
 	background: url(shadow_top.png) repeat-x 0 0;
 }
 
-header.sticky {
+header#nav.sticky {
 	border-bottom: 1px solid #ededed;
 	background: #fff;
 	-webkit-transition: all 0.4s ease;
@@ -668,11 +668,6 @@ video {
 	left: 0;
 	right: 0;
 	opacity: 0.55;
-}
-
-iframe {
-	height: 100%;
-	width: 100%;
 }
 
 video {
@@ -2408,12 +2403,6 @@ ul.list_3 li:before {
 	border: 1px solid #ddd;
 	border-top: none;
 	margin-bottom: 25px;
-	-webkit-border-bottom-right-radius: 5px;
-	-webkit-border-bottom-left-radius: 5px;
-	-moz-border-radius-bottomright: 5px;
-	-moz-border-radius-bottomleft: 5px;
-	border-bottom-right-radius: 5px;
-	border-bottom-left-radius: 5px;
 }
 
 /*-------- 3.6 Parallax bg --------*/
@@ -2503,10 +2492,6 @@ label {
 .form-control::-webkit-input-placeholder {
 	color: #b6b6b6;
 	font-weight: 500;
-}
-
-.form-group {
-	margin-bottom: 25px;
 }
 
 /* Drop down select */

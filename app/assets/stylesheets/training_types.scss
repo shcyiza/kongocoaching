@@ -1,0 +1,90 @@
+
+.card {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+  max-width: 1000px;
+}
+.card header {
+  position: relative;
+  background-image: none;
+}
+.card header img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card header .text-wrap {
+  color: #3d0167;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 20px;
+}
+.card header .text-wrap h2 {
+  font-size: 3.5rem;
+  margin-top: 20px;
+  color:#ffb586;
+  background: white;
+}
+.card header .text-wrap h3 {
+  margin-top: 5px;
+  font-weight: 100;
+  background: white;
+}
+.card main {
+  min-height: 150px;
+  background: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.card main .cta-wrap {
+  background: #ed5434;
+  color: white;
+  padding: 10px;
+  width: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.card main .cta-wrap svg {
+  height: 40px;
+  fill: white;
+}
+.card main .cta-wrap span {
+  margin-top: 10px;
+}
+.card main .info-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column wrap;
+      flex-flow: column wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.card main .info-wrap h4 {
+  font-size: 1.45rem;
+  color: #3a3a3a;
+}
+.card main .info-wrap p {
+  margin-top: .75rem;
+  color: #7f8c8d;
+}

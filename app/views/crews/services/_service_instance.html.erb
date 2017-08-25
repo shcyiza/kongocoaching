@@ -1,0 +1,75 @@
+<section class="card">
+  <header style="">
+    <% if has_photos_of service %>
+    <!-- has_photos is a application helper method -->
+      <%= image_tag service.photo.url %>
+    <% else %>
+      <img src="https://source.unsplash.com/ZKNsVqbRSPE/1000x400" />
+    <% end %>
+
+    <div class="text-wrap">
+      <h2><strong><%= service.name %></strong></h2>
+      <a href="#0" class="btn_1 white">
+        <i class="icon-edit-2"></i> editer...
+      </a>
+    </div>
+  </header>
+  <main>
+    <div href="#" class="cta-wrap">
+      <i class="icon-stopwatch"></i>
+      <span>Durée:</span>
+      <span><%= service.duration_hours %>h <%= service.duration_minutes %>m</span>
+    </div>
+    <div class="info-wrap">
+      <div class="panel-group" id="accordion_<%= service.id %>">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+                  <a class="accordion_<%= service.id %>-toggle" data-toggle="collapse" data-parent="#accordion_<%= service.id %>" href="#description_<%= service.id %>">
+                    <strong>Description</strong> <i class="icon-th-list"></i>
+                    <i class="indicator icon_minus_alt2 pull-right"></i>
+                  </a>
+                </h4>
+							</div>
+							<div id="description_<%= service.id %>" class="panel-collapse collapse in">
+								<div class="panel-body">
+                  <%= service.description %>
+								</div>
+							</div>
+						</div>
+            <% if has_photos_of service %>
+  						<div class="panel panel-default">
+  							<div class="panel-heading">
+  								<h4 class="panel-title">
+                    <a class="accordion_<%= service.id %>-toggle" data-toggle="collapse" data-parent="#accordion_<%= service.id %>" href="#pictures_<%= service.id %>">
+                      <strong>Photos</strong> <i class="icon-picture"></i>
+                      <i class="indicator icon_plus_alt2 pull-right"></i>
+                    </a>
+                  </h4>
+  							</div>
+  							<div id="pictures_<%= service.id %>" class="panel-collapse collapse">
+                  <%= render './shared/pictures_gallery', attachable: service  %>
+  							</div>
+  						</div>
+            <% end %>
+            <% if has_vidoes_of service %>
+  						<div class="panel panel-default">
+  							<div class="panel-heading">
+  								<h4 class="panel-title">
+                    <a class="accordion_<%= service.id %>-toggle" data-toggle="collapse" data-parent="#accordion_<%= service.id %>" href="#videos_<%= service.id %>">
+                      <strong>Videos</strong> <i class="icon-video"></i>
+                      <i class="indicator icon_plus_alt2 pull-right"></i>
+                    </a>
+                  </h4>
+  							</div>
+  							<div id="videos_<%= service.id %>" class="panel-collapse collapse">
+  								<div class="panel-body">
+                    <%= render './shared/videos_gallery', watchable: service  %>
+  								</div>
+  							</div>
+  						</div>
+            <% end %>
+					</div>
+    </div>
+  </main>
+</section>

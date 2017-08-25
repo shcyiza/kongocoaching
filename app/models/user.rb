@@ -25,6 +25,14 @@ def gender
   return gender
 end
 
+def tel
+  tel = "Pas de numéro de telephone"
+  if self.profile.phonenr
+    tel = self.profile.phonenr
+  end
+  return tel
+end
+
 # ---------------------Methods for coordinators--------------
    def coordinator? #is the selected user a coordinator?
      result = false
@@ -104,6 +112,14 @@ end
     result = false
     if self.coach? && self.coach.coaches_crews.include?(profile.coaches_crew)
       result = true
+    end
+    return result
+  end
+
+  def his_crews_as_coaches
+    result = false
+    if self.coach? &&  self.coach.crews != nil
+      result = self.coach.crews
     end
     return result
   end

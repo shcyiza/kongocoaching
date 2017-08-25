@@ -1,0 +1,71 @@
+<div class="col-lg-4">
+  <div class="shadowed">
+    <div class="coach hovercard">
+      <div class="coach-background">
+        <% if coach.avatars.count != 0 %>
+          <%= image_tag coach.photo.url, class: "coach-bkimg" %>
+        <% else %>
+          <%= image_tag "http://irontrainer.co/wp-content/uploads/2017/01/personal-trainer-demonstrating-squat-lLas-Vegas-256x256.jpg", class: "coach-bkimg" %>
+        <% end %>
+      </div>
+      <div class="useravatar">
+        <% if coach.avatars.count != 0 %>
+          <%= image_tag coach.photo.url :thumb, class: "img-responsive" %>
+        <% else %>
+          <%= image_tag "http://irontrainer.co/wp-content/uploads/2017/01/personal-trainer-demonstrating-squat-lLas-Vegas-256x256.jpg" %>
+        <% end %>
+      </div>
+      <div class="coach-info">
+        <span class="coach-title">
+          <font color="#ed5434"><b><%= coach.name %></b></font>
+        </span>
+      </div>
+    </div>
+
+    <div class="<%= coach.class.name %><%= coach.id %> btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <button type="button" id="stars" class="btn btn-primary" href="#tab1_<%= coach.class.name %><%= coach.id %>" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <div class="hidden-xs">Stars</div>
+        </button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" id="favorites" class="btn btn-default" href="#tab2_<%= coach.class.name %><%= coach.id %>" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+          <div class="hidden-xs">pictures</div>
+        </button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" id="following" class="btn btn-default" href="#tab3_<%= coach.class.name %><%= coach.id %>" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          <div class="hidden-xs">Following</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="tab1_<%= coach.class.name %><%= coach.id %>">
+        <h3>This is tab 1</h3>
+      </div>
+      <div class="tab-pane fade in" id="tab2_<%= coach.class.name %><%= coach.id %>">
+        <h3>
+          <% if has_photos_of coach %>
+            <%= render './shared/pictures_gallery', attachable: coach  %>
+          <% else %>
+            <h4>no pictures</h4>
+          <% end %>
+        </h3>
+      </div>
+      <div class="tab-pane fade in" id="tab3_<%= coach.class.name %><%= coach.id %>">
+        <h3>This is tab 3</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".<%= coach.class.name %><%= coach.id %> .btn").click(function () {
+      $(".<%= coach.class.name %><%= coach.id %> .btn").removeClass("btn-primary").addClass("btn-default");
+      // $(".tab").addClass("active"); // instead of this do the below
+      $(this).removeClass("btn-default").addClass("btn-primary");
+    });
+  });
+</script>

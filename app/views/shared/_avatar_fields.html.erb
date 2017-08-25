@@ -1,7 +1,8 @@
-<%= fields_for :avatar do |a| %>
-  <%= a.file_field :photo, id:"imgInp" %>
-  <img class="hidden" id="blah" src="#" alt="your image" width="650"/>
-<% end %>
+<div class="nested-fields">
+  <%= f.file_field :photo, id:"imgInp" %>
+  <img class="hidden previeuw" id="blah" src="#" alt="your image" height="150"/>
+  <%= link_to_remove_association "supprimez l'image", f %>
+</div>
 <script type="text/javascript">
 function readURL(input) {
 

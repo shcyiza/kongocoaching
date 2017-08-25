@@ -1,0 +1,34 @@
+<div class="row">
+  <h2>Rajouter un coach</h2>
+  <%= simple_form_for(@new_cp, url: "/crews/#{@crew.id}/add_cp", method: :post, html: { multipart: true }) do |f| %>
+    <%= f.error_notification %>
+
+
+  <div class="col-md-7">
+   <div class="form-inputs">
+     <%= f.input :name, label:"Son nom" %>
+   </div>
+  </div>
+  <hr>
+  <div class="col-md-5">
+    Photo de profiles
+    <%= render './shared/nest_avatar_form', f: f  %>
+
+    <hr>
+    <div class="video_links">
+      video youtube
+      <%= link_to_add_association 'ajouter un lien youtube', f, :video_links,
+       data: { association_insertion_node: '.video_links', association_insertion_method: :append },
+       partial: './shared/video_link_fields' %>
+      <br>
+      <%= f.simple_fields_for :video_links do |v| %>
+       <%= render './shared/video_link_fields', f: v  %> <br>
+      <% end %>
+   </div>
+  </div>
+   <br>
+   <div class="form-actions">
+    <%= f.button :submit, label: "ajouter le coach" %>
+   </div>
+  <% end %>
+</div>

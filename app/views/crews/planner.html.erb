@@ -1,0 +1,169 @@
+<%= javascript_include_tag 'datepicker', 'data-turbolinks-track' => 'load' %>
+<section class="hero">
+  <%= image_tag "https://fitness.edu.au/image/article-image-recipe/uploads/blog/bigstock-personal-trainer-working-with-108371150_1.jpg", class: "hero__background" %>
+	<div class="container">
+		<h2 class="main_title  hero__title" style="color:green; width:100%;">
+      Vos demande de kickstarts non confirmés?
+    </h2>
+  </div>
+</section>
+<br>
+<div class="container">
+  <h3>Vous avez <font color="red"><b><%= @kickstart_count %> </b></font>demande de kickstarts confimés </h3>
+</div>
+<br>
+
+<div class="">
+  <% @kickstarts.each do |k| %>
+
+    <div class="panel panel-default container">
+      <div class="panel-heading row">
+      	<div class="panel-title col-md-10 col-xs-8">
+          <h4>
+            <b><%= k.user.name %></b> voudrait un RDV le <b><%=l(k.start_time, format: '%a, %d/%m/%y') %></b><br>
+            entre <b><%= k.start_time.hour %> heure</b> et <b><%= k.end_time.hour %> heure</b>
+          </h4>
+        </div>
+        <div class="btn_1 col-md-2 col-xs-4 text-centered" onclick='$("#<%= k.id %>").modal("show");'>
+          Lui donner un RDV...
+        </div>
+      </div>
+    	<div class="panel-body">
+        <h4><u>Motivations et Objectifs:</u></h4>
+    		<% if k.user.profile.motivation %>
+    		  <%= k.user.profile.motivation %>
+        <% else %>
+          <font color="red">Motivation à voir l'hors du rdv</font>
+    		<% end %>
+    	</div>
+    </div>
+    <div class="modal fade" id="<%= k.id %>" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content modal-popup">
+          <h4 style="color: #04af00;">
+          <b><%= k.user.name %></b> voudrait un RDV <br>
+          le <b><%=l(k.start_time, format: '%a, %d/%m/%y') %></b><br>
+          entre <b><%= k.start_time.hour %> heure</b> et <b><%= k.end_time.hour %> heure</b>
+          </h4>
+          <h3>Contatez le client pour confirmez le RDV:</h3>
+          <% if k.user.profile.phonenr %>
+            <%= tel_to k.user.tel, class:"btn_green_outline" do %>
+              <i class="icon-mail-alt"></i> <%= k.user.tel %>
+            <% end %>
+          <% else %>
+             <a class="btn disabled"> <%= k.user.tel %> </>
+          <% end %>
+          <br>
+          <%= mail_to k.user.email, class:"btn_green_outline" do %>
+            <i class="icon-mail-alt"></i>: <%= k.user.email %>
+          <% end %>
+          <hr>
+          <h3>A quelle moment avez vous pris un RDV?</h3>
+          <br>
+          <%= simple_form_for k, url: {action: "admin_confirmation", controller: 'kickstarts', id:"#{k.id}" }, method: 'post' do |f| %>
+            <%= render partial: "dateconfirmation", locals:{f: f, k: k} %>
+            <hr>
+            <div class="" id="sumbit">
+              <%= button_tag class: 'btn_full', type: :submit do %>
+               <font size="12px">Confirmer <span class="icon-check-3"></span></font>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+
+    </script>
+  <% end %>
+</div>
+
+
+<div class="flickr_pagination">
+  <h4 class="text-center"><%= will_paginate @kickstarts, previous_label: '<', next_label: '>' %></h4>
+</div>
+
+
+<script type="text/javascript">
+  const buttons = document.querySelectorAll('#change_time');
+  const hour_inputs = document.querySelectorAll('.hour');
+  const minute_inputs = document.querySelectorAll('.minute');
+
+  function changeTime (event) {
+    const id = event.currentTarget.dataset.instance;
+    const hour_min = event.currentTarget.dataset.for;
+    const operation = event.currentTarget.dataset.operation;
+    const field = document.getElementById('input_' + hour_min + "_" + id);
+    if (hour_min === "hour") {
+      changeHour(field, operation);
+    } else {
+      changeMinute(field, operation);
+    }
+
+  }
+
+  function changeHour (field, operation) {
+    const field_val = Number(field.value);
+
+    if (operation === "plus") {
+      let value_plus = field_val + 1;
+      if (value_plus >= 24) {
+        field.value = 0
+      } else {
+        field.value = value_plus ;
+      }
+    }
+    else if (operation === "minus") {
+      let value_minus = field_val - 1 ;
+      if (value_minus < 0) {
+        field.value = 23
+      } else {
+        field.value = value_minus ;
+      }
+    }
+  }
+
+  function changeMinute (field, operation) {
+    const field_val = Number(field.value);
+
+    if (operation === "plus") {
+      let value_plus = field_val + 5;
+      if (value_plus >= 60) {
+        field.value = 0
+      } else {
+        field.value = value_plus ;
+      }
+    }
+
+    else if (operation === "minus") {
+      let value_minus = field_val - 5 ;
+      if (value_minus < 0) {
+        field.value = 55
+      } else {
+        field.value = value_minus ;
+      }
+    }
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', changeTime));
+  hour_inputs.forEach(i => i.addEventListener('input', checkHourValue));
+  minute_inputs.forEach(i => i.addEventListener('input', checkMinuteValue));
+
+  function checkHourValue (event) {
+    const input = event.currentTarget
+    if (input.value >= 24) {
+      input.value = 23
+    } else if (input.value < 0){
+      input.value = 0
+    }
+  }
+
+  function checkMinuteValue (event) {
+    const input = event.currentTarget
+    if (input.value >= 60) {
+      input.value = 55
+    } else if (input.value < 0){
+      input.value = 0
+    }
+  }
+</script>

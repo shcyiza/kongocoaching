@@ -1,18 +1,151 @@
-<div class="container">
-  <%= simple_form_for(@training_type, html: { multipart: true }) do |f| %>
-    <%= f.error_notification %>
-
-    <div class="form-inputs">
-      <%= f.input :name %>
-      <%= f.input :description %>
-      <%= f.input :duration_hours %>
-      <%= f.input :duration_minutes %>
-      <%= render 'shared/nest_avatar_form' %>
-      <%= render 'shared/nest_videolink_form' %>
+  <div class="container row">
+<%= simple_form_for(@training_type, html: { multipart: true }) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+   <div class="col-md-8">
+    <%= f.input :name %>
+    <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
+   </div>
+   <div class="col-md-4">
+    <b>combien temp dure cette entrainement?</b>
+    <div class="col-md-5">
+      <%= f.label "H" %>
+      <button type="button" name="button" class="btn_1"
+      id="change_time" data-operation="plus" data-for="hour">
+        +
+      </button>
+      <%= f.input :duration_hours,as: :string, label: false,
+        input_html: { id:"input_hour", class: "hour", onchange: "if( this.value.length == 1 ) this.value='0'+this.value;"  }
+      %>
+      <button type="button" name="button" class="btn_1" id="change_time" data-operation="minus" data-for="hour">
+        -
+      </button>
     </div>
-
-    <div class="form-actions">
-      <%= f.button :submit %>
+    <div class="col-md-2" style="margin-top: 45px;">
+      <b>:</b>
     </div>
+    <div class="col-md-5">
+      <%= f.label "M" %>
+      <button type="button" name="button" class="btn_1" id="change_time" data-operation="plus" data-for="min">
+        +
+      </button>
+      <%= f.input :duration_minutes,as: :string, label: false,
+        input_html: { id:"input_min", class: "minute", onchange: "if( this.value.length == 1 ) this.value='0'+this.value;"  }
+      %>
+      <button type="button" name="button" class="btn_1" id="change_time" data-operation="minus" data-for="min">
+        -
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div class="avatars">
+    photo
+    <%= link_to_add_association 'ajouter une photo', f, :avatars,
+    data: { association_insertion_node: '.avatars', association_insertion_method: :append },
+    partial: './shared/avatar_fields'  %>
+    <br>
+    <%= f.simple_fields_for :avatars do |a| %>
+    <%= render './shared/avatar_fields', f: a  %> <br>
+    <% end %>
+  </div>
+  <hr>
+  <div class="video_links">
+    video youtube
+    <%= link_to_add_association 'ajouter un lien youtube', f, :video_links,
+     data: { association_insertion_node: '.video_links', association_insertion_method: :append },
+     partial: './shared/video_link_fields' %>
+    <br>
+    <%= f.simple_fields_for :video_links do |v| %>
+     <%= render './shared/video_link_fields', f: v  %> <br>
+    <% end %>
+   </div>
+  </div>
+ <br>
+ <div class="form-actions">
+  <%= f.button :submit %>
+ </div>
   <% end %>
 </div>
+
+  <script type="text/javascript">
+  var buttons = document.querySelectorAll('#change_time');
+  var hour_input = document.querySelector('.hour');
+  var minute_input = document.querySelector('.minute');
+
+  function changeTime (event) {
+    var hour_min = event.currentTarget.dataset.for;
+    var operation = event.currentTarget.dataset.operation;
+    var field = document.getElementById( 'input_' + hour_min );
+    if (hour_min === "hour") {
+      changeHour(field, operation);
+    } else {
+      changeMinute(field, operation);
+    }
+
+  }
+
+  function changeHour (field, operation) {
+    var field_val = Number(field.value);
+
+    if (operation === "plus") {
+      let value_plus = field_val + 1;
+      if (value_plus >= 8) {
+        field.value = 0
+      } else {
+        field.value = value_plus ;
+      }
+    }
+    else if (operation === "minus") {
+      let value_minus = field_val - 1 ;
+      if (value_minus < 0) {
+        field.value = 23
+      } else {
+        field.value = value_minus ;
+      }
+    }
+  }
+
+  function changeMinute (field, operation) {
+    var field_val = Number(field.value);
+
+    if (operation === "plus") {
+      let value_plus = field_val + 5;
+      if (value_plus >= 60) {
+        field.value = 0
+      } else {
+        field.value = value_plus ;
+      }
+    }
+
+    else if (operation === "minus") {
+      let value_minus = field_val - 5 ;
+      if (value_minus < 0) {
+        field.value = 55
+      } else {
+        field.value = value_minus ;
+      }
+    }
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', changeTime));
+  hour_input.addEventListener('input', checkHourValue);
+  minute_input.addEventListener('input', checkMinuteValue);
+
+  function checkHourValue (event) {
+    var input = event.currentTarget
+    if (input.value >= 24) {
+      input.value = 23
+    } else if (input.value < 0){
+      input.value = 0
+    }
+  }
+
+  function checkMinuteValue (event) {
+    var input = event.currentTarget
+    if (input.value >= 60) {
+      input.value = 55
+    } else if (input.value < 0){
+      input.value = 0
+    }
+  }
+  </script>

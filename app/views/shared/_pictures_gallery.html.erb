@@ -1,0 +1,9 @@
+<div class="panel-body magnific-gallery">
+  <% attachable.avatars.each do |pic| %>
+    <div class="col-sm-4">
+      <a href="<%= pic.photo.url %>" title="Photo title">
+        <%= image_tag pic.photo.url %>
+      </a>
+    </div>
+  <% end %>
+</div>

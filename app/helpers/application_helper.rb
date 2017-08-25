@@ -16,16 +16,40 @@ module ApplicationHelper
 
   #----------------END url helpers for kongo_coaching_pages controllers END
 
-  def youtube_embed(youtube_url)
-  if youtube_url[/youtu\.be\/([^\?]*)/]
-    youtube_id = $1
-  else
-    # Regex from # http://stackoverflow.com/questions/3452546/javascript-regex-how-to-get-youtube-video-id-from-url/4811367#4811367
-    youtube_url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
-    youtube_id = $5
+
+  def youtube_embed video, *style
+    content_tag(:iframe, 'youtube', src: video.yt_embed_link, style: style )
   end
 
-    raw(%Q{<iframe title="YouTube video player" src="http://www.youtube.com/embed/#{ youtube_id }" frameborder="0" allowfullscreen></iframe>})
+  def tel_to text, html_options = {}
+    groups = text.to_s.scan(/(?:^\+)?\d+/)
+    link_to '<i class="icon-phone"></i>: '.html_safe + text, "tel:#{groups.join '-'}", html_options
   end
 
+  def link_to_function(name, *args, &block)
+   html_options = args.extract_options!.symbolize_keys
+
+   function = block_given? ? update_page(&block) : args[0] || ''
+   onclick = "#{"#{html_options[:onclick]}; " if html_options[:onclick]}#{function}; return false;"
+   href = html_options[:href] || '#'
+
+   content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick))
+  end
+
+  def has_photos_of attachable
+    result = false
+    if attachable.avatars.count > 0
+      result = true
+    end
+    return result
+  end
+
+  def has_vidoes_of watchable
+    result = false
+    if watchable.video_links.count > 0
+      result = true
+    end
+    return result
+  end
+  
 end

@@ -3,10 +3,11 @@
 <% if @training_type.avatars.count != 0 %>
   <%= image_tag @training_type.photo.url(:medium) %>
 <% end %>
-<%= youtube_embed(@training_type.video_link) %>
+<% if @training_type.video_links.count != 0 %>
+  <%= youtube_embed(@training_type.video_link) %>
+<% end %>
 <p>
-  <strong>Type:</strong>
-  <%= @training_type.name %>
+  <strong><%= @training_type.name %></strong>
 </p>
 
 <p>

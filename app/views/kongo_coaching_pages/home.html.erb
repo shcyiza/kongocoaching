@@ -11,8 +11,8 @@
     </div>
     <!-- End sub_content -->
   </div>
-  <img src="/assets/video_fix-6f064b11007507ecebb88b25c6b21a41e51189b079c5a30342c8dc8950019c0c.png" alt="" class="header-video--media" data-video-src="/assets/intro-1744d23323c4af1b8313e311195732dfa202574567966ea9886aca7a30166926.mp4" data-teaser-source="/assets/intro-1744d23323c4af1b8313e311195732dfa202574567966ea9886aca7a30166926" data-provider="" data-video-width="1920" data-video-height="960">
-  <div id="count" class="text-center hidden-xs">
+  <img src="/assets/video_fix-6f064b11007507ecebb88b25c6b21a41e51189b079c5a30342c8dc8950019c0c.png" alt="" class="header-video--media" data-video-src="/assets/intro-807d3106d646ff27d8a7ee1df4e72533e6c1bfa05cb832aa7503a6234ce7f9f9.mp4" data-teaser-source="/assets/intro-807d3106d646ff27d8a7ee1df4e72533e6c1bfa05cb832aa7503a6234ce7f9f9" data-provider="" data-video-width="1920" data-video-height="960">
+  <div id="count" class="text-center hidden-md">
     <%= link_to "/1/signup", class:"btn_1" do %>
       <h2 style="color:white;"><i class="icon-heart"></i>Commencez mon kickstar!</h2>
     <% end %>
@@ -142,8 +142,13 @@
 				<h3>Subscribe to our Newsletter for latest news.</h3>
 				<div id="message-newsletter"></div>
 				<form method="post" action="assets/newsletter.php" name="newsletter" id="newsletter" class="form-inline">
-					<input name="email_newsletter" id="email_newsletter" type="email" value="" placeholder="Your Email" class="form-control">
-					<button id="submit-newsletter" class="btn_1"> Subscribe</button>
+          <div class="col-md-9">
+            <input name="email_newsletter" id="email_newsletter" type="email" value="" placeholder="Your Email" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <button id="submit-newsletter" class="btn_1"> Subscribe</button>
+          </div>
 				</form>
 			</div>
 		</div>

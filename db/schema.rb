@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801172912) do
+ActiveRecord::Schema.define(version: 20170823193522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "avatars", force: :cascade do |t|
     t.integer  "attachable_id"
-    t.integer  "attachable_type"
+    t.string   "attachable_type"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "photo_file_name"
@@ -44,10 +44,20 @@ ActiveRecord::Schema.define(version: 20170801172912) do
     t.index ["crew_id"], name: "index_clubs_crews_on_crew_id", using: :btree
   end
 
+  create_table "coach_placeholders", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "crew_id"
+    t.text     "description"
+    t.index ["crew_id"], name: "index_coach_placeholders_on_crew_id", using: :btree
+  end
+
   create_table "coaches", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
   create_table "coaches_crews", force: :cascade do |t|
@@ -122,6 +132,15 @@ ActiveRecord::Schema.define(version: 20170801172912) do
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 
+  create_table "specialties", force: :cascade do |t|
+    t.integer  "training_type_id"
+    t.integer  "specializable_id"
+    t.string   "specializable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["training_type_id"], name: "index_specialties_on_training_type_id", using: :btree
+  end
+
   create_table "training_types", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -133,6 +152,8 @@ ActiveRecord::Schema.define(version: 20170801172912) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "crew_id"
+    t.index ["crew_id"], name: "index_training_types_on_crew_id", using: :btree
   end
 
   create_table "trainings", force: :cascade do |t|
@@ -169,17 +190,20 @@ ActiveRecord::Schema.define(version: 20170801172912) do
   create_table "video_links", force: :cascade do |t|
     t.string   "video_path"
     t.integer  "watchable_id"
-    t.integer  "watchable_type"
+    t.string   "watchable_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
   add_foreign_key "clubs_crews", "clubs"
   add_foreign_key "clubs_crews", "crews"
+  add_foreign_key "coach_placeholders", "crews"
   add_foreign_key "kickstarts", "coaches_crews"
   add_foreign_key "kickstarts", "crews"
   add_foreign_key "profile_variables", "profiles"
   add_foreign_key "profiles", "coaches_crews"
   add_foreign_key "profiles", "crews"
   add_foreign_key "profiles", "users"
+  add_foreign_key "specialties", "training_types"
+  add_foreign_key "training_types", "crews"
 end

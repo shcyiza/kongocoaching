@@ -1,0 +1,56 @@
+<section class="hero">
+  <%= image_tag "https://cdn.pixabay.com/photo/2014/09/28/19/49/fitness-465203_960_720.jpg", class: "hero__background" %>
+	<div class="container">
+		<h2 class="main_title  hero__title" style="color:green; width:100%;">
+      Vos Coaches
+    </h2>
+  </div>
+</section>
+<div class="row admin_content">
+  <% @coaches.each do |coach| %>
+    <%= render 'crews/coaches/coach_instance', coach: coach %>
+  <% end %>
+
+  <div class="col-lg-4">
+    <div class="coach hovercard">
+      <div class="coach-background">
+          <%= image_tag "http://www.iconsdb.com/icons/preview/orange/add-user-xxl.png", class: "coach-bkimg" %>
+      </div>
+      <div class="useravatar">
+
+          <%= image_tag "http://www.iconsdb.com/icons/preview/orange/add-user-xxl.png" %>
+
+      </div>
+      <div class="coach-info">
+        <span class="coach-title">
+          <font color="#ed5434"><b>rajouter un coach</b></font>
+        </span>
+      </div>
+    </div>
+
+    <div class=" btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <button type="button" id="stars" class="btn btn-primary" href="#addcoach" data-toggle="modal">
+          <span >
+            <i class="icon-user"></i><i class="icon-plus"></i>
+            <div class="hidden-xs">Cliquez-ici</div>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="tab1">
+        <a href="#0" data-toggle="modal" data-target="#addcoach" class="btn_outline"><i class="icon-user"></i><i class="icon-plus"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addcoach" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <%= render 'crews/coaches/form_cp' %>
+    </div>
+  </div>
+</div>

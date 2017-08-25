@@ -1,0 +1,23 @@
+<% if @crew %>
+  <div id="sidebar-wrapper" class="col-md-2 animated">
+    <div id="sidebar" class="">
+        <ul class="nav list-group">
+            <li>
+                <%= link_to "Coaches", "/crews/#{@crew.id}/coaches", class: "list-group-item"%>
+            </li>
+            <li>
+                <%= link_to "Services", "/crews/#{@crew.id}/services", class: "list-group-item"%>
+            </li>
+            <li>
+                <%= link_to "Kickstarts non confirmé", "/crews/#{@crew.id}/kickstarts", class: "list-group-item"%>
+            </li>
+            <li>
+                <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 10</a>
+            </li>
+            <li>
+                <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 11</a>
+            </li>
+        </ul>
+    </div>
+  </div>
+<% end %>

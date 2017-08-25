@@ -1,10 +1,39 @@
 <% if user_signed_in? %>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-  <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+  <div class="main-menu">
+    <ul>
+      <li class="submenu">
+        <a href="javascript:void(0);" class="show-submenu"><i class="icon-cog"></i></font><i class="icon-down-open-mini"></i></a>
+        <ul >
+          <li><a><i class="icon-users"></i> Paramètres de mon Crew</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="main-menu">
+    <ul>
+      <li class="submenu">
+        <a href="javascript:void(0);" class="show-submenu"><i class="icon-user"></i><i class="icon-down-open-mini"></i></a>
+        <ul>
+          <li><a><i class="icon-user"></i> Profile</a>
+          </li>
+          <li>
+            <%= link_to  edit_user_registration_path do %>
+              <i class="icon-key-2"></i> Paramètres d'access
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, :method=>'delete' do %>
+              <i class=" icon-power"></i>  Déconnection
+            <% end %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 <% else %>
+
   <li><%= link_to 'Sign in', new_user_session_path %></li>
   <li><%= link_to 'Sign up', new_user_registration_path %></li>
-<% end %>
-<% if user_signed_in? %>
-  <li><%= link_to 'Users', users_path %></li>
+
 <% end %>

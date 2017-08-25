@@ -12,12 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require cocoon
 //= require_tree ./app_default
 //= require turbolinks
 
+
 function animate( elementId, animation ) {
   var element = document.getElementById( elementId );
-  element.classList.add("animated", animation );
+  element.classList.add( animation, "animated" );
 };
 
 function animateByElement( element, animation ) {
@@ -49,3 +51,22 @@ function addStyleTo( el, styleClass ) {
 function removeStyleTo( el, styleClass ) {
   el.classList.remove(styleClass);
 };
+
+function toggleSideBar() {
+  const sidebar = document.querySelector('#sidebar-wrapper');
+  const maincontent = document.querySelector('#main-wrapper');
+  if (Array.from(sidebar.classList).includes('hidden')) {
+    sidebar.classList.remove('hidden', 'fadeOutLeft');
+    sidebar.classList.add('fadeInLeft');
+    removeStyleTo( maincontent, 'col-md-12');
+    maincontent.classList.add('col-md-10');
+  } else {
+    removeStyleTo( sidebar, "fadeInLeft" );
+    addStyleTo( sidebar, "fadeOutLeft");
+    maincontent.classList.remove( 'col-md-10' );
+    addStyleTo( maincontent, 'col-md-12' );
+    setTimeout( function(){
+      sidebar.classList.add('hidden' );
+    }, 1000 );
+  }
+}
