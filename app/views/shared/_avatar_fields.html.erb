@@ -1,24 +1,28 @@
-<div class="nested-fields">
-  <%= f.file_field :photo, id:"imgInp" %>
-  <img class="hidden previeuw" id="blah" src="#" alt="your image" height="150"/>
-  <%= link_to_remove_association "supprimez l'image", f %>
+
+<div class="nested-fields col-md-6" onmouseover="make_id(event); this.onmouseover = null;">
+  <div class="image-upload">
+    <label for="imgInp">
+     <span class="btn btn_green_outline" id="upload_btn">
+       <i class="icon-picture"></i><br>
+       <i class="icon-plus"></i>
+       <img class="hidden previeuw img-rounded" id="previeuw" src="#" alt="your image" height="150"/>
+     </span>
+    </label>
+    <%= f.file_field :avatar, id:"imgInp", data:{ for:"image-upload" } %>
+  </div>
+  <%= link_to_remove_association "<i class='icon-trash'></i>".html_safe, f, class:"trash" %>
 </div>
 <script type="text/javascript">
-function readURL(input) {
-
-  if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-          $('#blah').attr('src', e.target.result);
-      }
-
-      reader.readAsDataURL(input.files[0]);
+  
+  function make_id(event) {
+    var input = event.currentTarget.querySelector("input");
+    var label = event.currentTarget.querySelector("label");
+    var prev_el = event.currentTarget.querySelector("img");
+    input.id = "imgInp_" + input.name;
+    label.for = "imgInp_" + input.name;
+    prev_el.id = "previeuw_" + input.name;
+    console.log( input.id );
   }
-}
 
-$("#imgInp").change(function(){
-  $('#blah').removeClass( "hidden" )
-  readURL(this);
-});
+
 </script>

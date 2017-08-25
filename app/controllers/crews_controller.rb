@@ -1,6 +1,6 @@
 class CrewsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_crew, :except => [:index]
-  before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
   # GET /crews
   # GET /crews.json
 

@@ -1,3 +1,11 @@
+<section class="hero">
+  <%= image_tag "http://www.tennisworld.net.au/wp-content/uploads/2014/07/bootcamp3-724x426.jpg", class: "hero__background" %>
+  <div class="container">
+    <h2 class="main_title  hero__title" style="color:green; width:100%;">
+      Vos services et entrainements
+    </h2>
+  </div>
+</section>
 <div class="admin_content">
   <div class="row">
     <% @services.each do |service| %>
@@ -9,7 +17,5 @@
     <% end %>
   </div>
 
-  <h1>New Training Type</h1>
-  <hr>
   <%= render 'crews/services/form_service' %>
 </div>

@@ -52,6 +52,21 @@ function removeStyleTo( el, styleClass ) {
   el.classList.remove(styleClass);
 };
 
+function readURL(input, prev_el) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          prev_el.attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+};
+
+function triggerPrevieuw( input, prev_el ){
+  prev_el.removeClass( "hidden" )
+  readURL( input, prev_el );
+};
+
 function toggleSideBar() {
   const sidebar = document.querySelector('#sidebar-wrapper');
   const maincontent = document.querySelector('#main-wrapper');
@@ -69,4 +84,4 @@ function toggleSideBar() {
       sidebar.classList.add('hidden' );
     }, 1000 );
   }
-}
+};

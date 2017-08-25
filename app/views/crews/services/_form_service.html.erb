@@ -1,18 +1,21 @@
+<h1>Ajouter un entrainement/service</h1>
+<hr>
 <div class="container row">
   <%= simple_form_for(@new_service, url: "/crews/#{@crew.id}/add_service", method: :post, html: { multipart: true }) do |f| %>
     <%= f.error_notification %>
 
     <div class="form-inputs">
      <div class="col-md-8">
-      <%= f.input :name %>
+      <%= f.input :name, label: "nom du entrainement/service" %>
       <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
      </div>
      <div class="col-md-4">
-      <b>combien temp dure cette entrainement?</b>
+      <div class="col-md-12">
+        <b>combien temp dure cette entrainement/service?</b>
+      </div>
       <div class="col-md-5">
         <%= f.label "H" %>
-        <button type="button" name="button" class="btn_1"
-        id="change_time" data-operation="plus" data-for="hour">
+        <button type="button" name="button" class="btn_1" id="change_time" data-operation="plus" data-for="hour">
           +
         </button>
         <%= f.input :duration_hours,as: :string, label: false,
@@ -37,33 +40,36 @@
           -
         </button>
       </div>
+      </div>
+      <hr>
+      <div class="col-sm-12">
+        <h3>Contenue Multimédia</h3>
+        <div class="avatars col-sm-6 verticalLine">
+          Photos <br>
+          <%= link_to_add_association '+ ajouter des photos', f, :avatars,
+          data: { association_insertion_node: '.avatars', association_insertion_method: :append },
+          partial: './shared/avatar_fields', class: "btn_1 shadowed"  %>
+          <br><br>
+          <%= f.simple_fields_for :avatars do |a| %>
+          <%= render './shared/avatar_fields', f: a  %> <br>
+          <% end %>
+        </div>
+        <div class="video_links col-sm-6">
+          Video youtube <br>
+          <%= link_to_add_association '+ ajouter des liens Youtube', f, :video_links,
+           data: { association_insertion_node: '.video_links', association_insertion_method: :append },
+           partial: './shared/video_link_fields', class: "btn_1 shadowed" %>
+          <br><br>
+          <%= f.simple_fields_for :video_links do |v| %>
+           <%= render './shared/video_link_fields', f: v  %> <br>
+          <% end %>
+         </div>
+      </div>
     </div>
-    <hr>
-    <div class="avatars">
-      photo
-      <%= link_to_add_association 'ajouter une photo', f, :avatars,
-      data: { association_insertion_node: '.avatars', association_insertion_method: :append },
-      partial: './shared/avatar_fields'  %>
-      <br>
-      <%= f.simple_fields_for :avatars do |a| %>
-      <%= render './shared/avatar_fields', f: a  %> <br>
-      <% end %>
-    </div>
-    <hr>
-    <div class="video_links">
-      video youtube
-      <%= link_to_add_association 'ajouter un lien youtube', f, :video_links,
-       data: { association_insertion_node: '.video_links', association_insertion_method: :append },
-       partial: './shared/video_link_fields' %>
-      <br>
-      <%= f.simple_fields_for :video_links do |v| %>
-       <%= render './shared/video_link_fields', f: v  %> <br>
-      <% end %>
-     </div>
-    </div>
-   <br>
-   <div class="form-actions">
-    <%= f.button :submit %>
+   <div class="form-actions col-md-12" style="margin-top: 3rem; border-top: 10px;">
+     <%= button_tag class: 'btn_full', type: :submit do %>
+      <font size="50px">Ajoutez cette entrainement/service</font>
+     <% end %>
    </div>
   <% end %>
 </div>

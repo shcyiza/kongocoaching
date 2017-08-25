@@ -177,10 +177,14 @@ button.btn_1
     color: green
     border-color: green
 
+a.btn_1
+  &:hover
+    background-color: white
+
 a.btn
   color: rgba(green, 0.7)
   &:hover
-    color: $loepard
+    color: white
     background-color: rgba(#ffffff, 0)
     border-color: $loepard
 
@@ -220,7 +224,7 @@ a.btn_white_outline
     color: $secondary
     background-color: white
 
-a.btn_green_outline
+.btn_green_outline
   border: 2px solid #04af00
   font-family: inherit
   color: #04af00
@@ -280,6 +284,12 @@ button.btn.btn-primary
     display: none
   label
     cursor: pointer
+
+a.trash
+  color: red
+  &:hover
+    color: red
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3)
 
 #sidebar ul
   margin: 0px

@@ -1,4 +1,5 @@
-<div class="nested-fields">
-  <%= f.input :video_path, label:"<i class='icon-movie'></i><i class='icon-link-4'></i>".html_safe %>
-  <%= link_to_remove_association "supprimez le lien youtube", f %>
+<div class="nested-fields col-md-6">
+  <i class='icon-movie'></i><i class='icon-link-4'></i>
+  <%= f.text_field :video_path, style: "max-width: 245px;" %>
+  <%= link_to_remove_association "<i class='icon-trash'></i>".html_safe, f , class: "trash"%>
 </div>
