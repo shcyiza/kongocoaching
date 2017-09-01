@@ -43,7 +43,7 @@ class TrainingTypesController < ApplicationController
   def update
     respond_to do |format|
       if @training_type.update(training_type_params)
-        format.html { redirect_to @training_type, notice: 'Training type was successfully updated.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Training type was successfully updated.' }
         format.json { render :show, status: :ok, location: @training_type }
       else
         format.html { render :edit }

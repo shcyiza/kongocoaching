@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823193522) do
+ActiveRecord::Schema.define(version: 20170831225425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,14 @@ ActiveRecord::Schema.define(version: 20170823193522) do
   create_table "avatars", force: :cascade do |t|
     t.integer  "attachable_id"
     t.string   "attachable_type"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.boolean  "is_default",         default: false
+    t.string   "vignette"
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -191,8 +193,9 @@ ActiveRecord::Schema.define(version: 20170823193522) do
     t.string   "video_path"
     t.integer  "watchable_id"
     t.string   "watchable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "is_default",     default: false
   end
 
   add_foreign_key "clubs_crews", "clubs"

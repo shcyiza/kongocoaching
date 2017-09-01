@@ -52,11 +52,4 @@ module ApplicationHelper
     return result
   end
 
-  def form_obj_key( f )
-    obj_key = f.to_s
-    obj_key.slice! "#<Avatar:"
-    obj_key.slice! ">"
-    return obj_key
-  end
-
 end

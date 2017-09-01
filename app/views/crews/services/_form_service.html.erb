@@ -6,65 +6,47 @@
 
     <div class="form-inputs">
      <div class="col-md-8">
-      <%= f.input :name, label: "nom du entrainement/service" %>
+      <%= f.input :name, label: "nom de l'entrainement/service" %>
       <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
+      <div class="col-md-8">
+        <div class="col-md-12">
+          <b>combien temp dure cette entrainement/service?</b>
+        </div>
+        <div class="col-md-5">
+          <%= f.label "H" %>
+          <button type="button" name="button" class="btn_1" id="change_time" data-instance="new" data-operation="plus" data-for="hour">
+            +
+          </button>
+          <%= f.input :duration_hours,as: :string, label: false,
+            input_html: { id:"input_hour_new", class: "hour", onchange: "if( this.value.length == 1 ) this.value='0'+this.value;"  }
+          %>
+          <button type="button" name="button" class="btn_1" id="change_time" data-instance="new" data-operation="minus" data-for="hour">
+            -
+          </button>
+        </div>
+        <div class="col-md-2" style="margin-top: 45px;">
+          <b>:</b>
+        </div>
+        <div class="col-md-5">
+          <%= f.label "M" %>
+          <button type="button" name="button" class="btn_1" id="change_time" data-instance="new" data-operation="plus" data-for="min">
+            +
+          </button>
+          <%= f.input :duration_minutes,as: :string, label: false,
+            input_html: { id:"input_min_new", class: "minute", onchange: "if( this.value.length == 1 ) this.value='0'+this.value;"  }
+          %>
+          <button type="button" name="button" class="btn_1" id="change_time" data-instance="new" data-operation="minus" data-for="min">
+            -
+          </button>
+        </div>
+      </div>
      </div>
      <div class="col-md-4">
-      <div class="col-md-12">
-        <b>combien temp dure cette entrainement/service?</b>
-      </div>
-      <div class="col-md-5">
-        <%= f.label "H" %>
-        <button type="button" name="button" class="btn_1" id="change_time" data-operation="plus" data-for="hour">
-          +
-        </button>
-        <%= f.input :duration_hours,as: :string, label: false,
-          input_html: { id:"input_hour", class: "hour", onchange: "if( this.value.length == 1 ) this.value='0'+this.value;"  }
-        %>
-        <button type="button" name="button" class="btn_1" id="change_time" data-operation="minus" data-for="hour">
-          -
-        </button>
-      </div>
-      <div class="col-md-2" style="margin-top: 45px;">
-        <b>:</b>
-      </div>
-      <div class="col-md-5">
-        <%= f.label "M" %>
-        <button type="button" name="button" class="btn_1" id="change_time" data-operation="plus" data-for="min">
-          +
-        </button>
-        <%= f.input :duration_minutes,as: :string, label: false,
-          input_html: { id:"input_min", class: "minute", onchange: "if( this.value.length == 1 ) this.value='0'+this.value;"  }
-        %>
-        <button type="button" name="button" class="btn_1" id="change_time" data-operation="minus" data-for="min">
-          -
-        </button>
-      </div>
+        <h4><strong><i class="icon-star"></i>Photo Star</strong></h4>
+        <%= render './shared/nest_avatar_form', {f: f, attachable: @new_service }  %>
       </div>
       <hr>
-      <div class="col-sm-12">
-        <h3>Contenue Multimédia</h3>
-        <div class="avatars col-sm-6 verticalLine">
-          Photos <br>
-          <%= link_to_add_association '+ ajouter des photos', f, :avatars,
-          data: { association_insertion_node: '.avatars', association_insertion_method: :append },
-          partial: './shared/avatar_fields', class: "btn_1 shadowed"  %>
-          <br><br>
-          <%= f.simple_fields_for :avatars do |a| %>
-          <%= render './shared/avatar_fields', f: a  %> <br>
-          <% end %>
-        </div>
-        <div class="video_links col-sm-6">
-          Video youtube <br>
-          <%= link_to_add_association '+ ajouter des liens Youtube', f, :video_links,
-           data: { association_insertion_node: '.video_links', association_insertion_method: :append },
-           partial: './shared/video_link_fields', class: "btn_1 shadowed" %>
-          <br><br>
-          <%= f.simple_fields_for :video_links do |v| %>
-           <%= render './shared/video_link_fields', f: v  %> <br>
-          <% end %>
-         </div>
-      </div>
+      <%= render './shared/multimedia_form', f: f  %>
     </div>
    <div class="form-actions col-md-12" style="margin-top: 3rem; border-top: 10px;">
      <%= button_tag class: 'btn_full', type: :submit do %>
@@ -73,86 +55,3 @@
    </div>
   <% end %>
 </div>
-
-<script type="text/javascript">
-var buttons = document.querySelectorAll('#change_time');
-var hour_input = document.querySelector('.hour');
-var minute_input = document.querySelector('.minute');
-
-function changeTime (event) {
-  var hour_min = event.currentTarget.dataset.for;
-  var operation = event.currentTarget.dataset.operation;
-  var field = document.getElementById( 'input_' + hour_min );
-  if (hour_min === "hour") {
-    changeHour(field, operation);
-  } else {
-    changeMinute(field, operation);
-  }
-
-}
-
-function changeHour (field, operation) {
-  var field_val = Number(field.value);
-
-  if (operation === "plus") {
-    let value_plus = field_val + 1;
-    if (value_plus >= 8) {
-      field.value = 0
-    } else {
-      field.value = value_plus ;
-    }
-  }
-  else if (operation === "minus") {
-    let value_minus = field_val - 1 ;
-    if (value_minus < 0) {
-      field.value = 23
-    } else {
-      field.value = value_minus ;
-    }
-  }
-}
-
-function changeMinute (field, operation) {
-  var field_val = Number(field.value);
-
-  if (operation === "plus") {
-    let value_plus = field_val + 5;
-    if (value_plus >= 60) {
-      field.value = 0
-    } else {
-      field.value = value_plus ;
-    }
-  }
-
-  else if (operation === "minus") {
-    let value_minus = field_val - 5 ;
-    if (value_minus < 0) {
-      field.value = 55
-    } else {
-      field.value = value_minus ;
-    }
-  }
-}
-
-buttons.forEach(btn => btn.addEventListener('click', changeTime));
-hour_input.addEventListener('input', checkHourValue);
-minute_input.addEventListener('input', checkMinuteValue);
-
-function checkHourValue (event) {
-  var input = event.currentTarget
-  if (input.value >= 24) {
-    input.value = 23
-  } else if (input.value < 0){
-    input.value = 0
-  }
-}
-
-function checkMinuteValue (event) {
-  var input = event.currentTarget
-  if (input.value >= 60) {
-    input.value = 55
-  } else if (input.value < 0){
-    input.value = 0
-  }
-}
-</script>

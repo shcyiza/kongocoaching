@@ -9,8 +9,12 @@
 
     <div class="text-wrap">
       <h2><strong><%= service.name %></strong></h2>
-      <a href="#0" class="btn_1 white">
+      <a href="#0" class="btn_1 white shadowed" data-toggle="modal" data-target="#edit_service<%= service.id %>">
         <i class="icon-edit-2"></i> editer...
+      </a><br><br><br><br><br><br>
+      <a href="#0" class="btn_1_outline shadowed pull-down" data-toggle="modal"
+      style="border-color: red; color: red;" data-target="#delete_service<%= service.id %>">
+        <i class="icon-trash"></i>...
       </a>
     </div>
   </header>
@@ -19,6 +23,10 @@
       <i class="icon-stopwatch"></i>
       <span>Durée:</span>
       <span><%= service.duration_hours %>h <%= service.duration_minutes %>m</span>
+      <hr>
+      <%= render './shared/add_avatar_btn', { attachable_type: service.class.name, attachable: service } %>
+      <br>
+      <%= render './shared/add_video_btn', { watchable_type: service.class.name, watchable_id: service.id } %>
     </div>
     <div class="info-wrap">
       <div class="panel-group" id="accordion_<%= service.id %>">
@@ -32,7 +40,7 @@
                 </h4>
 							</div>
 							<div id="description_<%= service.id %>" class="panel-collapse collapse in">
-								<div class="panel-body">
+								<div class="panel-body scrollable">
                   <%= service.description %>
 								</div>
 							</div>
@@ -48,7 +56,9 @@
                   </h4>
   							</div>
   							<div id="pictures_<%= service.id %>" class="panel-collapse collapse">
-                  <%= render './shared/pictures_gallery', attachable: service  %>
+                  <div class="panel-body scrollable">
+                    <%= render './shared/pictures_gallery', attachable: service  %>
+                  </div>
   							</div>
   						</div>
             <% end %>
@@ -63,7 +73,7 @@
                   </h4>
   							</div>
   							<div id="videos_<%= service.id %>" class="panel-collapse collapse">
-  								<div class="panel-body">
+  								<div class="panel-body scrollable">
                     <%= render './shared/videos_gallery', watchable: service  %>
   								</div>
   							</div>
@@ -73,3 +83,31 @@
     </div>
   </main>
 </section>
+<!--edit service modal-->
+<div class="modal fade bs-example-modal-lg" id="edit_service<%= service.id %>" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog modal-lg"  role="document">
+    <div class="modal-content modal-popup">
+      <%= render './training_types/form', training_type: service %>
+    </div>
+  </div>
+</div><!--end edit modal-->
+
+<!--destroy service modal-->
+<div class="modal fade bs-example-modal-lg" id="delete_service<%= service.id %>" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog modal-lg"  role="document">
+    <div class="modal-content modal-popup">
+      <h1>Etes vous sur de vouloir supprimez ce service/entrainement?</h1> <br>
+      <div class="text-wrap">
+        <h2><strong><%= service.name %></strong></h2>
+      </div>
+      <%= image_tag service.photo.url(:thumb) %>
+      <hr>
+      <%= link_to "/crews/#{@crew.id}/destroy_service/#{service.id}", class:"btn_1 white", method: 'post' do %>
+        <i class="icon-trash"></i> Oui
+      <% end %>
+      <a href="#" class="btn_1" onclick="$('#delete_service<%= service.id %>').modal('hide');" data-turbolinks="false">
+        <i class="icon-check"></i> non
+      </a>
+    </div>
+  </div>
+</div><!--end destroy modal-->

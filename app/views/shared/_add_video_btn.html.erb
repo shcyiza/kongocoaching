@@ -1,0 +1,15 @@
+<div class="dropdown">
+  <a href="#0" class="btn_1 white dropdown-toggle shadowed" type="button" id="addvid<%= watchable_id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    +<i class="icon-video"></i>
+  </a>
+  <div class="dropdown-menu custom_edit_multimedia wow fadeIn animated" aria-labelledby="addvid<%= watchable_id %>">
+    <h3 class="text-center">Ajouter une video <i class="icon-video"></i></h3>
+    <%= simple_form_for( new_videolink, url: "/crews/#{@crew.id}/add_videolink/#{watchable_type}/#{watchable_id}", method: 'post') do |f| %>
+      <%= render "./shared/nest_videolink_form", v: f %>
+      <li role="separator" class="divider"></li>
+      <%= button_tag class: 'btn_full', type: :submit do %>
+       Ajouter!
+      <% end %>
+    <% end %>
+  </div>
+</div>

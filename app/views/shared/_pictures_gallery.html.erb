@@ -1,9 +1,62 @@
-<div class="panel-body magnific-gallery">
-  <% attachable.avatars.each do |pic| %>
+<div class="magnific-gallery">
+  <% attachable.avatars.order('is_default desc').each do |pic| %>
     <div class="col-sm-4">
-      <a href="<%= pic.photo.url %>" title="Photo title">
+      <a class="magnific-picture"href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
         <%= image_tag pic.photo.url %>
       </a>
+      <hr>
+      <%= default_pic_link pic %>
+      <%= render "./shared/edit_avatar_btn", avatar: pic %>
+      <a href="#" class="trash"  data-toggle="modal" data-target="#delete_picbox<%= pic.id %>" data-turbolinks="false" >
+        <i class='icon-trash'></i>
+      </a>
     </div>
+    <div id="delete_picbox<%= pic.id %>" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document" style="max-width: 560px;">
+        <div class="modal-content modal-popup">
+          <h1>Etes vous sur de vouloir supprimez cette image?</h1> <br>
+          <%= image_tag pic.photo.url(:thumb) %>
+          <hr>
+          <%= link_to "/crews/#{@crew.id}/destroypic/#{pic.id}", class:"btn_1 white", method: 'post' do %>
+            <i class="icon-trash"></i> Oui
+          <% end %>
+          <a href="#" class="btn_1" onclick="$('#delete_picbox<%= pic.id %>').modal('hide');" data-turbolinks="false">
+            <i class="icon-check"></i> non
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="edit_picbox<%= pic.id %>" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document" style="max-width: 560px;">
+        <div class="modal-content modal-popup">
+
+        </div>
+      </div>
+    </div>
+
+    <% if pic.is_default == false || nil %>
+      <div id="default_picbox<%= pic.id %>" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document" style="max-width: 560px;">
+          <div class="modal-content modal-popup">
+            <h1>Etes vous sur de vouloir changer l'image Star?</h1> <br>
+            <div class="row">
+              <div class="col-xs-5"><%= image_tag attachable.photo.url(:medium) %></div>
+              <div class="col-xs-2">
+                <font color="orange" size="50"><i class="icon-right-5"></i></font>
+              </div>
+              <div class="col-xs-5"><%= image_tag pic.photo.url(:medium) %></div>
+            </div>
+            <hr>
+            <%= link_to "/crews/#{@crew.id}/setdefaultpic/#{pic.id}", class:"btn_1", method: 'post' do %>
+              <i class="icon-star"></i> Oui
+            <% end %>
+            <a href="#" class="btn_1 white" onclick="$('#default_picbox<%= pic.id %>').modal('hide');" data-turbolinks="false">
+              <i class="icon-cancel"></i> non
+            </a>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>

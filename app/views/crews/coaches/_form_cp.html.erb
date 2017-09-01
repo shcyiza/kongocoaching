@@ -7,12 +7,13 @@
   <div class="col-md-7">
    <div class="form-inputs">
      <%= f.input :name, label:"Son nom" %>
+     <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
    </div>
   </div>
   <hr>
   <div class="col-md-5">
-    Photo de profiles
-    <%= render './shared/nest_avatar_form', f: f  %>
+    <h4><strong>Photo de profiles</strong></h4>
+    <%= render './shared/nest_avatar_form', {f: f, attachable: @new_cp }  %>
 
     <hr>
     <div class="video_links">

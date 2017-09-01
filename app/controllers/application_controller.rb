@@ -9,16 +9,16 @@ class ApplicationController < ActionController::Base
     Participant.create! user: current_user, enrollable: enrollable
   end
 
-  def add_avatar attached, attachable
-    Avatar.create! photo: attached, attachable: attachable
+  def add_avatar attachable, photo, vignette, *is_default
+    @new_avatar = Avatar.new
+    @new_avatar.save( photo: photo, vignette: vignette, attachable: attachable )
+    if is_default || is_default == true
+      @new_avatar.set_as_default
+    end
   end
 
   def add_videolink link, watchable
     VideoLink.create! video_path: link, watchable: watchable
-  end
-
-  def add_participant enrollable
-    Participant.create! user: current_user, enrollable: enrollable
   end
 
   def set_as_confirmable confirmable

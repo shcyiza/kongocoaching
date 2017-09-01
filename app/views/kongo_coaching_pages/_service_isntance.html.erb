@@ -1,0 +1,22 @@
+<div class="col-md-4" data-tag="Yoga">
+  <div class="course_container">
+    <figure id="course">
+      <a href="/1/services/<%= service.id %>">
+        <img src="<%= service.photo.url %>" width="800" height="533" class="img-responsive" alt="Image">
+        <div class="short_info"><i class="icon-clock-1"></i><%= service.duration %> par scéance</div>
+      </a>
+    </figure>
+    <div class="course_title">
+      <div class="type">
+        <span>
+          <%= service.name %>
+        </span>
+      </div>
+      <h4>
+        <%= truncate_html(service.description, length: 150, omission: (link_to '<br>...en savoir plus'.html_safe, "/1/services/#{service.id}")) %>
+
+      </h4>
+    </div>
+  </div>
+  <!-- End box course_container -->
+</div>

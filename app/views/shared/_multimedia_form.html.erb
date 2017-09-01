@@ -1,0 +1,32 @@
+<div class="col-sm-12">
+  <h3>Contenue Multimédia</h3>
+  <div class="avatars col-sm-6 verticalLine">
+    Photos <br>
+    <%= link_to_add_association '+ ajouter des photos', f, :avatars,
+    data: { association_insertion_node: '.avatars', association_insertion_method: :append },
+    partial: './shared/avatar_fields', class: "btn_1 shadowed"  %>
+    <br><br>
+    <%= f.simple_fields_for :avatars do |a| %>
+    <%= render './shared/avatar_fields', f: a  %> <br>
+    <% end %>
+  </div>
+  <div class="video_links col-sm-6">
+    Video youtube <br>
+    <%= link_to_add_association '+ ajouter des liens Youtube', f, :video_links,
+     data: { association_insertion_node: '.video_links', association_insertion_method: :append },
+     partial: './shared/video_link_fields', class: "btn_1 shadowed" %>
+    <br><br>
+    <%= f.simple_fields_for :video_links do |v| %>
+     <%= render './shared/video_link_fields', f: v  %> <br>
+    <% end %>
+   </div>
+</div>
+<script type="text/javascript">
+  $('.avatars').on('cocoon:after-insert', function(e, added_avatar) {
+    var input = added_avatar.find('input[data-for="img-upld"]');
+    var label = added_avatar.find('label');
+    var uniq_id = input.attr('name');
+    input.attr('id', "id" + uniq_id);
+    label.attr('for', "id" + uniq_id);
+  });
+</script>

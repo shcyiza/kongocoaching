@@ -17,6 +17,7 @@ gem "paperclip", git: "https://github.com/thoughtbot/paperclip.git"
 gem 'access-granted', '~> 1.1.0'
 gem "time_splitter"
 gem 'will_paginate'
+gem 'chosen-rails'
 #gems for the emails
 gem 'sidekiq'
 gem 'inky-rb', require: 'inky'

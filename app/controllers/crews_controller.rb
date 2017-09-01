@@ -31,13 +31,13 @@ class CrewsController < ApplicationController
 
 
   def coaches
-    @coaches = @crew.its_coaches
+    @coaches = @crew.its_coaches.paginate( page: params[:page], per_page: 8 )
     @new_cp = @crew.coach_placeholders.build #cp are coache placeholders
     authorize! :show, @crew
   end
 
   def services
-    @services = @crew.training_types
+    @services = @crew.training_types.paginate( page: params[:page], per_page: 6 )
     @new_service = @crew.training_types.build
     authorize! :show, @crew
   end
@@ -45,7 +45,7 @@ class CrewsController < ApplicationController
   def add_cp #cp are coache placeholders
     @new_cp = @crew.coach_placeholders.build(cp_params)
     if @new_cp.save
-      add_avatar cp_params[:photo_params], @new_cp
+      add_avatar @new_cp, cp_params[:photo], cp_params[:vignette], true
     end
     respond_to do |format|
       if @new_cp.save
@@ -77,9 +77,14 @@ class CrewsController < ApplicationController
 
   def add_service
     @new_service = @crew.training_types.build(training_type_params)
+    if @new_service.save
+      #create the default avatars
+      Avatar.create!( photo: training_type_params[:photo], vignette: training_type_params[:vignette],
+       is_default: true, attachable: @new_service )
+    end
     respond_to do |format|
       if @new_service.save
-        format.html { redirect_back fallback_location: root_path, notice: 'Training type was successfully created.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Le service a bien été créer.' }
         format.json { render :show, status: :created, location: @new_service }
         format.js
       else
@@ -90,12 +95,17 @@ class CrewsController < ApplicationController
     end
   end
 
-  def delete_coaches
+  def destroy_coaches
     #code
   end
 
-  def delete_training_types
-    #code
+  def destroy_service
+    @service = TrainingType.find(params[:key])
+    @service.destroy
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path, notice: 'Le service a bien été supprimé.' }
+      format.json { head :no_content }
+    end
   end
 
   # GET /crews/new
@@ -160,15 +170,16 @@ class CrewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def training_type_params
-      params.require(:training_type).permit(:name, :description, :duration_hours, :duration_minutes,
-                                            avatars_attributes: [:photo],
+      params.require(:training_type).permit(:name, :description, :duration_hours, :duration_minutes, :photo, :vignette,
+                                            avatars_attributes: [:photo, :vignette],
                                             video_links_attributes: [:video_path]
                                             )
     end
 
     #cp means coach_placesholder
     def cp_params
-      params.require(:coach_placeholder).permit(:name, :description, :photo_params,
+      params.require(:coach_placeholder).permit(:name, :description, :photo, :vignette,
+                    avatars_attributes: [:photo, :vignette],
                     video_links_attributes: [:video_path]
                     )
     end

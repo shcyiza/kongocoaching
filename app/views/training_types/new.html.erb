@@ -1,5 +1,7 @@
 <h1>New Training Type</h1>
-
-<%= render 'form', training_type: @training_type %>
+<%= simple_form_for(training_type, html: { multipart: true }) do |f| %>
+  <%= f.error_notification %>
+    <%= render 'form', training_type: @training_type %>
+<% end %>
 
 <%= link_to 'Back', training_types_path %>

@@ -4,6 +4,7 @@
 
 $loepard: #5e7942
 $secondary: #27927e
+$adminprimary: #ed5434
 
 body
   background-color: white
@@ -23,12 +24,19 @@ main
   width: auto
   margin: 0px 0 0 0
 
+.navbar-inverse
+  background-color: green
+  border-color: #090909
+
 section
   background-color: white
   width: 100%
   margin: 0px
   padding: 0px
 
+.scrollable
+  height: 230px
+  overflow-y: auto
 
 footer
   background-color: green
@@ -45,6 +53,10 @@ a
     font-weight: bold
     background: none
     color: $loepard
+
+a.notboldhover
+  &:hover
+    all: unset
 
 .flickr_pagination
   text-align: center
@@ -66,6 +78,12 @@ a
       border-color: $loepard
       background: rgba(green, 0.7)
       color: white
+
+.navbar-inverse .navbar-brand
+  color: white
+  &:hover
+    color: $adminprimary
+
   .page_info
     color: #aaaaaa
     padding-top: 0.8em
@@ -107,6 +125,10 @@ a
   border-bottom: 2px solid white
   &:focus
     border-bottom: 0px solid white
+
+input.form-control
+  padding: none
+  height: auto
 
 .step .form-control
   color: black
@@ -252,32 +274,32 @@ a.btn_white_outline
 button.btn.btn-default
   border-color: white
   &:hover
-    color: #ed5434
+    color: $adminprimary
     background-color: white
     border-color: white
   &:focus
     color: #fff
-    background-color: #ed5434
-    border-color: #ed5434
+    background-color: $adminprimary
+    border-color: $adminprimary
     outline: none
 
 button.btn.btn-primary
   color: #fff
-  background-color: #ed5434
-  border-color: #ed5434
+  background-color: $adminprimary
+  border-color: $adminprimary
   &:focus
     color: #fff
-    background-color: #ed5434
-    border-color: #ed5434
+    background-color: $adminprimary
+    border-color: $adminprimary
     outline: none
   &:active
     color: #fff
-    background-color: #ed5434
-    border-color: #ed5434
+    background-color: $adminprimary
+    border-color: $adminprimary
   &:hover
     color: #fff
-    background-color: #ed5434
-    border-color: #ed5434
+    background-color: $adminprimary
+    border-color: $adminprimary
 
 .image-upload >
   input
@@ -315,3 +337,34 @@ a.vids
 @media screen and (max-width: 480px)
   a.vids span
     background-size: 400%
+
+.panel-group
+  width: 100%
+  margin-bottom: 0px
+
+a#view_all
+  background: #fff
+  color: $loepard
+  &:hover
+    background: $loepard
+    color: #fff
+
+figure#course
+  max-height: 200px
+  min-height: 200px
+
+.course_title
+  max-height: 137px
+  min-height: 137px
+
+.dropdown-menu.custom_edit_multimedia
+    right: 18px
+    top: -125px
+    left: 55px
+    width: 400px
+    padding: 12px
+    border-color: $adminprimary
+
+img.mfp-img
+  width: auto
+  max-width: 800px

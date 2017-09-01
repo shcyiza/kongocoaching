@@ -1,0 +1,18 @@
+
+  <a href="#0" class="trash" data-toggle="modal" data-target="#editpic<%= avatar.id %>" data-turbolinks="false" >
+    <font color="blue"><i class="icon-edit"></i></font>
+  </a>
+  <div  id="editpic<%= avatar.id %>" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 560px;">
+      <div class="modal-content modal-popup">
+        <h3 class="text-center">Editer Cette Photo <i class="icon-picture"></i></h3>
+        <%= simple_form_for( avatar, url: "/crews/#{@crew.id}/edit_avatar/#{avatar.id}", method: 'post') do |f| %>
+          <%= render "./shared/nest_avatar_form", { f: f, attachable: avatar } %>
+          <li role="separator" class="divider"></li>
+          <%= button_tag class: 'btn_full', type: :submit do %>
+           Editer!
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>

@@ -1,6 +1,41 @@
 class VideoLink < ApplicationRecord
   belongs_to :watchable, polymorphic: true, optional: true
 
+  scope :current_defaults, -> { where(is_default: true) }
+
+  class << self
+    #class methode meant to be called with watchable
+    #done this way so it can be called from any polymorphic owner
+    def has_default
+      result = false
+      if self.current_defaults
+        result = true
+      end
+      return result
+    end
+  end
+
+  class << self
+    #class methode meant to be called with watchable
+    #done this way so it can be called from any polymorphic owner
+    def get_default
+      if self.current_defaults
+        self.current_defaults.first
+      else
+        raise 'Cette instance ne possède de avatar par default'
+      end
+    end
+  end
+
+  def get_watchable_default #instance methode unlike get_default
+    self.watchable.video_links.get_default
+  end
+
+  def set_as_default
+    self.watchable.video_links.update_all(is_default: false)
+    self.update(is_default: true)
+  end
+
   def yt_id
     youtube_id = ""
     if self.video_path[/youtu\.be\/([^\?]*)/]

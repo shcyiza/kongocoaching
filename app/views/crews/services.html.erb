@@ -6,16 +6,133 @@
     </h2>
   </div>
 </section>
+<br><br>
+
 <div class="admin_content">
-  <div class="row">
-    <% @services.each do |service| %>
-      <div class="col-md-6">
-        <% unless service.id == nil %>
-          <%= render 'crews/services/service_instance', service: service %>
-        <% end %>
+  <a href="#0" class="btn_1 white shadowed" href="#0" data-toggle="modal" data-target="#addservice">
+    <i class="icon-plus"></i> Ajoutez un entrainement/service
+  </a>
+
+  <% if @services %>
+
+    <div class="row">
+      <% @services.each do |service| %>
+        <div class="col-md-6">
+          <% unless service.id == nil %>
+            <%= render 'crews/services/service_instance', service: service %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="flickr_pagination">
+        <h4 class="text-center"><%= will_paginate @services, previous_label: '<', next_label: '>' %></h4>
       </div>
-    <% end %>
+
+    </div>
+  <% else %>
+
+    <h1>Aucun service ou entrainement ajouté...</h1>
+
+  <% end %>
+  <div class="modal fade bs-example-modal-lg" id="addservice" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  role="document">
+      <div class="modal-content modal-popup">
+        <%= render 'crews/services/form_service' %>
+      </div>
+    </div>
   </div>
 
-  <%= render 'crews/services/form_service' %>
 </div>
+
+<script type="text/javascript">
+  var buttons = document.querySelectorAll('#change_time');
+  var hour_inputs = document.querySelectorAll('.hour');
+  var minute_inputs = document.querySelectorAll('.minute');
+
+  function changeTime (event) {
+    var id = event.currentTarget.dataset.instance;
+    var hour_min = event.currentTarget.dataset.for;
+    var operation = event.currentTarget.dataset.operation;
+    var field = document.getElementById('input_' + hour_min + "_" + id);
+    if (hour_min === "hour") {
+      changeHour(field, operation);
+    } else {
+      changeMinute(field, operation);
+    }
+
+  }
+
+  function changeHour (field, operation) {
+    var field_val = Number(field.value);
+
+    if (operation === "plus") {
+      let value_plus = field_val + 1;
+      if (value_plus >= 8) {
+        field.value = 0
+      } else {
+        field.value = value_plus ;
+      }
+    }
+    else if (operation === "minus") {
+      let value_minus = field_val - 1 ;
+      if (value_minus < 0) {
+        field.value = 7
+      } else {
+        field.value = value_minus ;
+      }
+    }
+  }
+
+  function changeMinute (field, operation) {
+    var field_val = Number(field.value);
+
+    if (operation === "plus") {
+      let value_plus = field_val + 5;
+      if (value_plus >= 60) {
+        field.value = 0
+      } else {
+        field.value = value_plus ;
+      }
+    }
+
+    else if (operation === "minus") {
+      let value_minus = field_val - 5 ;
+      if (value_minus < 0) {
+        field.value = 55
+      } else {
+        field.value = value_minus ;
+      }
+    }
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', changeTime));
+  hour_inputs.forEach(i => i.addEventListener('input', checkHourValue));
+  minute_inputs.forEach(i => i.addEventListener('input', checkMinuteValue));
+
+  function checkHourValue (event) {
+    var input = event.currentTarget
+    if (input.value >= 8) {
+      input.value = 7
+    } else if (input.value < 0){
+      input.value = 0
+    }
+  }
+
+  function checkMinuteValue (event) {
+    var input = event.currentTarget
+    if (input.value >= 60) {
+      input.value = 55
+    } else if (input.value < 0){
+      input.value = 0
+    }
+  }
+
+
+  $('input[data-for="img-upld"]').each( function(index) {
+    $(this).change( function() {
+      let prev_el = $(this).parent().find('img');
+      triggerPrevieuw( this, prev_el );
+    });
+  });
+
+</script>

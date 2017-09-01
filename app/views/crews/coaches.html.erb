@@ -47,10 +47,18 @@
   </div>
 </div>
 
-<div class="modal fade" id="addcoach" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="addcoach" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog modal-lg"  role="document">
     <div class="modal-content modal-popup">
       <%= render 'crews/coaches/form_cp' %>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$('input[data-for="img-upld"]').each( function(index) {
+  $(this).change( function() {
+    let prev_el = $(this).parent().find('img');
+    triggerPrevieuw( this, prev_el );
+  });
+});
+</script>

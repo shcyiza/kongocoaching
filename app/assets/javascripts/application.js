@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require cocoon
+//= require chosen-jquery
 //= require_tree ./app_default
 //= require turbolinks
 
@@ -56,7 +57,7 @@ function readURL(input, prev_el) {
   if (input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
-          prev_el.attr('src', e.target.result);
+        prev_el.attr('src', e.target.result);
       }
       reader.readAsDataURL(input.files[0]);
   }
@@ -85,3 +86,15 @@ function toggleSideBar() {
     }, 1000 );
   }
 };
+
+$(document).ready(function() {
+	$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+		disableOn: 700,
+		type: 'iframe',
+		mainClass: 'mfp-fade',
+		removalDelay: 160,
+		preloader: false,
+
+		fixedContentPos: false
+	});
+});

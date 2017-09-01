@@ -1,17 +1,28 @@
 <% watchable.video_links.each do |video| %>
   <div class="col-sm-4">
     <div class="vids_index">
-      <a href="#" class="vids"  data-toggle="modal" data-target="#<%= video.yt_id %>" data-turbolinks="false">
+      <a class="vids popup-youtube" href="<%= video.video_path %>" data-turbolinks="false">
         <span><font style="background-color: white;"><i class="icon-play"></i></font></span>
         <%= image_tag video.yt_thumbnail %>
       </a>
+      <hr>
+      <a href="#" class="trash"  data-toggle="modal" data-target="#delete_vidbox<%= video.id %>" data-turbolinks="false">
+        <i class='icon-trash'></i>
+      </a>
     </div>
+  </div>
 
-    <div id="<%= video.yt_id %>" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <%= youtube_embed(video, "width: 100%; height:40rem;") %>
-        </div>
+  <div id="delete_vidbox<%= video.id %>" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 560px;">
+      <div class="modal-content modal-popup">
+        <h1>Etes vous sur de vouloir supprimez ce lien Youtube?</h1> <br>
+        <%= image_tag video.yt_thumbnail %><hr>
+        <%= link_to "/crews/#{@crew.id}/destroyvid/#{video.id}", class:"btn_1 white", method: 'post' do %>
+          <i class="icon-trash"></i> Oui
+        <% end %>
+        <a href="#" class="btn_1" onclick="$('#delete_vidbox<%= video.id %>').modal('hide');" data-turbolinks="false">
+          <i class="icon-check"></i> non
+        </a>
       </div>
     </div>
   </div>

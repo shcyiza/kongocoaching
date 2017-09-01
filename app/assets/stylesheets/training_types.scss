@@ -35,13 +35,15 @@
   background: white;
 }
 .card main {
-  min-height: 150px;
   background: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  min-height: 420px;
+  max-height: 421px;
 }
 .card main .cta-wrap {
+  height: auto;
   background: #ed5434;
   color: white;
   padding: 10px;
@@ -68,6 +70,7 @@
   margin-top: 10px;
 }
 .card main .info-wrap {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -75,7 +78,6 @@
       flex-flow: column wrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;

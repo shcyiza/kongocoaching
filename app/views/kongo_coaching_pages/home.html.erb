@@ -64,48 +64,11 @@
 	<div class="container margin_60_35">
 		<h2 class="main_title" style="color:green"><em></em>Nos Services</h2>
 		<div class="row">
-			<div class="col-md-4" data-tag="Yoga">
-				<div class="course_container">
-					<div class="ribbon top"><span>Top Sell</span>
-					</div>
-					<figure>
-						<a href="fitness-course-1.html">
-							<img src="" width="800" height="533" class="img-responsive" alt="Image">
-							<div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-						</a>
-					</figure>
-					<div class="course_title">
-						<div class="type"><span>Yoga</span>
-						</div>
-						<h3><a href="fitness-course-1.html">Yoga Fundamentals</a></h3>
-						<div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span class="users">450</span>
-						</div>
-					</div>
-				</div>
-				<!-- End box course_container -->
-			</div>
-			<div class="col-md-4" data-tag="Yoga">
-				<div class="course_container">
-					<div class="ribbon top"><span>Top sell</span>
-					</div>
-					<figure>
-						<a href="fitness-course-1.html">
-							<img src="" width="800" height="533" class="img-responsive" alt="Image">
-							<div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-						</a>
-					</figure>
-					<div class="course_title">
-						<div class="type"><span>Yoga</span>
-						</div>
-						<h3><a href="fitness-course-1.html">Total Body Stretching </a></h3>
-						<div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span class="users">450</span>
-						</div>
-					</div>
-				</div>
-				<!-- End box course_container -->
-			</div>
+      <% @services.each do |service| %>
+        <%= render 'service_isntance', service: service %>
+      <% end %>
 			<div class="col-md-4">
-				<a href="explore-1.html" id="view_all"><span><i class="arrow_carrot-right_alt2"></i>Voir tout nos services</span></a>
+				<a href="/1/services" id="view_all"><span><i class="arrow_carrot-right_alt2"></i>Voir tout nos services</span></a>
 			</div>
 		</div>
 		<!-- End row -->

@@ -1,5 +1,5 @@
 
-<div class="nested-fields col-md-6" onmouseover="make_id(event); this.onmouseover = null;">
+<div class="nested-fields col-md-6" id="upload_btn">
   <div class="image-upload">
     <label for="imgInp">
      <span class="btn btn_green_outline" id="upload_btn">
@@ -8,21 +8,16 @@
        <img class="hidden previeuw img-rounded" id="previeuw" src="#" alt="your image" height="150"/>
      </span>
     </label>
-    <%= f.file_field :avatar, id:"imgInp", data:{ for:"image-upload" } %>
+    <%= f.file_field :photo, id:"imgInp", data:{for:'img-upld'}%>
+    <%= f.input :vignette, label:"Courte descritpion", html_options:{style: "padding: none;"} %>
   </div>
   <%= link_to_remove_association "<i class='icon-trash'></i>".html_safe, f, class:"trash" %>
 </div>
 <script type="text/javascript">
-  
-  function make_id(event) {
-    var input = event.currentTarget.querySelector("input");
-    var label = event.currentTarget.querySelector("label");
-    var prev_el = event.currentTarget.querySelector("img");
-    input.id = "imgInp_" + input.name;
-    label.for = "imgInp_" + input.name;
-    prev_el.id = "previeuw_" + input.name;
-    console.log( input.id );
-  }
-
-
+  $('input[data-for="img-upld"]').each( function(index) {
+    $(this).change( function() {
+      let prev_el = $(this).parent().find('img');
+      triggerPrevieuw( this, prev_el );
+    });
+  });
 </script>

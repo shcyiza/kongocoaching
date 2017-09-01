@@ -7,14 +7,15 @@ class KongoCoachingPagesController < ApplicationController
     @crew = Crew.find(1)
     @clubs = @crew.clubs
     @club = @crew.club
+
   end
 
   def home
-    #code
+    @services = @crew.training_types.take(5)
   end
 
   def services_index
-    #code
+    @services = @crew.training_types
   end
 
   def services_show
