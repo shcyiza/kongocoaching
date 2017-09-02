@@ -76,19 +76,14 @@
   padding: 50px 0 0px 0;
   position: fixed;
   background-color: white;
-  border-right: 1px solid green;
+  border-right: 1px solid #f49671;
 }
 #sidebar {
   position: relative;
   height: 100%;
   overflow:hidden;
 }
-#sidebar .list-group-item {
-  border-radius: 0;
-  border-left: 0;
-  border-right: 0;
-  border-top: 0;
-}
+
 @media (max-width: 992px) {
   body {
     padding-top: 0px;

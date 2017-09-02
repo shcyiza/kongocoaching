@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   post 'crews/:id/admin_confirmation', to: 'kickstarts#admin_confirmation'
   post 'crews/:id/add_service', to: 'crews#add_service'
   post 'crews/:id/destroy_service/:key', to: 'crews#destroy_service'
-  post 'crews/:id/add_cp', to: 'crews#add_cp'
+  post 'crews/:id/add_cc', to: 'crews#add_cc'
   post 'crews/:id/destroyvid/:media_id', to: 'multimedia#destroy_videolink'
   post 'crews/:id/destroypic/:media_id', to: 'multimedia#destroy_picture'
   post 'crews/:id/setdefaultpic/:media_id', to: 'multimedia#make_this_pic_default'

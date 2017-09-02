@@ -27,11 +27,6 @@ class Crew < ApplicationRecord
     self.clubs.first
   end
 
-  def its_coaches
-    coaches_array = self.coaches.to_a + self.coach_placeholders.to_a
-    return coaches_array
-  end
-
   def unconfirmed_kickstars
     Kickstart.all_unconfirmed.select { |k| k.crew_id == self.id }.sort_by{|k| k[:start_time]}
   end

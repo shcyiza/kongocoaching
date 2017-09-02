@@ -1,6 +1,6 @@
 <div class="row">
   <h2>Rajouter un coach</h2>
-  <%= simple_form_for(@new_cp, url: "/crews/#{@crew.id}/add_cp", method: :post, html: { multipart: true }) do |f| %>
+  <%= simple_form_for(@new_coaches_crew, url: "/crews/#{@crew.id}/add_cc", method: :post, html: { multipart: true }) do |f| %>
     <%= f.error_notification %>
 
 
@@ -13,7 +13,7 @@
   <hr>
   <div class="col-md-5">
     <h4><strong>Photo de profiles</strong></h4>
-    <%= render './shared/nest_avatar_form', {f: f, attachable: @new_cp }  %>
+    <%= render './shared/nest_avatar_form', {f: f, attachable: @new_coaches_crew }  %>
 
     <hr>
     <div class="video_links">

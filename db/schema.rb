@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831225425) do
+ActiveRecord::Schema.define(version: 20170901234516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,15 +46,6 @@ ActiveRecord::Schema.define(version: 20170831225425) do
     t.index ["crew_id"], name: "index_clubs_crews_on_crew_id", using: :btree
   end
 
-  create_table "coach_placeholders", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "crew_id"
-    t.text     "description"
-    t.index ["crew_id"], name: "index_coach_placeholders_on_crew_id", using: :btree
-  end
-
   create_table "coaches", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at",  null: false
@@ -65,8 +56,10 @@ ActiveRecord::Schema.define(version: 20170831225425) do
   create_table "coaches_crews", force: :cascade do |t|
     t.integer  "coach_id"
     t.integer  "crew_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.text     "description"
   end
 
   create_table "confirmations", force: :cascade do |t|
@@ -200,7 +193,6 @@ ActiveRecord::Schema.define(version: 20170831225425) do
 
   add_foreign_key "clubs_crews", "clubs"
   add_foreign_key "clubs_crews", "crews"
-  add_foreign_key "coach_placeholders", "crews"
   add_foreign_key "kickstarts", "coaches_crews"
   add_foreign_key "kickstarts", "crews"
   add_foreign_key "profile_variables", "profiles"

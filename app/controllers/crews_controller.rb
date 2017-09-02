@@ -31,8 +31,8 @@ class CrewsController < ApplicationController
 
 
   def coaches
-    @coaches = @crew.its_coaches.paginate( page: params[:page], per_page: 8 )
-    @new_cp = @crew.coach_placeholders.build #cp are coache placeholders
+    @coaches = @crew.coaches_crews.paginate( page: params[:page], per_page: 8 )
+    @new_coaches_crew = @crew.coaches_crews.build
     authorize! :show, @crew
   end
 
@@ -42,25 +42,25 @@ class CrewsController < ApplicationController
     authorize! :show, @crew
   end
 
-  def add_cp #cp are coache placeholders
-    @new_cp = @crew.coach_placeholders.build(cp_params)
-    if @new_cp.save
-      add_avatar @new_cp, cp_params[:photo], cp_params[:vignette], true
+  def add_cc
+    @new_coaches_crew = @crew.coaches_crews.build(coaches_crew_params)
+    if @new_coaches_crew.save
+      add_avatar @new_coaches_crew, coaches_crew_params[:photo], coaches_crew_params[:vignette], true
     end
     respond_to do |format|
-      if @new_cp.save
+      if @new_coaches_crew.save
         format.html { redirect_back fallback_location: root_path, notice: 'Training type was successfully created.' }
-        format.json { render :show, status: :created, location: @new_cp }
+        format.json { render :show, status: :created, location: @new_coaches_crew }
         format.js
       else
         format.html { render :new }
-        format.json { render json: @new_cp.errors, status: :unprocessable_entity }
+        format.json { render json: @new_coaches_crew.errors, status: :unprocessable_entity }
         format.js
       end
     end
   end
 
-  def destroy_cp
+  def destroy_coaches_crew
     #code
     authorize! :show, @crew
   end
@@ -176,9 +176,9 @@ class CrewsController < ApplicationController
                                             )
     end
 
-    #cp means coach_placesholder
-    def cp_params
-      params.require(:coach_placeholder).permit(:name, :description, :photo, :vignette,
+
+    def coaches_crew_params
+      params.require(:coaches_crew).permit(:name, :description, :photo, :vignette,
                     avatars_attributes: [:photo, :vignette],
                     video_links_attributes: [:video_path]
                     )

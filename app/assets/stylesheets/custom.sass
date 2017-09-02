@@ -3,7 +3,7 @@
 /* Your custom styles */
 
 $loepard: #5e7942
-$secondary: #27927e
+$secondary: #f49671
 $adminprimary: #ed5434
 
 body
@@ -25,8 +25,22 @@ main
   margin: 0px 0 0 0
 
 .navbar-inverse
-  background-color: green
-  border-color: #090909
+  background-color: white
+  border: 5px
+  border-color: $secondary
+
+.navborder
+  background-color: $secondary
+  color: $secondary
+  font-size: 1px
+
+.navbar-inverse .navbar-nav > li > a
+    color: $secondary
+
+.main-menu#admin > ul > li > a
+  color: $secondary
+  &:hover
+    color: $adminprimary
 
 section
   background-color: white
@@ -80,19 +94,29 @@ a.notboldhover
       color: white
 
 .navbar-inverse .navbar-brand
-  color: white
+  color: $secondary
+  background: white
   &:hover
     color: $adminprimary
 
-  .page_info
-    color: #aaaaaa
-    padding-top: 0.8em
-  .previous_page, .next_page
-    border-width: 2px
-  .previous_page
-    margin-right: 1em
-  .next_page
-    margin-left: 1em
+.navbar-header
+  min-width: 320px
+
+#sidebar .list-group-item
+  color: $secondary
+  border: none
+  &:hover
+    color: $adminprimary
+
+.page_info
+  color: #aaaaaa
+  padding-top: 0.8em
+.previous_page, .next_page
+  border-width: 2px
+.previous_page
+  margin-right: 1em
+.next_page
+  margin-left: 1em
 
 .margintop
   margin-top: 30px
@@ -358,12 +382,15 @@ figure#course
   min-height: 137px
 
 .dropdown-menu.custom_edit_multimedia
-    right: 18px
-    top: -125px
-    left: 55px
-    width: 400px
-    padding: 12px
-    border-color: $adminprimary
+  right: 18px
+  top: -125px
+  left: 55px
+  width: 400px
+  padding: 12px
+  border-color: $adminprimary
+
+.dropdown-menu label
+  color: black
 
 img.mfp-img
   width: auto
