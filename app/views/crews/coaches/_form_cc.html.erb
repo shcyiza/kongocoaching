@@ -1,35 +1,28 @@
-<div class="row">
-  <h2>Rajouter un coach</h2>
-  <%= simple_form_for(@new_coaches_crew, url: "/crews/#{@crew.id}/add_cc", method: :post, html: { multipart: true }) do |f| %>
-    <%= f.error_notification %>
-
-
-  <div class="col-md-7">
-   <div class="form-inputs">
-     <%= f.input :name, label:"Son nom" %>
-     <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
-   </div>
+<h1>Rajouter un coach</h1>
+<%= simple_form_for(@new_coaches_crew, url: "/crews/#{@crew.id}/add_cc", method: :post, html: { multipart: true }) do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-inputs">
+        <%= f.input :name, label:"Son nom" %>
+        <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
+        <%= f.label :training_type_ids, "CV (Quelles services/entrainements donne-t-il?)" %>
+        <%= f.collection_select :training_type_ids, TrainingType.order(:name), :id, :name, {}, {multiple: true, class: "chosen-select"} %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <h4>
+        <strong><i class="icon-star"></i>Photo Star</strong>
+      </h4>
+      <%= render './shared/nest_avatar_form', {f: f, attachable: @new_coaches_crew }  %>
+    </div>
   </div>
   <hr>
-  <div class="col-md-5">
-    <h4><strong>Photo de profiles</strong></h4>
-    <%= render './shared/nest_avatar_form', {f: f, attachable: @new_coaches_crew }  %>
-
-    <hr>
-    <div class="video_links">
-      video youtube
-      <%= link_to_add_association 'ajouter un lien youtube', f, :video_links,
-       data: { association_insertion_node: '.video_links', association_insertion_method: :append },
-       partial: './shared/video_link_fields' %>
-      <br>
-      <%= f.simple_fields_for :video_links do |v| %>
-       <%= render './shared/video_link_fields', f: v  %> <br>
-      <% end %>
-   </div>
-  </div>
-   <br>
-   <div class="form-actions">
-    <%= f.button :submit, label: "ajouter le coach" %>
-   </div>
+  <%= render './shared/multimedia_form', {f: f, attachable: @new_coaches_crew }  %>
+  <br>
+  <br>
+  <hr>
+  <%= button_tag class: 'btn_full', type: :submit do %>
+   <font size="50px">Ajoutez ce Coach</font>
   <% end %>
-</div>
+<% end %>

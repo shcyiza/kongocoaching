@@ -13,7 +13,7 @@ class Coach < ApplicationRecord
   accepts_nested_attributes_for :avatars, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :video_links, reject_if: :all_blank, allow_destroy: true
 
-  attr_accessor :photo_params
+  attr_accessor :photo_params, :vignette
 
   def photo
     #test on va changer eventuellement

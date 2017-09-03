@@ -45,59 +45,63 @@ class CrewsController < ApplicationController
   def add_cc
     @new_coaches_crew = @crew.coaches_crews.build(coaches_crew_params)
     if @new_coaches_crew.save
+      #create the default avatars
       add_avatar @new_coaches_crew, coaches_crew_params[:photo], coaches_crew_params[:vignette], true
     end
     respond_to do |format|
-      if @new_coaches_crew.save
+      if @new_coaches_crew.id != nil
         format.html { redirect_back fallback_location: root_path, notice: 'Training type was successfully created.' }
         format.json { render :show, status: :created, location: @new_coaches_crew }
         format.js
       else
-        format.html { render :new }
+        format.html { redirect_back fallback_location: root_path, alert: 'Erreur, réessayé.' }
         format.json { render json: @new_coaches_crew.errors, status: :unprocessable_entity }
         format.js
       end
     end
   end
 
-  def destroy_coaches_crew
-    #code
-    authorize! :show, @crew
+  def edit_cc
+    @coaches_crew = CoachesCrew.find(params[:key])
+    respond_to do |format|
+      if @coaches_crew.update(coaches_crew_params)
+        format.html { redirect_back fallback_location: root_path, notice: 'Edité avec success.' }
+        format.json { render :show, status: :ok, location: @crew }
+      else
+        format.html { redirect_back fallback_location: root_path, notice: 'Erreur, contacter le Patrick Cyiza.' }
+        format.json { render json: @crew.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  def add_coach
-    #code
-    authorize! :show, @crew
-  end
-
-  def destroy_coach
-    #code
-    authorize! :show, @crew
+  def destroy_cc
+    @coaches_crew = CoachesCrew.find(params[:key])
+    @coaches_crew.destroy
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path, notice: 'Coach bien supprimé.' }
+      format.json { head :no_content }
+    end
   end
 
   def add_service
     @new_service = @crew.training_types.build(training_type_params)
     if @new_service.save
       #create the default avatars
-      Avatar.create!( photo: training_type_params[:photo], vignette: training_type_params[:vignette],
-       is_default: true, attachable: @new_service )
+      add_avatar @new_service, training_type_params[:photo], training_type_params[:vignette], true
     end
     respond_to do |format|
-      if @new_service.save
+      if @new_service.id != nil
         format.html { redirect_back fallback_location: root_path, notice: 'Le service a bien été créer.' }
         format.json { render :show, status: :created, location: @new_service }
         format.js
       else
-        format.html { render :new }
+        format.html { redirect_back fallback_location: root_path, alert: 'Erreur, réessayé.' }
         format.json { render json: @new_service.errors, status: :unprocessable_entity }
         format.js
       end
     end
   end
 
-  def destroy_coaches
-    #code
-  end
 
   def destroy_service
     @service = TrainingType.find(params[:key])
@@ -179,6 +183,7 @@ class CrewsController < ApplicationController
 
     def coaches_crew_params
       params.require(:coaches_crew).permit(:name, :description, :photo, :vignette,
+                    training_type_ids: [],
                     avatars_attributes: [:photo, :vignette],
                     video_links_attributes: [:video_path]
                     )

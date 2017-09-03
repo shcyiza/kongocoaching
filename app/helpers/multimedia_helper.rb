@@ -40,4 +40,28 @@ module MultimediaHelper
     return result
   end
 
+  def has_photos_of attachable
+    result = false
+    if attachable.avatars.count > 0
+      result = true
+    end
+    return result
+  end
+
+  def has_vidoes_of watchable
+    result = false
+    if watchable.video_links.count > 0
+      result = true
+    end
+    return result
+  end
+
+  def count_videos_for watchable
+    watchable.video_links.count
+  end
+
+  def count_avatars_for attachable
+    attachable.avatars.count
+  end
+
 end

@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
   end
 
   def add_avatar attachable, photo, vignette, *is_default
-    @new_avatar = Avatar.new
-    @new_avatar.save( photo: photo, vignette: vignette, attachable: attachable )
+    @new_avatar = Avatar.new( photo: photo, vignette: vignette, attachable: attachable )
+    @new_avatar.save
     if is_default || is_default == true
       @new_avatar.set_as_default
     end

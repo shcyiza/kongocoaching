@@ -17,48 +17,133 @@
       </div>
       <div class="coach-info">
         <span class="coach-title">
-          <font color="#ed5434"><b><%= coach.name %></b></font>
+          <font color="#ed5434"><b><%= coach.get_name %></b></font>
         </span>
       </div>
     </div>
-
-    <div class="<%= coach.class.name %><%= coach.id %> btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-      <div class="btn-group" role="group">
-        <button type="button" id="stars" class="btn btn-primary" href="#tab1_<%= coach.class.name %><%= coach.id %>" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          <div class="hidden-xs">Stars</div>
-        </button>
+    <div class="row">
+      <div class="col-xs-4">
+        <a href="#0" class="btn_1" data-toggle="modal" data-target="#edit_coach<%= coach.id %>">
+          <font class="notboldhover"><i class="icon-edit-2"></i> editer...</font>
+        </a>
       </div>
-      <div class="btn-group" role="group">
-        <button type="button" id="favorites" class="btn btn-default" href="#tab2_<%= coach.class.name %><%= coach.id %>" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-          <div class="hidden-xs">pictures</div>
-        </button>
+      <div class="col-xs-3">
+        <%= render './shared/add_avatar_btn', { attachable_type: coach.class.name, attachable: coach } %>
       </div>
-      <div class="btn-group" role="group">
-        <button type="button" id="following" class="btn btn-default" href="#tab3_<%= coach.class.name %><%= coach.id %>" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-          <div class="hidden-xs">Following</div>
-        </button>
+      <div class="col-xs-3">
+        <%= render './shared/add_video_btn', { watchable_type: coach.class.name, watchable_id: coach.id } %>
+      </div>
+      <div class="col-xs-2">
+        <a href="#0" class="btn_1_outline" data-toggle="modal"
+        style="border-color: red; color: red;" data-target="#delete_coach<%= coach.id %>">
+          <i class="icon-trash"></i>
+        </a>
       </div>
     </div>
-
-    <div class="tab-content">
-      <div class="tab-pane fade in active" id="tab1_<%= coach.class.name %><%= coach.id %>">
-        <h3>This is tab 1</h3>
-      </div>
-      <div class="tab-pane fade in" id="tab2_<%= coach.class.name %><%= coach.id %>">
-        <h3>
-          <% if has_photos_of coach %>
-            <%= render './shared/pictures_gallery', attachable: coach  %>
-          <% else %>
-            <h4>no pictures</h4>
-          <% end %>
-        </h3>
-      </div>
-      <div class="tab-pane fade in" id="tab3_<%= coach.class.name %><%= coach.id %>">
-        <h3>This is tab 3</h3>
+    <div class="info-wrap">
+      <div class="panel-group" id="accordion_<%= coach.id %>">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion_<%= coach.id %>-toggle notboldhover" data-toggle="collapse" data-parent="#accordion_<%= coach.id %>" href="#description_<%= coach.id %>">
+                <strong>Description</strong> <i class="icon-th-list"></i>
+                <i class="indicator icon_minus_alt2 pull-right"></i>
+              </a>
+            </h4>
+          </div>
+          <div id="description_<%= coach.id %>" class="panel-collapse collapse in">
+            <div class="panel-body scrollable">
+              <%= coach.description %>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion_<%= coach.id %>-toggle notboldhover" data-toggle="collapse" data-parent="#accordion_<%= coach.id %>" href="#pictures_<%= coach.id %>">
+                <strong>Photos <i class="icon-picture"></i> <%= count_avatars_for coach %></strong>
+                <i class="indicator icon_plus_alt2 pull-right"></i>
+              </a>
+            </h4>
+          </div>
+            <% if has_photos_of coach %>
+              <div id="pictures_<%= coach.id %>" class="panel-collapse collapse">
+                <div class="panel-body scrollable">
+                  <%= render './shared/pictures_gallery', attachable: coach  %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a class="accordion_<%= coach.id %>-toggle notboldhover" data-toggle="collapse" data-parent="#accordion_<%= coach.id %>" href="#videos_<%= coach.id %>">
+                  <strong>Videos <i class="icon-video"></i> <%= count_videos_for coach %></strong>
+                  <i class="indicator icon_plus_alt2 pull-right"></i>
+                </a>
+              </h4>
+            </div>
+            <% if has_vidoes_of coach %>
+              <div id="videos_<%= coach.id %>" class="panel-collapse collapse">
+                <div class="panel-body scrollable">
+                  <%= render './shared/videos_gallery', watchable: coach  %>
+                </div>
+              </div>
+            <% end %>
+          </div>
       </div>
     </div>
   </div>
 </div>
+
+<!--edit coach modal-->
+<div class="modal fade bs-example-modal-lg" id="edit_coach<%= coach.id %>" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog modal-lg"  role="document">
+    <div class="modal-content modal-popup">
+      <%= render './crews/coaches/coach_edit_form',{coach: coach} %>
+    </div>
+  </div>
+</div><!--end edit modal-->
+
+<!--destroy coach modal-->
+<div class="modal fade bs-example-modal-lg" id="delete_coach<%= coach.id %>" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog modal-lg"  role="document">
+    <div class="modal-content modal-popup">
+      <h1>Etes vous sur de vouloir supprimez ce coach/entrainement?</h1> <br>
+      <div class="text-wrap">
+        <h2><strong><%= coach.name %></strong></h2>
+      </div>
+      <div class="coach hovercard">
+        <div class="coach-background">
+          <% if coach.avatars.count != 0 %>
+            <%= image_tag coach.photo.url, class: "coach-bkimg" %>
+          <% else %>
+            <%= image_tag "http://irontrainer.co/wp-content/uploads/2017/01/personal-trainer-demonstrating-squat-lLas-Vegas-256x256.jpg", class: "coach-bkimg" %>
+          <% end %>
+        </div>
+        <div class="useravatar">
+          <% if coach.avatars.count != 0 %>
+            <%= image_tag coach.photo.url :thumb, class: "img-responsive" %>
+          <% else %>
+            <%= image_tag "http://irontrainer.co/wp-content/uploads/2017/01/personal-trainer-demonstrating-squat-lLas-Vegas-256x256.jpg" %>
+          <% end %>
+        </div>
+        <div class="coach-info">
+          <span class="coach-title">
+            <font color="#ed5434"><b><%= coach.get_name %></b></font>
+          </span>
+        </div>
+      </div>
+      <hr>
+      <%= link_to "/crews/#{@crew.id}/destroy_cc/#{coach.id}", class:"btn_1 white", method: 'post' do %>
+        <i class="icon-trash"></i> Oui
+      <% end %>
+      <a href="#" class="btn_1" onclick="$('#delete_coach<%= coach.id %>').modal('hide');" data-turbolinks="false">
+        <i class="icon-check"></i> non
+      </a>
+    </div>
+  </div>
+</div><!--end destroy modal-->
 
 <script type="text/javascript">
   $(document).ready(function() {

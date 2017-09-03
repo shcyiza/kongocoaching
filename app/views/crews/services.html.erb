@@ -16,10 +16,10 @@
   <% if @services %>
 
     <div class="row">
-      <% @services.each do |service| %>
+      <% @services.each do |srvc| %>
         <div class="col-md-6">
-          <% unless service.id == nil %>
-            <%= render 'crews/services/service_instance', service: service %>
+          <% unless srvc.id == nil %>
+            <%= render 'crews/services/service_instance', srvc: srvc %>
           <% end %>
         </div>
       <% end %>
@@ -31,7 +31,7 @@
     </div>
   <% else %>
 
-    <h1>Aucun service ou entrainement ajouté...</h1>
+    <h1>Aucun srvc ou entrainement ajouté...</h1>
 
   <% end %>
   <div class="modal fade bs-example-modal-lg" id="addservice" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">

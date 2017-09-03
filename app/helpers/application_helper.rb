@@ -36,20 +36,4 @@ module ApplicationHelper
    content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick))
   end
 
-  def has_photos_of attachable
-    result = false
-    if attachable.avatars.count > 0
-      result = true
-    end
-    return result
-  end
-
-  def has_vidoes_of watchable
-    result = false
-    if watchable.video_links.count > 0
-      result = true
-    end
-    return result
-  end
-
 end

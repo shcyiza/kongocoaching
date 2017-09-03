@@ -55,10 +55,10 @@
   </div>
 </div>
 <script type="text/javascript">
-$('input[data-for="img-upld"]').each( function(index) {
-  $(this).change( function() {
-    let prev_el = $(this).parent().find('img');
-    triggerPrevieuw( this, prev_el );
+  $('input[data-for="img-upld"]').each( function(index) {
+    $(this).change( function() {
+      let prev_el = $(this).parent().find('img');
+      triggerPrevieuw( this, prev_el );
+    });
   });
-});
 </script>
