@@ -117,3 +117,16 @@
 		</div>
 	</div>
 </div>
+
+<head>
+  <%= javascript_include_tag 'lovefit/video_header', 'data-turbolinks-track' => 'load' %>
+  <%= javascript_include_tag "lovefit/bootstrap-portfilter", 'data-turbolinks-track' => 'load' %>
+  <script>
+    HeaderVideo.init({
+      container: $('.header-video'),
+      header: $('.header-video--media'),
+      videoTrigger: $("#video-trigger"),
+      autoPlayVideo: true
+    });
+  </script>
+</head>

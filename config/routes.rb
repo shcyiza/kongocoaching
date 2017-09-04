@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :clubs
-  root to: 'kongo_coaching_pages#home'
+  root to: 'application#home_page_router'
   resources :kickstarts
   resources :profile_variables
   resources :profiles
@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   get 'crews/:id/planner', to: 'crews#planner'
   get 'crews/:id/coaches', to: 'crews#coaches'
   get 'crews/:id/services', to: 'crews#services'
+  get 'crews/:id/clubs', to: 'crews#clubs'
+  get 'crews/:id/clubs/new', to: 'crews#club_new'
+  get 'crews/:id/clubs/:key', to: 'crews#club_show'
 
+  get '/1/home', to: 'kongo_coaching_pages#home'
   get '/1/signup', to: 'kongo_coaching_pages#sign_up'
   get '/1/login', to: 'kongo_coaching_pages#login'
   get '/1/services', to: 'kongo_coaching_pages#services_index'
@@ -27,11 +31,16 @@ Rails.application.routes.draw do
   post '/add_motivation', to: 'kickstarts#add_motivation'
   post '/after_kickstart_creation', to: 'kickstarts#after_creation_actions'
   post 'crews/:id/admin_confirmation', to: 'kickstarts#admin_confirmation'
+
   post 'crews/:id/add_service', to: 'crews#add_service'
+  post 'crews/:id/destroy_service/:key', to: 'crews#destroy_service'
+
   post 'crews/:id/destroy_cc/:key', to: 'crews#destroy_cc'
   post 'crews/:id/add_cc', to: 'crews#add_cc'
   post 'crews/:id/edit_cc/:key', to: 'crews#edit_cc'
-  post 'crews/:id/destroy_service/:key', to: 'crews#destroy_service'
+
+  post 'crews/:id/add_club', to: 'crews#add_club'
+
   post 'crews/:id/destroyvid/:media_id', to: 'multimedia#destroy_videolink'
   post 'crews/:id/destroypic/:media_id', to: 'multimedia#destroy_picture'
   post 'crews/:id/setdefaultpic/:media_id', to: 'multimedia#make_this_pic_default'

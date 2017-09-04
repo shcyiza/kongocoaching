@@ -50,14 +50,14 @@ class MultimediaController < ApplicationController
   def make_this_vid_default
     @vid = VideoLink.find(params[:media_id])
     respond_to do |format|
-      if @vid == @pic.get_attachable_default
-        format.html { redirect_back fallback_location: root_path, alert: "cette images est déja l'image star." }
-        format.json { head "cette images est déja l'image star." }
+      if @vid == @vid.get_watchable_default
+        format.html { redirect_back fallback_location: root_path, alert: "cette video est déja la video star." }
+        format.json { head "cette video est déja la video star." }
         format.js
       else
         @vid.set_as_default
-        format.html { redirect_back fallback_location: root_path, notice: "Image star modifiée." }
-        format.json { head "Image star modifié." }
+        format.html { redirect_back fallback_location: root_path, notice: "Video star modifiée." }
+        format.json { head "Video star modifiée." }
         format.js
       end
     end

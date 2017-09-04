@@ -70,7 +70,7 @@ end
 
    def his_crew_as_coord
      if self.coordinator? && has_crew?
-       return current_user.coordinator.crews.last
+       return self.coordinator.crews.last
      else
        return false
      end

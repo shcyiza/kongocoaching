@@ -16,18 +16,4 @@
     </main>
     <%= render 'layouts/kc_layouts/footer' %>
   </body>
-  <% if params[:controller] == "kongo_coaching_pages" %>
-    <% if params[:action] == "home" %>
-      <%= javascript_include_tag 'lovefit/video_header', 'data-turbolinks-track' => 'render' %>
-      <%= javascript_include_tag "lovefit/bootstrap-portfilter", 'data-turbolinks-track' => 'render' %>
-      <script>
-        HeaderVideo.init({
-          container: $('.header-video'),
-          header: $('.header-video--media'),
-          videoTrigger: $("#video-trigger"),
-          autoPlayVideo: true
-        });
-      </script>
-    <% end %>
-  <% end %>
 </html>

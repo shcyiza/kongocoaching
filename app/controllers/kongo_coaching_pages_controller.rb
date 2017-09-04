@@ -19,7 +19,7 @@ class KongoCoachingPagesController < ApplicationController
   end
 
   def services_show
-    #code
+    @service = TrainingType.find(params[:id])
   end
 
   def coaches_index

@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
     redirect_back(fallback_location: root_path, alert: "You don't have permission to access this page.")
   end
 
+  def home_page_router
+    if Crew.find(1) && User.count > 0
+      redirect_to "/1/home"
+    else
+      redirect_to new_user_registration_path
+    end
+  end
+
   def add_participant enrollable
     Participant.create! user: current_user, enrollable: enrollable
   end

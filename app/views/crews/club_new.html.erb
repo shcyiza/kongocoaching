@@ -1,8 +1,10 @@
-<%= simple_form_for(@crew) do |f| %>
+<h1>Ajouter un Club</h1>
+<%= simple_form_for(@club, url: "/crews/#{@crew.id}/add_club", method: :post) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :name %>
+    <%= f.input :address %>
   </div>
 
   <div class="form-actions">

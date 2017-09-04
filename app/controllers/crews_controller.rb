@@ -42,6 +42,36 @@ class CrewsController < ApplicationController
     authorize! :show, @crew
   end
 
+  def clubs
+    @clubs = @crew.clubs
+  end
+
+  def club_show
+    @club = Club.find(params[:key])
+  end
+
+  def club_new
+    @club = @crew.clubs.build
+  end
+
+  def add_club
+    @club = @crew.clubs.build(club_params)
+    respond_to do |format|
+      if @club.save
+        format.html { redirect_to "/crews/#{@crew.id}/clubs" , notice: 'Club was successfully created.' }
+        format.json { render :club_show, status: :created, location: @club }
+        ClubsCrew.create! crew: @crew, club: @club
+      else
+        format.html { redirect_back fallback_location: root_path, alert: 'Erreur, réessayé.' }
+        format.json { render json: @club.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def club_edit
+    @club = Club.find(params[:key])
+  end
+
   def add_cc
     @new_coaches_crew = @crew.coaches_crews.build(coaches_crew_params)
     if @new_coaches_crew.save
@@ -189,8 +219,7 @@ class CrewsController < ApplicationController
                     )
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def crew_params
-      params.fetch(:crew, {})
+    def club_params
+      params.require(:club).permit(:name, :address)
     end
 end

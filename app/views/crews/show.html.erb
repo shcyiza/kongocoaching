@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
+<h2>Bienvenue sur la page d'aministration de:</h2>
 <h1><%= @crew.name %></h1>
 <br>
 <br>
-<%= link_to "/crews/#{@crew.id}/signup", class:"btn_1_outline", turbolinks: false do %>
-  <i class=" icon-heart"></i> Kickstar!
+<% if @crew.clubs %>
+  <%= render file: "clubs/show" %>
+<% else %>
+  <%= link_to "/crews/#{@crew.id}/new_club", class:"btn_1_outline" do %>
+    <i class=" icon-plus"></i> ajouter un club
+  <% end %>
 <% end %>
-<%= render file: "clubs/show" %>
+
 <br>

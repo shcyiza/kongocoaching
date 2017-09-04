@@ -1,4 +1,4 @@
-<% watchable.video_links.each do |video| %>
+<% watchable.video_links.order('is_default desc').each do |video| %>
   <div class="col-sm-4">
     <div class="vids_index">
       <a class="vids popup-youtube" href="<%= video.video_path %>" data-turbolinks="false">
@@ -6,6 +6,7 @@
         <%= image_tag video.yt_thumbnail %>
       </a>
       <hr>
+      <%= default_vid_link video %>
       <a href="#" class="trash"  data-toggle="modal" data-target="#delete_vidbox<%= video.id %>" data-turbolinks="false">
         <i class='icon-trash'></i>
       </a>
@@ -26,4 +27,23 @@
       </div>
     </div>
   </div>
+
+  <% if video.is_default == false || nil %>
+    <div id="default_videobox<%= video.id %>" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document" style="max-width: 560px;">
+        <div class="modal-content modal-popup">
+          <h1>Etes vous sur de vouloir mettre ce video en Star?</h1> <br>
+          <%= image_tag video.yt_thumbnail %>
+          <hr>
+          <%= link_to "/crews/#{@crew.id}/setdefaultvid/#{video.id}", class:"btn_1", method: 'post' do %>
+            <i class="icon-star"></i> Oui
+          <% end %>
+          <a href="#" class="btn_1 white" onclick="$('#default_videobox<%= video.id %>').modal('hide');" data-turbolinks="false">
+            <i class="icon-cancel"></i> non
+          </a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
 <% end %>

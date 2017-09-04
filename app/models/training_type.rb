@@ -31,11 +31,13 @@ class TrainingType < ApplicationRecord
   end
 
   def duration
+    result = "#{ self.duration_hours }hr #{ self.duration_minutes }min"
     if self.duration_minutes <= 0
-      return "#{ self.duration_hours }hr"
-    else
-      return "#{ self.duration_hours }hr #{ self.duration_minutes }min"
+      result = "#{ self.duration_hours }hr"
+    elsif self.duration_hours >= 0
+      result = "#{ self.duration_minutes }min"
     end
+    return result
   end
 
 end

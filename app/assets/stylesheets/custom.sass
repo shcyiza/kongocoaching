@@ -154,8 +154,12 @@ input.form-control
   padding: none
   height: auto
 
-.chosen-select
-  width: 100%
+ul#course_info
+    background-color: #5e7942
+    margin: 0
+    padding: 10px
+    list-style: none
+    color: #fff
 
 .step .form-control
   color: black
@@ -333,6 +337,26 @@ button.btn.btn-primary
     display: none
   label
     cursor: pointer
+
+.wrapper16_9
+  width: 100%
+  display: inline-block
+  position: relative
+  &:after
+    padding-top: 56.25%
+    display: block
+    content: ''
+
+div.video_ratio
+  position: absolute
+  top: 0
+  bottom: 0
+  right: 0
+  left: 0
+  iframe
+    width: 100%
+    height: 100%
+
 
 a.trash
   color: red

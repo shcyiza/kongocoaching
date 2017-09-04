@@ -6,7 +6,7 @@ class VideoLink < ApplicationRecord
   class << self
     #class methode meant to be called with watchable
     #done this way so it can be called from any polymorphic owner
-    def has_default
+    def has_default?
       result = false
       if self.current_defaults
         result = true

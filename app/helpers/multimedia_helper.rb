@@ -12,6 +12,18 @@ module MultimediaHelper
     end
   end
 
+  def default_vid_link video
+    if video.is_default?
+      "<font color='#c4ac45'><i class='icon-star'></i></font>".html_safe
+    else
+      content_tag :a, href: "#",
+      data:{toggle:"modal", target: "#default_videobox#{video.id}", turbolinks: "false"},
+      class:"trash", style:"color: green;" do
+        "<i class='icon-star-empty'></i>".html_safe
+      end
+    end
+  end
+
   def new_videolink
     VideoLink.new
   end

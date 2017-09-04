@@ -42,7 +42,7 @@ class ClubsController < ApplicationController
   def update
     respond_to do |format|
       if @club.update(club_params)
-        format.html { redirect_to @club, notice: 'Club was successfully updated.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Club was successfully updated.' }
         format.json { render :show, status: :ok, location: @club }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class ClubsController < ApplicationController
   def destroy
     @club.destroy
     respond_to do |format|
-      format.html { redirect_to clubs_url, notice: 'Club was successfully destroyed.' }
+      format.html { redirect_back fallback_location: root_path, notice: 'Club was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

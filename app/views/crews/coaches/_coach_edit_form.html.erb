@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="col-md-5">
-      <%= f.label :training_type_ids, "CV (Quelles services/entrainements donne-t-il?)" %>
+      <%= f.label :training_type_ids, "Quelles services/entrainements donne-t-il?" %>
       <%= f.collection_select :training_type_ids, TrainingType.order(:name), :id, :name, {}, {multiple: true, class: "chosen-select"} %>
     </div>
   </div>

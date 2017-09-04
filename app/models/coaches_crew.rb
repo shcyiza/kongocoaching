@@ -22,6 +22,11 @@ class CoachesCrew < ApplicationRecord
     self.avatars.get_default.photo
   end
 
+  def video
+    #test on va changer eventuellement
+    self.video_links.get_default
+  end
+
   def is_owner_name?
     result = false
     if self.name == nil && self.coach

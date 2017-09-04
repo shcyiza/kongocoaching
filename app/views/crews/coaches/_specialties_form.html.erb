@@ -1,0 +1,7 @@
+<%= simple_form_for(coach, url: "/crews/#{@crew.id}/edit_cc/#{coach.id}", method: :post, html: { multipart: true }) do |f| %>
+  <%= f.label :training_type_ids, "Quelles services/entrainements donne-t-il?" %>
+  <%= f.collection_select :training_type_ids, TrainingType.order(:name), :id, :name, {}, {multiple: true, class: "chosen-select"} %>
+  <%= button_tag class: 'btn_full', type: :submit do %>
+   <i class="icon-floppy"></i> Enregistrer!
+  <% end %>
+<% end %>

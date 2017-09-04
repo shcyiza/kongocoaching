@@ -1,7 +1,7 @@
 <div class="magnific-gallery">
   <% attachable.avatars.order('is_default desc').each do |pic| %>
     <div class="col-sm-4">
-      <a class="magnific-picture"href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
+      <a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
         <%= image_tag pic.photo.url %>
       </a>
       <hr>
@@ -23,14 +23,6 @@
           <a href="#" class="btn_1" onclick="$('#delete_picbox<%= pic.id %>').modal('hide');" data-turbolinks="false">
             <i class="icon-check"></i> non
           </a>
-        </div>
-      </div>
-    </div>
-
-    <div id="edit_picbox<%= pic.id %>" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-      <div class="modal-dialog modal-lg" role="document" style="max-width: 560px;">
-        <div class="modal-content modal-popup">
-
         </div>
       </div>
     </div>

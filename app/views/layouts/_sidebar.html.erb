@@ -3,19 +3,24 @@
     <div id="sidebar" class="">
         <ul class="nav list-group">
             <li>
-                <%= link_to "Coaches", "/crews/#{@crew.id}/coaches", class: "list-group-item"%>
+              <%= link_to crew_path(current_user.his_crew_as_coord), class:"hidden-xs navlinks" do %>
+                <i class="icon-home-2"></i> Acceuille
+              <% end %>
             </li>
             <li>
-                <%= link_to "Services", "/crews/#{@crew.id}/services", class: "list-group-item"%>
+              <%= link_to "Vos Coaches", "/crews/#{@crew.id}/coaches", class: "list-group-item"%>
             </li>
             <li>
-                <%= link_to "Kickstarts non confirmé", "/crews/#{@crew.id}/kickstarts", class: "list-group-item"%>
+              <%= link_to "Vos Services", "/crews/#{@crew.id}/services", class: "list-group-item"%>
             </li>
             <li>
-                <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 10</a>
+              <%= link_to "Kickstarts non confirmé", "/crews/#{@crew.id}/kickstarts", class: "list-group-item"%>
             </li>
             <li>
-                <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 11</a>
+              <%= link_to "Vos Clubs", "/crews/#{@crew.id}/clubs", class: "list-group-item"%>
+            </li>
+            <li>
+              <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 11</a>
             </li>
         </ul>
     </div>

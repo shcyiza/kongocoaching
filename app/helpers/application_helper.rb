@@ -18,7 +18,11 @@ module ApplicationHelper
 
 
   def youtube_embed video, *style
-    content_tag(:iframe, 'youtube', src: video.yt_embed_link, style: style )
+    result = content_tag :iframe, 'youtube', src: video.yt_embed_link
+    if style
+      result = content_tag :iframe, 'youtube', src: video.yt_embed_link, style: style
+    end
+    return result
   end
 
   def tel_to text, html_options = {}

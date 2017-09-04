@@ -21,25 +21,6 @@
         </span>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-4">
-        <a href="#0" class="btn_1" data-toggle="modal" data-target="#edit_coach<%= coach.id %>">
-          <font class="notboldhover"><i class="icon-edit-2"></i> editer...</font>
-        </a>
-      </div>
-      <div class="col-xs-3">
-        <%= render './shared/add_avatar_btn', { attachable_type: coach.class.name, attachable: coach } %>
-      </div>
-      <div class="col-xs-3">
-        <%= render './shared/add_video_btn', { watchable_type: coach.class.name, watchable_id: coach.id } %>
-      </div>
-      <div class="col-xs-2">
-        <a href="#0" class="btn_1_outline" data-toggle="modal"
-        style="border-color: red; color: red;" data-target="#delete_coach<%= coach.id %>">
-          <i class="icon-trash"></i>
-        </a>
-      </div>
-    </div>
     <div class="info-wrap">
       <div class="panel-group" id="accordion_<%= coach.id %>">
         <div class="panel panel-default">
@@ -54,6 +35,21 @@
           <div id="description_<%= coach.id %>" class="panel-collapse collapse in">
             <div class="panel-body scrollable">
               <%= coach.description %>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion_<%= coach.id %>-toggle notboldhover" data-toggle="collapse" data-parent="#accordion_<%= coach.id %>" href="#specialties_<%= coach.id %>">
+                <strong>Specialisation <i class="icon-heart"></i> <%= coach.specialties.count %></strong>
+                <i class="indicator icon_minus_alt2 pull-right"></i>
+              </a>
+            </h4>
+          </div>
+          <div id="specialties_<%= coach.id %>" class="panel-collapse collapse">
+            <div class="panel-body scrollable">
+              <%= render './crews/coaches/specialties_form',{coach: coach}  %>
             </div>
           </div>
         </div>
@@ -92,6 +88,19 @@
             <% end %>
           </div>
       </div>
+    </div>
+    <div class="">
+
+        <a href="#0" class="btn_1" data-toggle="modal" data-target="#edit_coach<%= coach.id %>">
+          <font class="notboldhover"><i class="icon-edit-2"></i> editer...</font>
+        </a>
+        <%= render './shared/add_avatar_btn', { attachable_type: coach.class.name, attachable: coach } %>
+        <%= render './shared/add_video_btn', { watchable_type: coach.class.name, watchable_id: coach.id } %>
+        <a href="#0" class="btn_1_outline" data-toggle="modal"
+        style="border-color: red; color: red;" data-target="#delete_coach<%= coach.id %>">
+          <i class="icon-trash"></i>
+        </a>
+
     </div>
   </div>
 </div>
