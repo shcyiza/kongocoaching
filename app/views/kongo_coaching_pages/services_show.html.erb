@@ -78,7 +78,7 @@
       <div class="col-md-6 multimedia">
         <h3 >Videos de <%= @service.name %></h3>
         <% @service.video_links.each do |video| %>
-          <div class="col-md-6 container">
+          <div class="col-md-4 container">
             <div class="vids_index">
               <a class="vids popup-youtube" href="<%= video.video_path %>" data-turbolinks="false">
                 <span><font style="background-color: white; font-size: 35px;"><i class="icon-youtube"></i> <i class="icon-play"></i></font></span>
@@ -96,7 +96,7 @@
       <h3 >Photos de <%= @service.name %></h3>
       <br>
         <% @service.avatars.each do |pic| %>
-          <div class="col-md-6 container">
+          <div class="col-md-4">
             <a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
               <%= image_tag pic.photo.url, class: "picture_frame" %>
             </a>
