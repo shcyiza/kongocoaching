@@ -7,9 +7,14 @@
     </h2>
   </div>
 </section>
+<div class="breadcrums">
+  <%= link_to "Acceille", "/1/home", data: { turbolinks: false } %> >>
+  <%= link_to "Nos Service", "/1/services" %> >>
+  <u><%= link_to @service.name, "", disabled: true %></b>
+</div>
 <div class="container margin_60">
   <div class="row">
-    <div class="col-md-8 ">
+    <div class="col-md-6 ">
       <% if @service.video != nil %>
         <div class="wrapper16_9">
           <div class="video_ratio">
@@ -25,49 +30,36 @@
         <li><i class="icon-clock"></i> <%= @service.duration %> </li>
         <li><i class="icon-users-3"></i></li>
       </ul>
-      <h2>Description</h2>
-      <p><%= @service.description %></p>
-      <hr class="add_bottom_30">
-    </div><!-- End col -->
-    <div class="col-md-4" id="sidebar">
       <div class="theiaStickySidebar">
         <div class="box_style_2">
-          <div id="features" class="version-2">
-            <h4>What you get</h4>
-            <ul>
-              <li><a href="#0" class="tooltip-1" data-placement="right" title="" data-original-title="Default tooltip"><i class="icon_film"></i>12 Workout videos</a>
-              </li>
-              <li><a href="#0" class="tooltip-1" data-placement="right" title="" data-original-title="Default tooltip">Tool<i class="icon_tablet"></i>Tablets &amp; mobiles access</a>
-              </li>
-              <li><a href="#0" class="tooltip-1" data-placement="right" title="" data-original-title="Default tooltip"><i class="icon_lock-open_alt"></i>Lifetime access</a>
-              </li>
-              <li><a href="#0" class="tooltip-1" data-placement="right" title="" data-original-title="Default tooltip"><i class="icon_chat_alt"></i>Discuss with coach</a>
-              </li>
-            </ul>
-          </div>
-          <p><small style="line-height:10px">Choro lobortis euripidis cu qui, ex melius labitur conceptam eos, sumo possim sea in. Te platonem ullamcorper per.</small>
-          </p>
-          <hr>
-          <a class="btn_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
+          <p>Vous voullez avoir plus d'infos sur ce service ou vous y inscrire...</p>
+          <a class="btn_outline" href="#"><i class=" icon-mail"></i> Contactez-nous!</a>
         </div>
         <!-- End box_style -->
-        <div id="trainer_col">
-          <h4>About the trainer</h4>
-          <div class="media">
-            <div class="pull-right">
-              <a href="#"><img src="img/avatar1.jpg" class="img-circle" alt="">
+      </div>
+    </div><!-- End col -->
+    <div class="col-md-6" id="sidebar">
+      <h2>Description</h2>
+      <p><%= @service.description %></p>
+
+      <% if @service.its_coaches.length > 0 %>
+        <h4>Qui donne cette entrainement?</h4>
+        <br>
+          <% @service.its_coaches.each do |coach| %>
+            <div style="width:100%">
+              <a href="#0" class="coach_frame" style="padding-bottom:3rem; margin-bottom: 1rem;">
+                <% if coach.avatars.count != 0 %>
+                  <%= image_tag coach.photo.url(:thumb), class: "img-circle thumb_frame pull-left" %>
+                <% else %>
+                  <%= image_tag "http://irontrainer.co/wp-content/uploads/2017/01/personal-trainer-demonstrating-squat-lLas-Vegas-256x256.jpg", class: "img-circle thumb_frame pull-left" %>
+                <% end %>
+                <br>
+                <%= coach.name %>
               </a>
             </div>
-            <div class="media-body">
-              <h5 class="media-heading">Marc Twain</h5>
-              <p>
-                Mea assum nemore erroribus ei, eu sed movet animal eleifend. Id usu recteque consequuntur, nam elitr veniam legere ex. Nec iriure scaevola intellegat ea, cu cum erroribus concludaturque. In quis solum legimus qui.
-                <br><a href="trainer-profile.html">View profile</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+          <% end %>
+        <% end %>
+
       <!-- End theiaStickySidebar -->
     </div>
     <!-- End col -->
@@ -75,25 +67,42 @@
   <!-- End row -->
 </div>
 <!-- End container -->
-<div class="workoutlist container">
-  <h1 class="text-center">Gallerie Multimedia</h1>
+<ul id="course_info">
+  <li>Multimedia</li>
+  <li><i class="icon-video"></i></li>
+  <li><i class="icon-picture"></i></li>
+</ul>
+<div class="workoutlist">
   <div class="row">
-    <div class="col-sm-6">
-      <% @service.video_links.each do |video| %>
-        <div class="col-md-6">
-          <div class="vids_index">
-            <a class="vids popup-youtube" href="<%= video.video_path %>" data-turbolinks="false">
-              <span><font style="background-color: white; font-size: 35px;"><i class="icon-youtube"></i> <i class="icon-play"></i></font></span>
-              <%= image_tag video.yt_thumbnail %>
-            </a>
-            <hr>
+    <% if has_videos_of(@service) %>
+      <div class="col-md-6 multimedia">
+        <h3 >Videos de <%= @service.name %></h3>
+        <% @service.video_links.each do |video| %>
+          <div class="col-md-6 container">
+            <div class="vids_index">
+              <a class="vids popup-youtube" href="<%= video.video_path %>" data-turbolinks="false">
+                <span><font style="background-color: white; font-size: 35px;"><i class="icon-youtube"></i> <i class="icon-play"></i></font></span>
+                <%= image_tag video.yt_thumbnail %>
+              </a>
+              <hr>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-sm-6">
-      <h4><a href="https://www.youtube.com/watch?v=oX6I6vs1EFs" class="video">Yoga Fundamentals (Youtube modal)</a></h4>
-      <p>Vel ex velit nemore, his no phaedrum interesset, in malis bonorum dissentiunt quo.</p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="col-md-6 multimedia">
+      <div class="magnific-gallery">
+      <h3 >Photos de <%= @service.name %></h3>
+      <br>
+        <% @service.avatars.each do |pic| %>
+          <div class="col-md-6 container">
+            <a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
+              <%= image_tag pic.photo.url, class: "picture_frame" %>
+            </a>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

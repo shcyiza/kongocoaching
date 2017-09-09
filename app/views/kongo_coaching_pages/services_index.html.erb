@@ -1,12 +1,17 @@
 	<!-- SubHeader =============================================== -->
-  <section class="hero">
-    <%= image_tag "back.jpg" , class: "hero__background" %>
-    <div class="container">
-      <h2 class="main_title  hero__title" style="color:green; width:100%;">
-        Nos services et entrainements
-      </h2>
-    </div>
-  </section>
+<section class="hero">
+  <%= image_tag "back.jpg" , class: "hero__background" %>
+  <div class="container">
+    <h2 class="main_title  hero__title" style="color:green; width:100%;">
+      Nos services et entrainements
+    </h2>
+  </div>
+</section>
+
+<div class="breadcrums">
+  <%= link_to "Acceille", "/1/home", data: { turbolinks: false } %> >>
+  <u><%= link_to "Nos Service", "" %></b>
+</div>
 
 <div class="container" style="padding-top: 5rem;">
   <div class="row">

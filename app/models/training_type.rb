@@ -32,12 +32,16 @@ class TrainingType < ApplicationRecord
 
   def duration
     result = "#{ self.duration_hours }hr #{ self.duration_minutes }min"
-    if self.duration_minutes <= 0
+    if self.duration_minutes == nil
       result = "#{ self.duration_hours }hr"
-    elsif self.duration_hours >= 0
+    elsif self.duration_hours == nil
       result = "#{ self.duration_minutes }min"
     end
     return result
+  end
+
+  def its_coaches
+    self.specialties.map { |s| s.specializable }
   end
 
 end

@@ -60,7 +60,7 @@ module MultimediaHelper
     return result
   end
 
-  def has_vidoes_of watchable
+  def has_videos_of watchable
     result = false
     if watchable.video_links.count > 0
       result = true
