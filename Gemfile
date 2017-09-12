@@ -34,7 +34,6 @@ gem 'devise-i18n'
 gem 'cocoon'
 
 group :production do
-  gem 'rails_12factor'
   gem 'aws-sdk', '~> 2.3'
   gem 'exception_notification'
 end

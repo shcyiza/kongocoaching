@@ -1,0 +1,39 @@
+<section class="hero">
+  <%= image_tag "http://www.tennisworld.net.au/wp-content/uploads/2014/07/bootcamp3-724x426.jpg", class: "hero__background" %>
+	<h2 class="main_title  hero__title" style="color:green; width:100%;">
+    <strong>Notre Equipe</strong>
+  </h2>
+</section>
+<div class="breadcrums">
+  <%= link_to "Acceille", "/1/home", data: { turbolinks: false } %> >>
+  <u><%= link_to "Notre équipe", "" %></b>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <% @coaches.each do |coach| %>
+        <div class="col-md-4">
+          <div class="team-item">
+            <div class="team-item-img" style="height: 300px;">
+              <%= show_his_pic_or_default coach %>
+              <div class="team-item-detail">
+                <div class="team-item-detail-inner">
+                  <h4><%= coach.get_name %></h4>
+                  <p>
+                    <% coach.specialties.each do |specialty| %>
+                     <%= specialty.name %>/
+                    <% end %>
+                  </p>
+                  <a href="/1/coaches/<%= coach.id %>" class="btn_1">Voir son profile</a>
+                </div>
+              </div>
+            </div>
+            <div class="team-item-info">
+              <h4><%= coach.get_name %></h4>
+              <p>Personal Trainer</p>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

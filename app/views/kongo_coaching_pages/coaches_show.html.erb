@@ -1,0 +1,133 @@
+
+<!-- SubHeader =============================================== -->
+<section class="hero">
+	<%= image_tag "http://www.tennisworld.net.au/wp-content/uploads/2014/07/bootcamp3-724x426.jpg", class: "hero__background" %>
+    <h4 class="main_title  hero__title" style="color:green; width:100%;"> Notre équipe:  </h4>
+		<h2 class="main_title  hero__title" style="color:green; width:100%;">
+      <strong><%= @coach.get_name %></strong>
+    </h2>
+</section>
+<div class="breadcrums">
+  <%= link_to "Acceille", "/1/home", data: { turbolinks: false } %> >>
+  <%= link_to "Notre équipe", "/1/coaches" %> >>
+  <u><%= link_to @coach.get_name, "", disabled: true %></u>
+</div>
+
+<div class="container_styled_1">
+<div class="container margin_60">
+  <div class="row">
+  <aside class="col-md-3" id="sidebar">
+	  <div class="theiaStickySidebar">
+			<div class="profile">
+				<p class="text-center">
+						<%= show_his_pic_or_default @coach, "img-circle styled_2 big_thumb_frame" %>
+				</p>
+				<ul>
+					<li>
+						<h1 class="text-center"><%= @coach.get_name %></h1>
+					</li>
+				</ul>
+			</div><!-- End box-sidebar -->
+	  </div>
+  </aside>
+<div class="col-md-9">
+	<div class="box_style_6">
+		<div class="indent_title_in">
+			<i class="icon-question"></i>
+			<br>
+			<h3>A propos du Coach</h3>
+		</div>
+
+		<div class="wrapper_indent">
+			<p><%= @coach.description %></p>
+	  </div><!--wrapper_indent -->
+
+		<div class="row">
+			<% if @coach.training_types.length > 0 %>
+				<hr class="styled_2">
+				<div class="indent_title_in">
+				  <i class="icon_document_alt"></i>
+					<br>
+					<h3>Ses Service et Entrainement</h3>
+				</div>
+				<% @coach.training_types.each do |srvc| %>
+					<div class="col-xs-6">
+						<%= link_to "/1/services/#{srvc.id}", class: "coach_frame", style: "padding-bottom:3rem; margin-bottom: 1rem;" do %>
+							<%= image_tag srvc.photo.url(:medium), class: "styled_2 thumb_frame pull-left" %>
+							<br>
+							<%= srvc.name %>
+						<% end %>
+					</div>
+				<% end %>
+			<% end %>
+		</div><!--wrapper_indent -->
+	</div>
+</div>
+
+</div><!--End row -->
+<hr class="styled_2">
+<div class="indent_title_in">
+	<i class="icon_camera_alt"></i>
+	<br>
+
+</div>
+<div class="wrapper_indent">
+	<div class="row">
+		<% if has_videos_of(@coach) %>
+			<div class="col-md-6 multimedia">
+				<h3 >Videos de <%= @coach.name %></h3>
+				<% @coach.video_links.each do |video| %>
+					<div class="col-md-4 container">
+						<div class="vids_index">
+							<a class="vids popup-youtube" href="<%= video.video_path %>" data-turbolinks="false">
+								<span><font style="background-color: white; font-size: 35px;"><i class="icon-youtube"></i> <i class="icon-play"></i></font></span>
+								<%= image_tag video.yt_thumbnail %>
+							</a>
+							<hr>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+
+		<div class="col-md-6 multimedia">
+			<div class="magnific-gallery">
+			<h3 >Photos de <%= @coach.name %></h3>
+			<br>
+				<% @coach.avatars.each do |pic| %>
+					<div class="col-md-4">
+						<a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
+							<%= image_tag pic.photo.url, class: "picture_frame" %>
+						</a>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div><!--End container -->
+</div>
+
+
+<!-- SPECIFIC SCRIPTS -->
+<script>
+    'use strict';
+$(".team-carousel").owlCarousel({
+     items: 1,
+        loop: true,
+	margin: 10,
+        autoplay: false,
+        smartSpeed: 300,
+        responsiveClass: false,
+        responsive: {
+            320: {
+                items: 1,
+            },
+		768: {
+                items: 2,
+            },
+            1000: {
+                items: 3,
+            }
+        }
+    });
+</script>

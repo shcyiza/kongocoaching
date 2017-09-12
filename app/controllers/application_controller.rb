@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_back_wrong_way
+    redirect_back fallback_location: root_path, alert: 'Mauvais chemin!'
+  end
+
   def add_participant enrollable
     Participant.create! user: current_user, enrollable: enrollable
   end

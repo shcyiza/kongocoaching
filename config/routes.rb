@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get '/1/login', to: 'kongo_coaching_pages#login'
   get '/1/services', to: 'kongo_coaching_pages#services_index'
   get '/1/services/:id', to: 'kongo_coaching_pages#services_show'
+  get '/1/coaches', to: 'kongo_coaching_pages#coaches_index'
+  get '/1/coaches/:id', to: 'kongo_coaching_pages#coaches_show'
   get '/1/kickstarts/new', to: "kongo_coaching_pages#new_kickstart"
   get '/1/kickstarts/:id', to: "kongo_coaching_pages#show_kickstart"
 

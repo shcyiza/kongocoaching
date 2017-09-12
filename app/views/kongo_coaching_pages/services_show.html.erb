@@ -1,16 +1,16 @@
 <section class="hero">
   <%= image_tag @service.photo.url , class: "hero__background" %>
-	<div class="container">
-    <h4 class="main_title  hero__title" style="color:green; width:100%;"> Nos services: </h4>
-		<h2 class="main_title  hero__title" style="color:green; width:100%;">
-      <strong><%= @service.name %></strong>
-    </h2>
-  </div>
+
+  <h4 class="main_title  hero__title" style="color:green; width:100%;"> Nos services: </h4>
+	<h2 class="main_title  hero__title" style="color:green; width:100%;">
+    <strong><%= @service.name %></strong>
+  </h2>
+
 </section>
 <div class="breadcrums">
   <%= link_to "Acceille", "/1/home", data: { turbolinks: false } %> >>
   <%= link_to "Nos Service", "/1/services" %> >>
-  <u><%= link_to @service.name, "", disabled: true %></b>
+  <u><%= link_to @service.name, "", disabled: true %></u>
 </div>
 <div class="container margin_60">
   <div class="row">
@@ -39,23 +39,28 @@
       </div>
     </div><!-- End col -->
     <div class="col-md-6" id="sidebar">
-      <h2>Description</h2>
+      <div class="indent_title_in">
+			  <i class="icon-question"></i>
+        <br>
+				<h3>A propos de ce Service</h3>
+			</div>
       <p><%= @service.description %></p>
 
       <% if @service.its_coaches.length > 0 %>
-        <h4>Qui donne cette entrainement?</h4>
+      <hr>
+      <div class="indent_title_in">
+			  <i class="icon-group"></i>
         <br>
+				<h3>Les coaches de ce service</h3>
+			</div>
+
           <% @service.its_coaches.each do |coach| %>
             <div style="width:100%">
-              <a href="#0" class="coach_frame" style="padding-bottom:3rem; margin-bottom: 1rem;">
-                <% if coach.avatars.count != 0 %>
-                  <%= image_tag coach.photo.url(:thumb), class: "img-circle thumb_frame pull-left" %>
-                <% else %>
-                  <%= image_tag "http://irontrainer.co/wp-content/uploads/2017/01/personal-trainer-demonstrating-squat-lLas-Vegas-256x256.jpg", class: "img-circle thumb_frame pull-left" %>
-                <% end %>
+              <%= link_to "/1/coaches/#{coach.id}", class: "coach_frame", style: "padding-bottom:3rem; margin-bottom: 1rem;" do %>
+                <%= show_his_pic_or_default coach, "img-circle styled_2 thumb_frame pull-left" %>
                 <br>
-                <%= coach.name %>
-              </a>
+                <%= coach.get_name %>
+              <% end %>
             </div>
           <% end %>
         <% end %>

@@ -17,6 +17,40 @@
       </div>
       <div class="coach-info">
         <span class="coach-title">
+          <div class="dropdown">
+            <a class="btn_1 pull-left white dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <i class=" icon-cog"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>
+                <a class="text-center" href="#0" data-toggle="modal" data-target="#edit_coach<%= coach.id %>">
+                  <i class="icon-edit-2"></i> editer...
+                </a>
+              </li>
+              <li>
+                <a class="text-center" href="#0" data-toggle="modal" data-target="#add_pic<%= coach.id %>">
+                  +<i class="icon-picture"></i> Ajouter une photo...
+                </a>
+              </li>
+              <li>
+                <a class="text-center" href="#0" data-toggle="modal" data-target="#add_vid<%= coach.id %>">
+                  +<i class="icon-video"></i> Ajouter une video...
+                </a>
+              </li>
+              <li>
+                <a class="text-center" href="#0" data-toggle="modal"
+                style="color: red;" data-target="#delete_coach<%= coach.id %>">
+                  <i class="icon-trash"></i>  supprimer ce coach...
+                </a>
+              </li>
+            </ul>
+          </div>
+          <br>
+          <br>
+          <br>
+        </span>
+        <hr class="invisible">
+        <span class="coach-title">
           <font color="#ed5434"><b><%= coach.get_name %></b></font>
         </span>
       </div>
@@ -89,14 +123,14 @@
           </div>
       </div>
     </div>
-    <div class="">
+    <div class="invis_btn">
 
         <a href="#0" class="btn_1" data-toggle="modal" data-target="#edit_coach<%= coach.id %>">
           <font class="notboldhover"><i class="icon-edit-2"></i> editer...</font>
         </a>
         <%= render './shared/add_avatar_btn', { attachable_type: coach.class.name, attachable: coach } %>
         <%= render './shared/add_video_btn', { watchable_type: coach.class.name, watchable_id: coach.id } %>
-        <a href="#0" class="btn_1_outline" data-toggle="modal"
+        <a href="#0" class=" btn_1 _outline" data-toggle="modal"
         style="border-color: red; color: red;" data-target="#delete_coach<%= coach.id %>">
           <i class="icon-trash"></i>
         </a>
@@ -118,7 +152,7 @@
 <div class="modal fade bs-example-modal-lg" id="delete_coach<%= coach.id %>" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
   <div class="modal-dialog modal-lg"  role="document">
     <div class="modal-content modal-popup">
-      <h1>Etes vous sur de vouloir supprimez ce coach/entrainement?</h1> <br>
+      <h1>Etes vous sur de vouloir supprimez ce coach de votre équipe?</h1> <br>
       <div class="text-wrap">
         <h2><strong><%= coach.name %></strong></h2>
       </div>
@@ -144,12 +178,12 @@
         </div>
       </div>
       <hr>
-      <%= link_to "/crews/#{@crew.id}/destroy_cc/#{coach.id}", class:"btn_1 white", method: 'post' do %>
-        <i class="icon-trash"></i> Oui
-      <% end %>
       <a href="#" class="btn_1" onclick="$('#delete_coach<%= coach.id %>').modal('hide');" data-turbolinks="false">
         <i class="icon-check"></i> non
       </a>
+      <%= link_to "/crews/#{@crew.id}/destroy_cc/#{coach.id}", class:"btn_1 white", method: 'post' do %>
+        <i class="icon-trash"></i> Oui
+      <% end %>
     </div>
   </div>
 </div><!--end destroy modal-->

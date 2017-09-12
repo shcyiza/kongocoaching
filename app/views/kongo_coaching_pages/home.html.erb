@@ -1,3 +1,7 @@
+<head>
+  <%= javascript_include_tag 'lovefit/video_header', 'data-turbolinks-track' => 'load' %>
+  <%= javascript_include_tag "lovefit/bootstrap-portfilter", 'data-turbolinks-track' => 'load' %>
+</head>
 <section class="header-video">
   <div id="hero_video">
     <div id="sub_content">
@@ -76,6 +80,57 @@
 	<!-- End container -->
 </div>
 
+<div class="container_styled_1">
+	<div class="container margin_60_35">
+		<h2 class="main_title" style="color:green"><em></em>Notre Equipe</h2>
+
+<div class="container">
+  <div class="owl-carousel team-carousel">
+
+    <% @coaches.each do |coach| %>
+      <div class="team-item">
+        <div class="team-item-img" style="height: 370px;">
+          <%= show_his_pic_or_default coach %>
+          <div class="team-item-detail">
+            <div class="team-item-detail-inner">
+              <h4><%= coach.get_name %></h4>
+              <p>
+                <% coach.specialties.each do |specialty| %>
+                 <%= specialty.name %>/
+                <% end %>
+              </p>
+              <a href="/1/coaches/<%= coach.id %>" class="btn_1">Voir son profile</a>
+            </div>
+          </div>
+        </div>
+        <div class="team-item-info">
+          <h4><%= coach.get_name %></h4>
+          <p>Personal Trainer</p>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="team-item">
+      <div class="team-item-img" style="height: 370px;">
+        <font class="text-center" size="350"><i class="icon-group"></i></font>
+        <div class="team-item-detail">
+          <div class="team-item-detail-inner">
+            <h4></h4>
+            <a href="/1/coaches" class="btn_1">Voir toute notre équipe</a>
+          </div>
+        </div>
+      </div>
+      <div class="team-item-info">
+        <h4>Toute l'équipe</h4>
+        <p>Personal Trainer</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+
 <section class="margin_60_35" id="testimonials">
 	<div class="container">
 		<div class="row">
@@ -121,15 +176,31 @@
 	</div>
 </div>
 
-<head>
-  <%= javascript_include_tag 'lovefit/video_header', 'data-turbolinks-track' => 'load' %>
-  <%= javascript_include_tag "lovefit/bootstrap-portfilter", 'data-turbolinks-track' => 'load' %>
-  <script>
-    HeaderVideo.init({
-      container: $('.header-video'),
-      header: $('.header-video--media'),
-      videoTrigger: $("#video-trigger"),
-      autoPlayVideo: true
-    });
-  </script>
-</head>
+<script>
+  'use strict';
+  HeaderVideo.init({
+    container: $('.header-video'),
+    header: $('.header-video--media'),
+    videoTrigger: $("#video-trigger"),
+    autoPlayVideo: true
+  });
+  $(".team-carousel").owlCarousel({
+    items: 1,
+    loop: true,
+    margin: 10,
+    autoplay: true,
+    smartSpeed: 300,
+    responsiveClass: false,
+    responsive: {
+      320: {
+        items: 1,
+      },
+      768: {
+        items: 2,
+      },
+      1000: {
+        items: 3,
+      }
+    }
+  });
+</script>
