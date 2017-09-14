@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901234516) do
+ActiveRecord::Schema.define(version: 20170914040135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,14 @@ ActiveRecord::Schema.define(version: 20170901234516) do
     t.datetime "updated_at",      null: false
     t.index ["coaches_crew_id"], name: "index_kickstarts_on_coaches_crew_id", using: :btree
     t.index ["crew_id"], name: "index_kickstarts_on_crew_id", using: :btree
+  end
+
+  create_table "news_subscribers", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "crew_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crew_id"], name: "index_news_subscribers_on_crew_id", using: :btree
   end
 
   create_table "participants", force: :cascade do |t|
@@ -195,6 +203,7 @@ ActiveRecord::Schema.define(version: 20170901234516) do
   add_foreign_key "clubs_crews", "crews"
   add_foreign_key "kickstarts", "coaches_crews"
   add_foreign_key "kickstarts", "crews"
+  add_foreign_key "news_subscribers", "crews"
   add_foreign_key "profile_variables", "profiles"
   add_foreign_key "profiles", "coaches_crews"
   add_foreign_key "profiles", "crews"

@@ -3,6 +3,7 @@ class Crew < ApplicationRecord
   has_many :training_types, dependent: :destroy
   has_many :trainings, through: :coaches_crews
   has_many :kickstarts, dependent: :destroy
+  has_many :news_subscribers, dependent: :destroy
 
   has_many :profiles
 

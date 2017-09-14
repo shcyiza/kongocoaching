@@ -15,7 +15,7 @@
     </div>
     <!-- End sub_content -->
   </div>
-  <img src="/assets/video_fix-6f064b11007507ecebb88b25c6b21a41e51189b079c5a30342c8dc8950019c0c.png" alt="" class="header-video--media" data-video-src="/assets/intro-807d3106d646ff27d8a7ee1df4e72533e6c1bfa05cb832aa7503a6234ce7f9f9.mp4" data-teaser-source="/assets/intro-807d3106d646ff27d8a7ee1df4e72533e6c1bfa05cb832aa7503a6234ce7f9f9" data-provider="" data-video-width="1920" data-video-height="960">
+  <img src="<%= asset_path('video_fix.png') %>" alt="" class="header-video--media" data-video-src="<%= video_bg_path('pre_pro_version.mp4') %>" data-teaser-source="<%= video_bg_path('pre_pro_version.mp4') %>" data-provider="" data-video-width="1920" data-video-height="960">
   <div id="count" class="text-center hidden-md">
     <%= link_to "/1/signup", class:"btn_1" do %>
       <h2 style="color:white;"><i class="icon-heart"></i>Commencez mon kickstar!</h2>
@@ -89,7 +89,7 @@
 
     <% @coaches.each do |coach| %>
       <div class="team-item">
-        <div class="team-item-img" style="height: 370px;">
+        <div class="team-item-img">
           <%= show_his_pic_or_default coach %>
           <div class="team-item-detail">
             <div class="team-item-detail-inner">
@@ -111,8 +111,8 @@
     <% end %>
 
     <div class="team-item">
-      <div class="team-item-img" style="height: 370px;">
-        <font class="text-center" size="350"><i class="icon-group"></i></font>
+      <div class="team-item-img">
+        <%= image_tag "http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Group-icon.png" %>
         <div class="team-item-detail">
           <div class="team-item-detail-inner">
             <h4></h4>
@@ -121,7 +121,7 @@
         </div>
       </div>
       <div class="team-item-info">
-        <h4>Toute l'équipe</h4>
+        <h4><a href="/1/coaches">Toute l'équipe</a></h4>
         <p>Personal Trainer</p>
       </div>
     </div>
@@ -160,17 +160,22 @@
 	<div class="container margin_60">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1 text-center">
-				<h3>Subscribe to our Newsletter for latest news.</h3>
+				<h3>Tenez-vous au courant de nos actualités...
+          <h4><i>inscrivez-vous a nôtre newsletter pour restez avoirs des infos ou des offres inédites.</i></h4>
+        </h3>
+        <hr class="invisible">
 				<div id="message-newsletter"></div>
-				<form method="post" action="assets/newsletter.php" name="newsletter" id="newsletter" class="form-inline">
-          <div class="col-md-9">
-            <input name="email_newsletter" id="email_newsletter" type="email" value="" placeholder="Your Email" class="form-control">
-          </div>
-
-          <div class="col-md-3">
-            <button id="submit-newsletter" class="btn_1"> Subscribe</button>
-          </div>
-				</form>
+          <%= form_for(@subscriber, id: "newsletter", class: "form-inline") do |f| %>
+            <div class="col-md-9">
+              <%= f.email_field :email, id: "email_newsletter", class: "form-control trainer_frame", placeholder: "Vôtre Email" %>
+              <%= f.hidden_field :crew_id, value: @crew.id, readonly: true %>
+            </div>
+            <div class="col-md-3">
+              <%= button_tag id:"submit-newsletter", class: 'btn_1', type: :submit do %>
+               M'inscire!
+              <% end %>
+            </div>
+          <% end %>
 			</div>
 		</div>
 	</div>

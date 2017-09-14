@@ -13,6 +13,7 @@ class KongoCoachingPagesController < ApplicationController
   def home
     @services = @crew.training_types.take(5)
     @coaches = @crew.coaches_crews.take(5)
+    @subscriber = @crew.news_subscribers.build
   end
 
   def services_index

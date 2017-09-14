@@ -40,4 +40,10 @@ module ApplicationHelper
    content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick))
   end
 
+  def video_bg_path asset_str
+    path = asset_path(asset_str)
+    bg_path = path.slice(0..(path.index('.'))).tr(".", "")
+    return bg_path
+  end
+
 end

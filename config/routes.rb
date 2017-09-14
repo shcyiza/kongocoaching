@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :news_subscribers
   resources :clubs
   root to: 'application#home_page_router'
   resources :kickstarts
