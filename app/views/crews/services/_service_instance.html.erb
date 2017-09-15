@@ -9,23 +9,43 @@
 
     <div class="text-wrap">
       <h2><strong><%= srvc.name %></strong></h2>
-      <a href="#0" class="btn_1 shadowed" data-toggle="modal" data-target="#edit_service<%= srvc.id %>">
-        <i class="icon-edit-2"></i> editer...
-      </a><br><br><br><br><br><br>
-      <a href="#0" class="btn_1_outline shadowed pull-down" data-toggle="modal"
-      style="border-color: red; color: red;" data-target="#delete_service<%= srvc.id %>">
-        <i class="icon-trash"></i>...
-      </a>
+      <div class="dropdown">
+        <a class="btn_1 dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <i class=" icon-cog"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li>
+            <a href="#0" class="" data-toggle="modal" data-target="#edit_service<%= srvc.id %>">
+              <i class="icon-edit-2"></i> editer...
+            </a>
+          </li>
+          <li>
+            <a class="text-center" href="#0" data-toggle="modal" data-target="#add_pic<%= srvc.id %>">
+              +<i class="icon-picture"></i> Ajouter une photo...
+            </a>
+          </li>
+          <li>
+            <a class="text-center" href="#0" data-toggle="modal" data-target="#add_vid<%= srvc.id %>">
+              +<i class="icon-video"></i> Ajouter une video...
+            </a>
+          </li>
+          <li>
+            <a href="#0" class="" data-toggle="modal"
+            style="color: red;" data-target="#delete_service<%= srvc.id %>">
+              <i class="icon-trash"></i>...
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </header>
   <main>
-    <div href="#" class="cta-wrap">
+    <div href="#" class="cta-wrap invis_btn">
       <i class="icon-stopwatch"></i>
       <span>Durée:</span>
       <span><%= srvc.duration_hours %>h <%= srvc.duration_minutes %>m</span>
-      <hr>
       <%= render './shared/add_avatar_btn', { attachable_type: srvc.class.name, attachable: srvc } %>
-      <br>
       <%= render './shared/add_video_btn', { watchable_type: srvc.class.name, watchable_id: srvc.id } %>
     </div>
     <div class="info-wrap">

@@ -8,6 +8,8 @@
      </span>
     </label>
     <%= f.file_field :photo, id:"imgInp#{attachable.class.name}#{attachable.id}", data:{for:'img-upld'}%>
-    <%= f.input :vignette, label: "Courte descritpion de la photo", html_options:{style: "padding: none;"} %>
+    <hr class="invisible">
+    <label for="vignette", style="color:black;">Descritpion de la photo</label>
+    <%= f.input :vignette, label: false,html_options:{style: "padding: none;"}, id:"vignette" %>
   </div>
 </div>

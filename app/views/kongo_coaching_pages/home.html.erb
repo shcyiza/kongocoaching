@@ -135,7 +135,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
-				<h3>Pouquoi faire Kickstar?</h3>
+				<h3>Pouquoi faire Kickstart?</h3>
           <p class="lead"><span>- Faire connaissance avec l&rsquo;entra&icirc;nement personnalis&eacute; et d&eacute;couvrir votre club</span></p>
           <p class="lead"><span>- Petits groupes de 1 &agrave; 3 personnes</span></p>
           <p class="lead"><span>- Exercices et conseils afin de pouvoir vous entra&icirc;ner tout seul apr&egrave;s la s&eacute;ance.</span></p>
@@ -167,7 +167,7 @@
 				<div id="message-newsletter"></div>
           <%= form_for(@subscriber, id: "newsletter", class: "form-inline") do |f| %>
             <div class="col-md-9">
-              <%= f.email_field :email, id: "email_newsletter", class: "form-control trainer_frame", placeholder: "Vôtre Email" %>
+              <%= f.email_field :email, id: "email_newsletter", class: "form-control trainer_frame", placeholder: "votre Email" %>
               <%= f.hidden_field :crew_id, value: @crew.id, readonly: true %>
             </div>
             <div class="col-md-3">
