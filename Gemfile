@@ -18,20 +18,20 @@ gem 'access-granted', '~> 1.1.0'
 gem "time_splitter"
 gem 'will_paginate'
 gem 'chosen-rails'
+gem 'cocoon'
+gem 'truncate_html'
+gem 'foundation-icons-sass-rails'
+gem 'geocoder'
 #gems for the emails
 gem 'sidekiq'
 gem 'inky-rb', require: 'inky'
 gem 'premailer-rails' # Stylesheet inlining for email **
+gem 'mail_form'
 gem 'mailjet', git: 'https://github.com/mailjet/mailjet-gem.git'
 #end gems for emails
-gem 'mail_form'
-gem 'truncate_html'
-gem 'foundation-icons-sass-rails'
-gem 'geocoder'
 # locals and languages
 gem 'rails-i18n', '~> 5.0.0'
 gem 'devise-i18n'
-gem 'cocoon'
 
 group :production do
   gem 'aws-sdk', '~> 2.3'

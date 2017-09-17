@@ -86,4 +86,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  #Mailjetgem smtp settings
+  config.action_mailer.delivery_method = :mailjet
+  #trackage d'evenement dans les mails
+  config.middleware.use Mailjet::Rack::Endpoint, 'http://kagenda.net/mailjet/callback' do |params|  # using the same URL you just set in Mailjet's administration
+    email = params['email'].presence || params['original_address'] # original_address is for typofix events
+
+    if user = User.find_by_email(email)
+        user.process_email_callback(params)
+    else
+        Rails.logger.fatal "[Mailjet] User not found: #{email} -- DUMP #{params.inspect}"
+    end
+  end
 end
