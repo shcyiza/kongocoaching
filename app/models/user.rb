@@ -14,24 +14,47 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook]
    #for the profile picture attachments
 
-def gender
-  gender = "homme"
-  if self.profile.sex == true
-    gender = "femme"
+  #Method for the OmniAuth facebook strategy
+  #check https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
+  def self.from_omniauth(auth)
+   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+     user.email = auth.info.email
+     user.password = Devise.friendly_token[0,20]
+     user.name = auth.info.name   # assuming the user model has a name
+     user.image = auth.info.image # assuming the user model has an image
+     # If you are using confirmable and the provider(s) you use validate emails,
+     # uncomment the line below to skip the confirmation emails.
+     # user.skip_confirmation!
+   end
   end
-  return gender
-end
 
-def tel
-  tel = "Pas de numéro de telephone"
-  if self.profile.phonenr
-    tel = self.profile.phonenr
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
   end
-  return tel
-end
+
+  def gender
+    gender = "homme"
+    if self.profile.sex == true
+      gender = "femme"
+    end
+    return gender
+  end
+
+  def tel
+    tel = "Pas de numéro de telephone"
+    if self.profile.phonenr
+      tel = self.profile.phonenr
+    end
+    return tel
+  end
 
 # ---------------------Methods for coordinators--------------
    def coordinator? #is the selected user a coordinator?
