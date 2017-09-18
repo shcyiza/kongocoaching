@@ -99,4 +99,11 @@ Rails.application.configure do
         Rails.logger.fatal "[Mailjet] User not found: #{email} -- DUMP #{params.inspect}"
     end
   end
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    email_prefix: "[PREFIX] ",
+    sender_address: %{"notifier" <notifier@staf-fit.com>},
+    exception_recipients: ENV["ADMIN-EMAIL"]
+  }
 end

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :kickstarts
   resources :profile_variables
   resources :profiles
-  devise_for :users, controllers: { registrations: "kongo_coaching_pages/registrations" }
+  devise_for :users, controllers: { registrations: "kongo_coaching_pages/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
   resources :users
   resources :participants
   resources :trainings
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'crews/:id/clubs/:key', to: 'crews#club_show'
 
   get '/1/home', to: 'kongo_coaching_pages#home'
+  get '/1/contact', to: 'kongo_coaching_pages#contact'
   get '/1/signup', to: 'kongo_coaching_pages#sign_up'
   get '/1/login', to: 'kongo_coaching_pages#login'
   get '/1/services', to: 'kongo_coaching_pages#services_index'
