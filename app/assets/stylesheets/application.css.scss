@@ -10,7 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require_tree ./app_default
  *= require_self
  *= foundation-icons
  *= require chosen
@@ -28,7 +28,6 @@
  @import url("style.css");													/* Main theme styles */
  @import url("responsive.css");											/* Responsive */
  @import url("icon_fonts/css/all_icons.min.css");			/* Icons */
- @import url("magnific-popup.css");						/* Modal */
  @import url("custom.sass");												/* Your custom css */
 
 

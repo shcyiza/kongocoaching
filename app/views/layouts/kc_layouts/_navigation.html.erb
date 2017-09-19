@@ -1,15 +1,14 @@
 <%# navigation styled for Bootstrap 3.0 %>
-<header id="nav">
+<header id="nav" style="min-height: 60px;">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-3">
+				<div class="col-md-3 col-xs-6">
 					<%= link_to root_path, id:'logo' do %>
-						<% logosize = "260x180" %>
-            <%= image_tag "logo_small.png", :size => logosize, class:"logo_normal" %>
-            <%= image_tag "logo_small_dark.png", :size => logosize, class:"logo_sticky" %>
+							<%= image_tag "logo_small.png", class:"logo_normal picture_frame" %>
+	            <%= image_tag "logo_small_dark.png", class:"logo_sticky picture_frame" %>
 					<% end %>
 				</div>
-				<nav class="col-xs-9">
+				<nav class="col-md-9 col-xs-6">
 					<ul id="access_top">
 						<%= render 'layouts/kc_layouts/nav_links_for_auth' %>
 					</ul>
