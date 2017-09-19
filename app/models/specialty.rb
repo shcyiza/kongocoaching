@@ -4,6 +4,6 @@ class Specialty < ApplicationRecord
   validates :training_type_id, presence: true, allow_blank: false
 
   def name
-    self.training_type.name
+    self.training_type.get_name
   end
 end

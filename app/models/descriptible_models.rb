@@ -3,6 +3,8 @@ module DescriptibleModels
   def self.included(base)
     base.has_many :avatars, as: :attachable, dependent: :destroy
     base.has_many :video_links, as: :watchable, dependent: :destroy
+    base.accepts_nested_attributes_for :avatars, reject_if: :all_blank, allow_destroy: true
+    base.accepts_nested_attributes_for :video_links, reject_if: :all_blank, allow_destroy: true
     attr_accessor :star_pic, :vignette
   end
 

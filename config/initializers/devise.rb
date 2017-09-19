@@ -252,8 +252,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   if Rails.env == 'development' || Rails.env == 'test'
     # facebook
-    config.omniauth :facebook, '503678566652179', '3b121d889cc92ad11e9e62eb336ee547'
-    config.omniauth :google_oauth2, '958522354694-6edhcgki3litbtkjejj7h0p11s62d4et.apps.googleusercontent.com', 'TEA9hlSW1BHqC68R0H5RcDmw', {}
+    config.omniauth :facebook, '503678566652179', ''
+    config.omniauth :google_oauth2, '958522354694-6edhcgki3litbtkjejj7h0p11s62d4et.apps.googleusercontent.com', '', {}
   else
     # facebook
     config.omniauth :facebook, ENV['FB_PRODUCTION_APP_ID'], ENV['FB_PRODUCTION_APP_SECRET']

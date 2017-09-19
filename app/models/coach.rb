@@ -3,28 +3,13 @@ class Coach < ApplicationRecord
   has_many :coaches_crews, dependent: :destroy
   has_many :crews, through: :coaches_crews
   has_many :training, through: :coaches_crews
-  has_many :avatars, as: :attachable, dependent: :destroy
-  has_many :video_links, as: :watchable, dependent: :destroy
   has_many :specialties, as: :specializable, dependent: :destroy
-
-  accepts_nested_attributes_for :specialties, reject_if: :all_blank, allow_destroy: true
-
+  #DescriptibleModels is a module that contain all the inheritance of the models who has columns name, description and is attachable or watchable
+  #attachable is the polymorphic owner of the avatar model and watchable of video_links
+  include DescriptibleModels
   #nested forms
-  accepts_nested_attributes_for :avatars, reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :video_links, reject_if: :all_blank, allow_destroy: true
-
-  attr_accessor :photo_params, :vignette
-
-  def photo
-    #test on va changer eventuellement
-    self.avatars.first.photo
-  end
-
-  def video
-    #test on va changer eventuellement
-    self.video_links.get_default
-  end
-
+  accepts_nested_attributes_for :specialties, reject_if: :all_blank, allow_destroy: true
+  
   def name
     self.user.name
   end

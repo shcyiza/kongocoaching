@@ -2,11 +2,10 @@ class TrainingType < ApplicationRecord
   belongs_to :crew
   has_many :trainings, dependent: :destroy
   has_many :specialties, dependent: :destroy
-  #for the training picture attachments
+  #DescriptibleModels is a module that contain all the inheritance of the models who has columns name, description and is attachable or watchable
+  #attachable is the polymorphic owner of the avatar model and watchable of video_links
   include DescriptibleModels
-  #nested forms
-  accepts_nested_attributes_for :avatars, reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :video_links, reject_if: :all_blank, allow_destroy: true
+
 
   def duration
     result = "#{ self.duration_hours }hr #{ self.duration_minutes }min"
