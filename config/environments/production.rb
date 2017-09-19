@@ -89,7 +89,7 @@ Rails.application.configure do
   #Mailjetgem smtp settings
   config.action_mailer.delivery_method = :mailjet
   #trackage d'evenement dans les mails
-  config.middleware.use Mailjet::Rack::Endpoint, 'http://kagenda.net/mailjet/callback' do |params|  # using the same URL you just set in Mailjet's administration
+  config.middleware.use Mailjet::Rack::Endpoint, 'https://staffit-crm.herokuapp.com/mailjet/callback' do |params|  # using the same URL you just set in Mailjet's administration
     email = params['email'].presence || params['original_address'] # original_address is for typofix events
 
     if user = User.find_by_email(email)
@@ -100,9 +100,22 @@ Rails.application.configure do
   end
 
   Rails.application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
+  email: {
     email_prefix: "[PREFIX] ",
     sender_address: %{"notifier" <notifier@staf-fit.com>},
     exception_recipients: ENV["ADMIN-EMAIL"]
   }
+
+  #configuration for paperclip in production
+   config.paperclip_defaults = {
+    storage: :s3,
+    s3_region: 'us-west-2',
+    s3_credentials: {
+      bucket: ENV['S3_BUCKET_NAME'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    url: ':s3_domain_url',
+    path: '/:class/:attachment/:id_partition/:style/:filename',
+  } #configuration for paperclip in production end
 end
