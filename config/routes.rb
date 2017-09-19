@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   resources :news_subscribers
   resources :clubs
-  root to: 'application#home_page_router'
+  if Rails.env.production?
+    root to: 'visitors#index'
+  else
+    root to: 'kongo_coaching_pages#home'
+  end
+
   resources :kickstarts
   resources :profile_variables
   resources :profiles
@@ -12,7 +17,7 @@ Rails.application.routes.draw do
   resources :training_types
   resources :coaches
   resources :crews
-  get '/', to: 'application#home_page_router'
+
   get '/home', to: 'visitors#index'
   get 'crews/:id/kickstarts', to: 'crews#kickstarts'
   get 'crews/:id/planner', to: 'crews#planner'
