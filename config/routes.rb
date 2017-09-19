@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   resources :training_types
   resources :coaches
   resources :crews
-  get '/', to: 'visitors#index'
+  get '/', to: 'application#home_page_router'
+  get '/home', to: 'visitors#index'
   get 'crews/:id/kickstarts', to: 'crews#kickstarts'
   get 'crews/:id/planner', to: 'crews#planner'
   get 'crews/:id/coaches', to: 'crews#coaches'

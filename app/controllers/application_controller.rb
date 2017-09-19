@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     if Crew.find(1) && User.count > 0
       redirect_to "/1/home"
     else
-      redirect_to new_user_registration_path
+      redirect_to "/home"
     end
   end
 
