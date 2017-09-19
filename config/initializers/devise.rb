@@ -250,11 +250,14 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # facebook
   if Rails.env == 'development' || Rails.env == 'test'
-    config.omniauth :facebook, '503678566652179', ''
+    # facebook
+    config.omniauth :facebook, '503678566652179', '3b121d889cc92ad11e9e62eb336ee547'
+    config.omniauth :google_oauth2, '958522354694-6edhcgki3litbtkjejj7h0p11s62d4et.apps.googleusercontent.com', 'TEA9hlSW1BHqC68R0H5RcDmw', {}
   else
+    # facebook
     config.omniauth :facebook, ENV['FB_PRODUCTION_APP_ID'], ENV['FB_PRODUCTION_APP_SECRET']
+    config.omniauth :google_oauth2, ENV['GOOGLE_PRODUCTION_APP_SECRET'], ENV['GOOGLE_PRODUCTION_APP_ID'], {}
   end
 
   # ==> Warden configuration

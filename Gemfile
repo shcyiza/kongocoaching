@@ -19,6 +19,7 @@ gem "time_splitter"
 gem 'will_paginate'
 gem 'chosen-rails'
 gem 'cocoon'
+gem 'trix'
 gem 'truncate_html'
 gem 'geocoder'
 
@@ -39,7 +40,6 @@ gem 'devise-i18n'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
-gem 'omniauth-twitter'
 #end Oauth
 
 group :production do

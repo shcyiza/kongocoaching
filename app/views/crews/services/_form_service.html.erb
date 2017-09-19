@@ -7,7 +7,7 @@
     <div class="form-inputs">
      <div class="col-md-8">
       <%= f.input :name, label: "nom de l'entrainement/service" %>
-      <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
+      <%= f.trix_editor :description %>
       <div class="col-md-8">
         <div class="col-md-12">
           <b>combien temp dure cette entrainement/service?</b>
@@ -43,7 +43,7 @@
      </div>
      <div class="col-md-4">
         <h4><strong><i class="icon-star"></i>Photo Star</strong></h4>
-        <%= render './shared/nest_avatar_form', {f: f, attachable: @new_service }  %>
+        <%= render './shared/star_pic_form', {f: f, attachable: @new_service }  %>
       </div>
       <hr>
       <%= render './shared/multimedia_form', f: f  %>

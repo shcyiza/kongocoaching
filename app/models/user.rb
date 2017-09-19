@@ -15,8 +15,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
-   #for the profile picture attachments
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+   #validation for omniauth
+  validates_presence_of :uid, :provider
+  validates_uniqueness_of :uid, :scope => :provider
 
   #Method for the OmniAuth facebook strategy
   #check https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview

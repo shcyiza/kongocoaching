@@ -5,7 +5,8 @@
     <div class="col-md-7">
       <div class="form-inputs">
         <%= f.input :name, label:"Son nom" %>
-        <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
+        <label>description</label>
+        <%= f.trix_editor :description %>
         <%= f.label :training_type_ids, "CV (Quelles services/entrainements donne-t-il?)" %>
         <%= f.collection_select :training_type_ids, TrainingType.order(:name), :id, :name, {}, {multiple: true, class: "chosen-select"} %>
       </div>
@@ -14,7 +15,7 @@
       <h4>
         <strong><i class="icon-star"></i>Photo Star</strong>
       </h4>
-      <%= render './shared/nest_avatar_form', {f: f, attachable: @new_coaches_crew }  %>
+      <%= render './shared/star_pic_form', {f: f, attachable: @new_coaches_crew }  %>
     </div>
   </div>
   <hr>

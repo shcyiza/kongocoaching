@@ -17,14 +17,14 @@
 <div class="container margin_60">
   <div class="row">
   <aside class="col-md-3" id="sidebar">
-	  <div class="theiaStickySidebar">
+	  <div class="theiaStickySidebar" style="text-align: center; vertical-align: middle; line-height: 100%;">
 			<div class="profile">
-				<p class="text-center">
-						<%= show_his_pic_or_default @coach, "img-circle styled_2" %>
-				</p>
+				<div class="wrapper-squared">
+					<%= show_his_pic_or_default @coach, "picture_frame img-circle styled_2" %>
+				</div>
 				<ul>
 					<li>
-						<b><h2 class="text-center" style="color: green;"><%= @coach.get_name %></h2></b>
+						<h2 class="" style="color: green;"><%= @coach.get_name %></h2>
 					</li>
 				</ul>
 			</div><!-- End box-sidebar -->
@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="wrapper_indent">
-			<p><%= @coach.description %></p>
+			<p><%= @coach.html_description %></p>
 	  </div><!--wrapper_indent -->
 
 		<div class="row">
@@ -51,11 +51,20 @@
 					<h3>Ses Service et Entrainement</h3>
 				</div>
 				<% @coach.training_types.each do |srvc| %>
-					<div class="col-xs-6">
-						<%= link_to "/1/services/#{srvc.id}", class: "coach_frame", style: "padding-bottom:3rem; margin-bottom: 1rem;" do %>
-							<%= image_tag srvc.photo.url(:medium), class: "styled_2 thumb_frame pull-left" %>
-							<br>
-							<%= srvc.name %>
+					<div class="col-md-6">
+						<%= link_to "/1/services/#{srvc.id}", class: "coach_frame" do %>
+							<div class="row">
+								<div class="col-xs-9">
+									<div class="wrapper-squared">
+										<div class="picture_frame">
+											<%= image_tag srvc.photo.url(:medium), class: "styled_2 pull-left" %>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<%= srvc.name %>
+								</div>
+							</div>
 						<% end %>
 					</div>
 				<% end %>
@@ -71,40 +80,46 @@
 	<br>
 
 </div>
-<div class="wrapper_indent">
-	<div class="row">
-		<% if has_videos_of(@coach) %>
-			<div class="col-md-6 multimedia">
-				<h3 >Videos de <%= @coach.name %></h3>
-				<% @coach.video_links.each do |video| %>
-					<div class="col-md-4 container">
-						<div class="vids_index">
-							<a class="vids popup-youtube" href="<%= video.video_path %>" data-turbolinks="false">
-								<span><font style="background-color: white; font-size: 35px;"><i class="icon-youtube"></i> <i class="icon-play"></i></font></span>
-								<%= image_tag video.yt_thumbnail %>
-							</a>
-							<hr>
-						</div>
-					</div>
-				<% end %>
-			</div>
-		<% end %>
 
-		<div class="col-md-6 multimedia">
-			<div class="magnific-gallery">
-			<h3 >Photos de <%= @coach.name %></h3>
-			<br>
-				<% @coach.avatars.each do |pic| %>
-					<div class="col-md-4">
-						<a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
-							<%= image_tag pic.photo.url, class: "picture_frame" %>
-						</a>
-					</div>
-				<% end %>
-			</div>
-		</div>
-	</div>
-</div><!--End container -->
+<div class="workoutlist">
+  <div class="row">
+    <% if has_videos_of(@coach) %>
+      <div class="col-md-6 multimedia">
+        <h3 >Videos de <%= @coach.name %></h3>
+        <% @coach.video_links.each do |video| %>
+          <div class="col-md-4 container">
+            <div class="vids_index">
+              <a class="vids popup-youtube" href="<%= video.video_path %>" data-turbolinks="false">
+                <span><font style="background-color: white; font-size: 35px;"><i class="icon-youtube"></i> <i class="icon-play"></i></font></span>
+                <%= image_tag video.yt_thumbnail %>
+              </a>
+              <hr>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="col-md-6 multimedia">
+      <div class="magnific-gallery">
+      <h3 >Photos de <%= @coach.name %></h3>
+      <br>
+        <% @coach.avatars.each do |pic| %>
+          <div class="col-md-4">
+            <div class="wrapper16_9">
+              <div class="picture_frame">
+                <a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
+                  <%= image_tag pic.photo.url %>
+                </a>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 

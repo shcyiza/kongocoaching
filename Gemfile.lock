@@ -221,7 +221,6 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oauth (0.5.3)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
       jwt (~> 1.0)
@@ -238,15 +237,9 @@ GEM
       multi_json (~> 1.3)
       omniauth (>= 1.1.1)
       omniauth-oauth2 (>= 1.3.1)
-    omniauth-oauth (1.1.0)
-      oauth
-      omniauth (~> 1.0)
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    omniauth-twitter (1.4.0)
-      omniauth-oauth (~> 1.1)
-      rack
     orm_adapter (0.5.0)
     pg (0.21.0)
     premailer (1.10.4)
@@ -379,6 +372,8 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     time_splitter (1.1.0)
+    trix (0.11.0)
+      rails (> 4.1, < 5.2)
     truncate_html (0.9.3)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
@@ -442,7 +437,6 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   omniauth-google-oauth2
-  omniauth-twitter
   paperclip!
   pg
   premailer-rails
@@ -464,6 +458,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   therubyracer
   time_splitter
+  trix
   truncate_html
   turbolinks (~> 5)
   tzinfo-data

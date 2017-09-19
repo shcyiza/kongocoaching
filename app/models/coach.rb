@@ -24,7 +24,7 @@ class Coach < ApplicationRecord
     #test on va changer eventuellement
     self.video_links.get_default
   end
-  
+
   def name
     self.user.name
   end

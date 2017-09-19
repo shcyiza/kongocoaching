@@ -6,7 +6,7 @@
     <div class="form-inputs">
      <div class="col-md-8">
       <%= f.input :name, label: "nom de l'entrainement/service" %>
-      <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
+      <%= f.trix_editor :description %>
      </div>
      <div class="col-md-4">
       <div class="col-md-12">

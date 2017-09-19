@@ -3,14 +3,14 @@
 
   <h4 class="main_title  hero__title" style="color:green; width:100%;"> Nos services: </h4>
 	<h2 class="main_title  hero__title" style="color:green; width:100%;">
-    <strong><%= @service.name %></strong>
+    <strong><%= @service.get_name %></strong>
   </h2>
 
 </section>
 <div class="breadcrums">
   <%= link_to "Acceille", "/1/home", data: { turbolinks: false } %> >>
   <%= link_to "Nos Service", "/1/services" %> >>
-  <u><%= link_to @service.name, "", disabled: true %></u>
+  <u><%= link_to @service.get_name, "", disabled: true %></u>
 </div>
 <div class="container margin_60">
   <div class="row">
@@ -26,7 +26,7 @@
       <% end %>
 
       <ul id="course_info">
-        <li><%= @service.name %></li>
+        <li><%= @service.get_name %></li>
         <li><i class="icon-clock"></i> <%= @service.duration %> </li>
         <li><i class="icon-users-3"></i></li>
       </ul>
@@ -44,7 +44,7 @@
         <br>
 				<h3>A propos de ce Service</h3>
 			</div>
-      <p><%= @service.description %></p>
+      <p><%= @service.html_description %></p>
 
       <% if @service.its_coaches.length > 0 %>
       <hr>
@@ -56,10 +56,17 @@
 
           <% @service.its_coaches.each do |coach| %>
             <div style="width:100%">
-              <%= link_to "/1/coaches/#{coach.id}", class: "coach_frame", style: "padding-bottom:3rem; margin-bottom: 1rem;" do %>
-                <%= show_his_pic_or_default coach, "img-circle styled_2 thumb_frame pull-left" %>
-                <br>
-                <%= coach.get_name %>
+              <%= link_to "/1/coaches/#{coach.id}", class: "coach_frame" do %>
+              <div class="row">
+                <div class="col-md-4 col-xs-6">
+                  <div class="wrapper-squared">
+                    <%= show_his_pic_or_default coach, "picture_frame img-circle styled_2 pull-left" %>
+                  </div>
+                </div>
+                <div class="col-md-8 col-xs-6" style="width: 50%; margin: 0 auto;">
+                  <%= coach.get_name %>
+                </div>
+              </div>
               <% end %>
             </div>
           <% end %>
@@ -81,7 +88,7 @@
   <div class="row">
     <% if has_videos_of(@service) %>
       <div class="col-md-6 multimedia">
-        <h3 >Videos de <%= @service.name %></h3>
+        <h3 >Videos de <%= @service.get_name %></h3>
         <% @service.video_links.each do |video| %>
           <div class="col-md-4 container">
             <div class="vids_index">
@@ -98,13 +105,17 @@
 
     <div class="col-md-6 multimedia">
       <div class="magnific-gallery">
-      <h3 >Photos de <%= @service.name %></h3>
+      <h3 >Photos de <%= @service.get_name %></h3>
       <br>
         <% @service.avatars.each do |pic| %>
           <div class="col-md-4">
-            <a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
-              <%= image_tag pic.photo.url, class: "picture_frame" %>
-            </a>
+            <div class="wrapper16_9">
+              <div class="picture_frame">
+                <a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
+                  <%= image_tag pic.photo.url %>
+                </a>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>

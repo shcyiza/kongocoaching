@@ -1,0 +1,15 @@
+<div id="upload_btn">
+  <div class="image-upload">
+    <label for="imgInp<%= attachable.class.name %><%= attachable.id %>">
+     <span class="btn btn_green_outline" id="upload_btn">
+       <i class="icon-picture"></i><br>
+       <i class="icon-plus"></i>
+       <img class="<%= hide_if_empty_src attachable %> previeuw img-rounded" id="previeuw" src="<%= show_editable_src attachable %>" alt="your image" height="150"/>
+     </span>
+    </label>
+    <%= f.file_field :star_pic, id:"imgInp#{attachable.class.name}#{attachable.id}", data:{for:'img-upld'}%>
+    <hr class="invisible">
+    <label for="vignette", style="color:black;">Descritpion de la photo</label>
+    <%= f.input :vignette, label: false,html_options:{style: "padding: none;"}, id:"vignette" %>
+  </div>
+</div>

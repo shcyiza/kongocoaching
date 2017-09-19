@@ -5,7 +5,8 @@
     <div class="col-md-7">
       <div class="form-inputs">
         <%= f.input :name, label:"Son nom" %>
-        <%= f.input :description, input_html: {style: "min-height: 125px;"} %>
+        <label>description</label>
+        <%= f.trix_editor :description %>
       </div>
     </div>
     <div class="col-md-5">

@@ -76,7 +76,7 @@ class CrewsController < ApplicationController
     @new_coaches_crew = @crew.coaches_crews.build(coaches_crew_params)
     if @new_coaches_crew.save
       #create the default avatars
-      add_avatar @new_coaches_crew, coaches_crew_params[:photo], coaches_crew_params[:vignette], true
+      add_avatar @new_coaches_crew, coaches_crew_params[:star_pic], coaches_crew_params[:vignette], true
     end
     respond_to do |format|
       if @new_coaches_crew.id != nil
@@ -117,7 +117,7 @@ class CrewsController < ApplicationController
     @new_service = @crew.training_types.build(training_type_params)
     if @new_service.save
       #create the default avatars
-      add_avatar @new_service, training_type_params[:photo], training_type_params[:vignette], true
+      add_avatar @new_service, training_type_params[:star_pic], training_type_params[:vignette], true
     end
     respond_to do |format|
       if @new_service.id != nil
@@ -204,7 +204,7 @@ class CrewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def training_type_params
-      params.require(:training_type).permit(:name, :description, :duration_hours, :duration_minutes, :photo, :vignette,
+      params.require(:training_type).permit(:name, :description, :duration_hours, :duration_minutes, :star_pic, :vignette,
                                             avatars_attributes: [:photo, :vignette],
                                             video_links_attributes: [:video_path]
                                             )
@@ -212,7 +212,7 @@ class CrewsController < ApplicationController
 
 
     def coaches_crew_params
-      params.require(:coaches_crew).permit(:name, :description, :photo, :vignette,
+      params.require(:coaches_crew).permit(:name, :description, :star_pic, :vignette,
                     training_type_ids: [],
                     avatars_attributes: [:photo, :vignette],
                     video_links_attributes: [:video_path]

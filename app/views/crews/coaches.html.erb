@@ -6,45 +6,12 @@
     </h2>
   </div>
 </section>
+<hr class="invisible">
+<a href="#0" data-toggle="modal" data-target="#addcoach" class="btn_1 white"><i class="icon-plus"></i>Ajouter un coach</a>
 <div class="row admin_content">
   <% @coaches.each do |coach| %>
     <%= render 'crews/coaches/coach_instance', coach: coach %>
   <% end %>
-
-  <div class="col-lg-4">
-    <div class="coach hovercard">
-      <div class="coach-background">
-          <%= image_tag "http://www.iconsdb.com/icons/preview/orange/add-user-xxl.png", class: "coach-bkimg" %>
-      </div>
-      <div class="useravatar">
-
-          <%= image_tag "http://www.iconsdb.com/icons/preview/orange/add-user-xxl.png" %>
-
-      </div>
-      <div class="coach-info">
-        <span class="coach-title">
-          <font color="#ed5434"><b>rajouter un coach</b></font>
-        </span>
-      </div>
-    </div>
-
-    <div class=" btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-      <div class="btn-group" role="group">
-        <button type="button" id="stars" class="btn btn-primary" href="#addcoach" data-toggle="modal">
-          <span >
-            <i class="icon-user"></i><i class="icon-plus"></i>
-            <div class="hidden-xs">Cliquez-ici</div>
-          </span>
-        </button>
-      </div>
-    </div>
-
-    <div class="tab-content">
-      <div class="tab-pane fade in active" id="tab1">
-        <a href="#0" data-toggle="modal" data-target="#addcoach" class="btn_outline"><i class="icon-user"></i><i class="icon-plus"></i></a>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="modal fade bs-example-modal-lg" id="addcoach" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
@@ -54,6 +21,7 @@
     </div>
   </div>
 </div>
+<%= javascript_include_tag 'resources/scaffold', 'data-turbolinks-track' => 'reload' %>
 <script type="text/javascript">
   $('input[data-for="img-upld"]').each( function(index) {
     $(this).change( function() {

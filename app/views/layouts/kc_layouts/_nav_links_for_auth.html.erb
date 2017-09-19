@@ -2,7 +2,7 @@
   <li><%= link_to 'se déconnecter', destroy_user_session_path, :method=>'delete', class:"hidden-xs navlinks" %></li>
   <li><%= link_to 'Edit account', edit_user_registration_path, class:"hidden-xs navlinks" %></li>
   <% if current_user.coordinator? %>
-    <li><%= link_to "Admin", crew_path(current_user.his_crew_as_coord), class:"hidden-xs navlinks" %></li>
+    <li><%= link_to "Admin", crew_path(current_user.his_crew_as_coord), class:"hidden-xs navlinks", data: { no_turbolink: true } %></li>
   <% end %>
 <% else %>
   <li><%= link_to "se connecter", "/1/login", class:"hidden-xs navlinks" %></li>

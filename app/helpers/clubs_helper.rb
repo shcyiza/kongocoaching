@@ -6,7 +6,8 @@ module ClubsHelper
       zoom: 17,
       size: "300x300",
       markers: [club.latitude, club.longitude].join(","),
-      sensor: true
+      sensor: true,
+      key: "AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"
       }.merge(options)
 
     query_string_img =  params.map{|k,v| "#{k}=#{v}"}.join("&")
@@ -22,7 +23,8 @@ module ClubsHelper
       zoom: 17,
       size: "300x300",
       markers: [club.latitude, club.longitude].join(","),
-      sensor: true
+      sensor: true,
+      key: "AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"
       }.merge(options)
 
     query_string_img =  params.map{|k,v| "#{k}=#{v}"}.join("&")

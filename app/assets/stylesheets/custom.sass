@@ -156,9 +156,9 @@ div.multimedia
     background-color: #f4f4f4
 
 .picture_frame
-  height: 10vw
-  width: 20vw
-  margin-bottom: 20px
+  position: absolute
+  width: 100%
+  height: 100%
 
 .thumb_frame
   height: 4vw
@@ -173,7 +173,7 @@ div.multimedia
 
 input.form-control#email_newsletter
   width: 100%
-  
+
 a.coach_frame
   border: 2px solid white
   font-family: inherit
@@ -404,6 +404,15 @@ button.btn.btn-primary
     display: block
     content: ''
 
+.wrapper-squared
+  width: 50%
+  display: inline-block
+  position: relative
+  &:after
+    padding-bottom: 100%
+    display: block
+    content: ''
+
 div.video_ratio
   position: absolute
   top: 0
@@ -427,7 +436,7 @@ a.trash
 .admin_content
   padding: 20px
 
-.vids_index img
+.vids_index
   width: 100%
   height: auto
 

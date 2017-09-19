@@ -10,7 +10,7 @@ class Avatar < ApplicationRecord
     #done this way so it can be called from any polymorphic owner
     def has_default
       result = false
-      if self.current_defaults
+      if self.current_defaults.count > 0
         result = true
       end
       return result

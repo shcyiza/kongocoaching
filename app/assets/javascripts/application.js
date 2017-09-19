@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require trix
 //= require cocoon
 //= require chosen-jquery
 //= require_tree ./app_default
