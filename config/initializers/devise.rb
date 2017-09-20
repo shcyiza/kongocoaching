@@ -257,7 +257,7 @@ Devise.setup do |config|
   else
     # facebook
     config.omniauth :facebook, ENV['FB_PRODUCTION_APP_ID'], ENV['FB_PRODUCTION_APP_SECRET']
-    config.omniauth :google_oauth2, ENV['GOOGLE_PRODUCTION_APP_SECRET'], ENV['GOOGLE_PRODUCTION_APP_ID'], {}
+    config.omniauth :google_oauth2, ENV['GOOGLE_PRODUCTION_APP_ID'], ENV['GOOGLE_PRODUCTION_APP_SECRET'], {}
   end
 
   # ==> Warden configuration
