@@ -26,6 +26,7 @@ module Kongocoaching
     config.i18n.default_locale = :fr
     config.time_zone = "Brussels"
 
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.assets.enabled = true
 
     #Needs to be false on Heroku
