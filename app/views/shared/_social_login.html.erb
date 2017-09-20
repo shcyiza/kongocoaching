@@ -1,0 +1,8 @@
+<h3 class="text-center">Vous connectez par:</h3>
+<%= link_to user_facebook_omniauth_authorize_path, class: "btn_1 social facebook" do %>
+  <i class="icon-facebook"></i> <span class="pull-right">facebook</span>
+<% end %>
+<br>
+<%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn_1 social google" do %>
+  <i class="icon-google"></i> <span class="pull-right">Google</span>
+<% end %>

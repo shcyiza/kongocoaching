@@ -1,3 +1,4 @@
+<%= render "shared/social_login" %>
 <div class="modal-dialog">
     <div class="modal-content modal-popup">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form', class: "popup-form", id:"myRegister"}) do |f| %>
@@ -23,7 +24,5 @@
 
          <%= f.submit 'Sign up', :class => 'btn btn-submit' %>
       <% end %>
-      <%= link_to "Sign up with Facebook", user_facebook_omniauth_authorize_path %>
-      <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
   </div>
 </div>
