@@ -3,7 +3,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-3 col-xs-6">
-					<%= link_to root_path, id:'logo' do %>
+					<%= link_to root_path, id:'logo', data: { turbolinks: false } do %>
 							<%= image_tag "logo_small.png", class:"logo_normal picture_frame" %>
 	            <%= image_tag "logo_small_dark.png", class:"logo_sticky picture_frame" %>
 					<% end %>

@@ -16,6 +16,7 @@
 //= require cocoon
 //= require chosen-jquery
 //= require_tree ./app_default
+//= require datepicker
 //= require turbolinks
 
 
