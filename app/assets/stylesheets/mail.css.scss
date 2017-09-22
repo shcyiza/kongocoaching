@@ -1,0 +1,56 @@
+
+/*General links color*/
+a {
+	color:  #f49671;
+	text-decoration: none;
+	-webkit-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+	outline: none;
+}
+
+a:hover,
+a:focus {
+	color: #333;
+	text-decoration: none;
+	outline: none;
+}
+
+.mail_brand{
+  background: #ffcd93;
+  padding: 1rem;
+  align-content: center;
+  border-bottom: 2px solid #ed5434
+}
+
+img.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+  }
+
+.mail_body{
+  background: white;
+  padding: 2rem;
+  border-left: 2px solid #ed5434;
+  border-right: 2px solid #ed5434;
+}
+
+.mail_footer{
+  padding: 2rem;
+  background: #ed5434;
+  color: white;
+}
+
+.mail_footer i{
+  color: white;
+}
+
+.mail_brand a.btn{
+  border-radius: 25px;
+  background-color: white;
+  padding: 10px;
+}
+
+.mail_footer a{
+  color: #ffcd93;
+}

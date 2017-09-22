@@ -1,0 +1,12 @@
+module EmailHelper
+  def email_image_tag(image, **options)
+    attachments[image] = File.read(Rails.root.join("app/assets/images/#{image}"))
+    image_tag attachments[image].url, **options
+  end
+
+  def email_get_image image
+    attachments[image] = File.read(Rails.root.join("app/assets/images/#{image}"))
+    url = "attachments/" + image
+    return url
+  end
+end

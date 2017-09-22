@@ -1,2 +1,3 @@
+<h1>Nouvelles demande de RDV Kickstart!</h1>
 motivé par quoi?
 <%= @client.profile.motivation %>

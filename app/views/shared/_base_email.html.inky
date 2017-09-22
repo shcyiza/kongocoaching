@@ -1,0 +1,33 @@
+<container>
+  <row>
+    <columns class="large-centered mail_brand" style="background-image: url(<%= email_get_image('mailbg1.jpg') %>);">
+        <%= email_image_tag 'staffit_white.png', class:'centered', size:"80x80" %>
+        <hr style="border-color:rgba(72, 143, 177, 0);">
+        <hr style="border-color:rgba(72, 143, 177, 0);">
+        <hr style="border-color:rgba(72, 143, 177, 0);">
+        <center><a class="btn"href="https://www.staf-fit.com" target="_blank;">staf-fit.com</a></center>
+    </columns>
+  </row>
+  <row>
+    <columns large="5" class="large-centered mail_body">
+      <%= yield %>
+    </columns>
+  </row>
+  <row>
+    <columns large="5" class="large-centered mail_footer">
+    <i>
+      Cordialement,<br>
+      l'équipe <b>StafFit</b>.<br>
+    </i>
+
+    <br><br>
+      <row>
+        <columns small="6">
+          <a href="https://www.facebook.com/AfroConsommActeurs/?fref=ts" target="_blank;">Facebook</a>
+        </columns>
+        <columns small="6">
+          <a href="https://twitter.com/OacaAsbl" target="_blank">Twitter</a>
+        </columns>
+    </columns>
+  </row>
+</container>

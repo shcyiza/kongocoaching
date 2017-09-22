@@ -35,4 +35,8 @@ class Crew < ApplicationRecord
   def confirmed_kickstars
     Kickstart.all_confirmed.select { |k| k.crew_id == self.id }.sort_by{|k| k[:start_time]}
   end
+  
+  def clients
+    self.profiles.map { |pr| pr.user }
+  end
 end

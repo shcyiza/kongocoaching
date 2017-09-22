@@ -5,6 +5,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Kongocoaching" %></title>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kongocoaching" %>">
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/green.css', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'leopard.png' %>
