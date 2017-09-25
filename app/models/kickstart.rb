@@ -15,11 +15,11 @@ class Kickstart < ApplicationRecord
   end
 
   def self.all_confirmed
-    Confirmation.where(confirmed: true, confirmable_type: "Kickstart").map{|k| k.confirmable}
+    Kickstart.joins(:confirmation).where("confirmed = ?", true)
   end
 
   def self.all_unconfirmed
-    Confirmation.where(confirmed: false, confirmable_type: "Kickstart").map{|k| k.confirmable}
+    Kickstart.joins(:confirmation).where("confirmed = ?", false)
   end
 
   def is_confirmable?

@@ -58,9 +58,9 @@ class CrewsController < ApplicationController
     @club = @crew.clubs.build(club_params)
     respond_to do |format|
       if @club.save
+        ClubsCrew.create! crew: @crew, club: @club
         format.html { redirect_to "/crews/#{@crew.id}/clubs" , notice: 'Club was successfully created.' }
         format.json { render :club_show, status: :created, location: @club }
-        ClubsCrew.create! crew: @crew, club: @club
       else
         format.html { redirect_back fallback_location: root_path, alert: 'Erreur, réessayé.' }
         format.json { render json: @club.errors, status: :unprocessable_entity }

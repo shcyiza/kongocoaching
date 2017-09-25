@@ -29,14 +29,14 @@ class Crew < ApplicationRecord
   end
 
   def unconfirmed_kickstars
-    Kickstart.all_unconfirmed.select { |k| k.crew_id == self.id }.sort_by{|k| k[:start_time]}
+    Kickstart.all_unconfirmed.where(crew_id: self.id ).order(:start_time)
   end
 
   def confirmed_kickstars
-    Kickstart.all_confirmed.select { |k| k.crew_id == self.id }.sort_by{|k| k[:start_time]}
+    Kickstart.all_confirmed.where(crew_id: self.id ).order(:start_time)
   end
-  
+
   def clients
-    self.profiles.map { |pr| pr.user }
+    User.joins(:profiles).where("crew_id = ?", self.id)
   end
 end

@@ -81,7 +81,7 @@ class KickstartsController < ApplicationController
       if @kickstart.update(kickstart_params)
         confirm_this @kickstart
         if @kickstart.is_confirmed?
-          format.html { redirect_back fallback_location: root_path, notice: 'RDV le Kickstart a bien été confirmer.' }
+          format.html { redirect_back fallback_location: root_path, notice: 'RDV pour le Kickstart a bien été confirmé.' }
           format.json { render :show, status: :ok, location: @kickstart }
         else
           # redirect to and error page

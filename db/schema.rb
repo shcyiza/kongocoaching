@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918115340) do
+ActiveRecord::Schema.define(version: 20170922171333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,9 @@ ActiveRecord::Schema.define(version: 20170918115340) do
   create_table "clubs_crews", force: :cascade do |t|
     t.integer  "club_id"
     t.integer  "crew_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "is_hq",      default: false
     t.index ["club_id"], name: "index_clubs_crews_on_club_id", using: :btree
     t.index ["crew_id"], name: "index_clubs_crews_on_crew_id", using: :btree
   end
@@ -130,6 +131,9 @@ ActiveRecord::Schema.define(version: 20170918115340) do
     t.integer  "crew_id"
     t.string   "phonenr"
     t.text     "motivation"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
     t.index ["coaches_crew_id"], name: "index_profiles_on_coaches_crew_id", using: :btree
     t.index ["crew_id"], name: "index_profiles_on_crew_id", using: :btree
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree

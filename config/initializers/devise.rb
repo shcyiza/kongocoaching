@@ -252,8 +252,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   if Rails.env == 'development' || Rails.env == 'test'
     # facebook
-    config.omniauth :facebook, '503678566652179', ''
-    config.omniauth :google_oauth2, '958522354694-6edhcgki3litbtkjejj7h0p11s62d4et.apps.googleusercontent.com', '', {}
+    config.omniauth :facebook, '503678566652179', Rails.application.secrets[:facebook_dev_secret]
+    config.omniauth :google_oauth2, '958522354694-6edhcgki3litbtkjejj7h0p11s62d4et.apps.googleusercontent.com', Rails.application.secrets[:google_dev_secret], {}
   else
     # facebook
     config.omniauth :facebook, ENV['FB_PRODUCTION_APP_ID'], ENV['FB_PRODUCTION_APP_SECRET']
@@ -265,7 +265,7 @@ Devise.setup do |config|
   # change the failure app, you can configure them inside the config.warden block.
   #
   # config.warden do |manager|
-  #   manager.intercept_401 = false
+  #   manager.intercept_401 = falsed
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
 

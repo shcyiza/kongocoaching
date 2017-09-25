@@ -18,7 +18,7 @@ class TrainingType < ApplicationRecord
   end
 
   def its_coaches
-    self.specialties.map { |s| s.specializable }
+    CoachesCrew.joins(:specialties).where("training_type_id = ?", self.id)
   end
 
 end
