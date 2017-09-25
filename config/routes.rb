@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :crews
 
   get '/home', to: 'visitors#index'
+  get '/edit_profile' , to: 'users#edit_profile'
+  post '/update_profile', to: 'users#update_profile'
   get 'crews/:id/kickstarts', to: 'crews#kickstarts'
   get 'crews/:id/planner', to: 'crews#planner'
   get 'crews/:id/coaches', to: 'crews#coaches'

@@ -1,0 +1,75 @@
+<div class="container">
+  <%= form_for(@user, url: "/update_profile", method: 'post', html: { role: 'form'}) do |f| %>
+  <%= devise_error_messages! %>
+
+    <div class="form-group">
+      <label>Nom:</label>
+      <%= f.text_field :name, :autofocus => true, class: 'form-control', placeholder: "Nom" %>
+    </div>
+    <%= fields_for :profile do |profile_f| %>
+      <div class="form-inputs row">
+        <div class="col-md-6 verticalLine">
+          <label>Date de naissance:</label>
+          <% if @profile.birth_date %>
+            <%= profile_f.text_field :birth_date, value:  l(@profile.birth_date), class: 'form-control', data: {toggle: 'datepicker'} %>
+          <% else %>
+            <%= profile_f.text_field :birth_date, placeholder: "jj/mm/aaaa", class: 'form-control', data: {toggle: 'datepicker'} %>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <label>Sex:</label>
+          <div class="col-xs-6">
+            Femme
+            <%= profile_f.radio_button :sex, true %>
+          </div>
+          <div class="col-xs-6">
+            Homme
+            <%= profile_f.radio_button :sex, false %>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <label>Téléphone:</label>
+        <%= profile_f.text_field :phonenr, class: 'form-control', placeholder: "Téléphone" %>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= button_tag class: 'btn_full', type: :submit do %>
+         Enregister!
+        <% end %>
+      </div>
+    </div>
+  <% end %><!--end form-->
+</div>
+<script type="text/javascript">
+  function activeTab( elOutId, elInId ) { disActivateClass( elOutId );
+    activateClass( elInId );
+  };
+
+  function animateTrigger( elOutId, elInId, animation, fn ) {
+    if (arguments[3]) {
+      fn( elInId+"tab", elOutId+"tab"  );
+    };
+    animate( elOutId, animation );
+  };
+
+  date_input = $('[data-toggle="datepicker"]');
+  date_input.datepicker({
+    format: 'dd/mm/yyyy',
+    autoHide: true,
+    weekStart: 1,
+    daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+    language: "fr-FR",
+    startView: 2,
+  });
+
+  $(document).ready(function(){
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
