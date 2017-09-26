@@ -24,10 +24,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_success_actions
     sign_in @user, event: :authentication
-    respond_to do |format|
-      format.html { redirect_to after_sign_in_path_for @user }
-      format.js
-    end
+    origin = URI(request.referer || '').path
+    @return_to = origin || root_path
+    render "users/_callbacks", :layout => false
   end
 
   def failure

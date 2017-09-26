@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :kickstarts
   resources :profile_variables
   resources :profiles
-  devise_for :users, controllers: { registrations: "kongo_coaching_pages/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { registrations: "kongo_coaching_pages/registrations", omniauth_callbacks: "users/omniauth_callbacks" }, via: [:get, :post]
   resources :users
   resources :participants
   resources :trainings
