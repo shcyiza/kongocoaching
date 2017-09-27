@@ -1,9 +1,22 @@
-<script type="text/javascript">
-  if (window.opener) {
-    window.opener.location = '<%= @return_to %>';
-  }
-  else {
-    window.location = '<%= @return_to %>';
-  }
-  window.close();
-</script>
+<% if current_user.profile == nil %>
+  <script type="text/javascript">
+    var redirect_path = '<%= @return_to %>'+'/create_profile'+'<%= @params_string %>';
+    if (window.opener) {
+      window.opener.location = redirect_path;
+    }
+    else {
+      window.location = redirect_path;
+    }
+    window.close();
+  </script>
+<% elsif current_user.sign_in_count >= 1 %>
+  <script type="text/javascript">
+    if (window.opener) {
+      window.opener.location = '<%= root_path %>';
+    }
+    else {
+      window.location = '<%= root_path %>';
+    }
+    window.close();
+  </script>
+<% end %>

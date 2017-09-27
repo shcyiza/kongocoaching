@@ -13,25 +13,29 @@
           <% if @profile.birth_date %>
             <%= profile_f.text_field :birth_date, value:  l(@profile.birth_date), class: 'form-control', data: {toggle: 'datepicker'} %>
           <% else %>
-            <%= profile_f.text_field :birth_date, placeholder: "jj/mm/aaaa", class: 'form-control', data: {toggle: 'datepicker'} %>
+            <%= profile_f.text_field :birth_date, placeholder: "<i class='icon-calendar'></i>".html_safe, class: 'form-control', data: {toggle: 'datepicker'} %>
           <% end %>
         </div>
         <div class="col-md-6">
           <label>Sex:</label>
           <div class="col-xs-6">
             Femme
-            <%= profile_f.radio_button :sex, true %>
+              <%= profile_f.radio_button :sex, true %>
           </div>
           <div class="col-xs-6">
             Homme
-            <%= profile_f.radio_button :sex, false %>
+              <%= profile_f.radio_button :sex, false %>
           </div>
         </div>
       </div>
       <br>
-      <div class="form-group">
+      <div class="form-group col-md-6 col-sm-12">
         <label>Téléphone:</label>
         <%= profile_f.text_field :phonenr, class: 'form-control', placeholder: "Téléphone" %>
+      </div>
+      <div class="form-group col-md-6 col-sm-12">
+        <label>Adresse:</label>
+        <%= profile_f.text_field :address, class: 'form-control', placeholder: "addresse" %>
       </div>
     <% end %>
     <div class="row">
@@ -44,17 +48,6 @@
   <% end %><!--end form-->
 </div>
 <script type="text/javascript">
-  function activeTab( elOutId, elInId ) { disActivateClass( elOutId );
-    activateClass( elInId );
-  };
-
-  function animateTrigger( elOutId, elInId, animation, fn ) {
-    if (arguments[3]) {
-      fn( elInId+"tab", elOutId+"tab"  );
-    };
-    animate( elOutId, animation );
-  };
-
   date_input = $('[data-toggle="datepicker"]');
   date_input.datepicker({
     format: 'dd/mm/yyyy',

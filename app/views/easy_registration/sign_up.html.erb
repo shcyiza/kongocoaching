@@ -30,63 +30,7 @@
     			</div>
           <div class="step">
 
-            <div class="form-group">
-              <label>Nom:</label>
-              <%= f.text_field :name, :autofocus => true, class: 'form-control', placeholder: "Nom" %>
-            </div>
-            <%= fields_for :profile do |profile_f| %>
-              <div class="form-inputs row">
-                <%= profile_f.hidden_field :crew_id, value: @crew.id, readonly: true %>
-                <div class="col-md-6 verticalLine">
-                  <label>Date de naissance:</label>
-                  <%= profile_f.text_field :birth_date, class: 'form-control', data: {toggle: 'datepicker'} %>
-                </div>
-                <div class="col-md-6">
-                  <label>Sex:</label>
-                  <div class="col-xs-6">
-                    Femme
-                    <%= profile_f.radio_button :sex, true  %>
-                  </div>
-                  <div class="col-xs-6">
-                    Homme
-                    <%= profile_f.radio_button :sex, false %>
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="form-group">
-                <label>Téléphone:</label>
-                <%= profile_f.text_field :phonenr, class: 'form-control', placeholder: "Téléphone" %>
-              </div>
-            <% end %>
-
-          </div>
-          <a href="#step2" class="btn_full" data-toggle="tab" aria-expanded="true" onclick="animateTrigger( 'step2', 'step1', 'fadeInRight', activeTab );" onclick="animateTrigger('step1tab', 'step2tab');">
-            Etape 2 <span data-icon="9"></span>
-          </a>
-          <!--fin 1er etape-->
-    		</div>
-    		<div class="tab-pane" id="step2">
-          <div class="form_title">
-    				<h3><strong>2</strong>Etape 2</h3>
-    				<p>
-    					Securisé votre compte.
-    				</p>
-    			</div>
-          <div class="step">
-
-            <div class="form-group">
-              <label>femme:</label>
-              <%= f.email_field :email, class: 'form-control', placeholder: "exemple@kongo.com", id: "femme_booking" %>
-            </div>
-            <div class="form-group">
-              <label>mot de passe:</label>
-              <%= f.password_field :password, class: 'form-control', placeholder: "mot de passe" %>
-            </div>
-            <div class="form-group">
-              <label>confirmation du mot de passe:</label>
-              <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "confirmation du mot de passe"  %>
-            </div>
+            <%= render 'shared/social_login' %>
 
           </div>
           <div class="row">
@@ -102,7 +46,7 @@
             </div>
           </div>
         <!--fin 2er etape-->
-        </div>
+        </>
       </div>
     <% end %><!--end form-->
   </div>

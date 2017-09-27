@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def update_profile
-    @profile = Profile.find_or_initialize_by(user_id: @user.id, crew_id: 1)
+    @profile = Profile.find_or_initialize_by(user_id: @user.id, crew_id: params[:id])
 
     respond_to do |format|
       if @user.update(user_profile_params)
