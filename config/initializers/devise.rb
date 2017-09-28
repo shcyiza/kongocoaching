@@ -259,6 +259,7 @@ Devise.setup do |config|
   else
     # facebook
     config.omniauth :facebook, ENV['FB_PRODUCTION_APP_ID'], ENV['FB_PRODUCTION_APP_SECRET'],
+    info_fields: 'name,email,gender,birthday',
     scope: 'public_profile,user_birthday', setup: true
     config.omniauth :google_oauth2, ENV['GOOGLE_PRODUCTION_APP_ID'], ENV['GOOGLE_PRODUCTION_APP_SECRET'], {}
   end
