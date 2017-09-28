@@ -1,7 +1,7 @@
 /*here i've put all the js code that interract directly with the dom elements so the dom needs to be loaded to work
 i've put at the end of the page for it to work more consistenly even with the code i haven't written has no page load event....*/
 //= require_tree ./resources
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbolinks:load', function () {
   $('input').iCheck({
     checkboxClass: 'icheckbox_square-green',
     radioClass: 'iradio_square-green',
