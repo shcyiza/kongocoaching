@@ -1,5 +1,5 @@
 //= require_tree ./resources
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbolinks:load', function () {
   $('input').iCheck({
     checkboxClass: 'icheckbox_square-green',
     radioClass: 'iradio_square-green',

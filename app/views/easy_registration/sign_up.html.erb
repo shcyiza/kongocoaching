@@ -1,0 +1,84 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/green.css", data-turbolinks-track="reload" />
+</head>
+<div class="hero">
+  <%= image_tag "back.jpg", class:"hero__background" %>
+    <h1 class="hero__title"><b>Commencez votre Kickstart</b></h1>
+    <h4 class="hero__title">Incription en quelque clique...</h4>
+  </p>
+
+  <div id="step-form" class="step-form animated fadeInDown">
+    <!--  Tabs -->
+    <ul class="nav nav-tabs">
+      <li id="step1tab" class="active"><a href="#step1" data-toggle="tab" aria-expanded="true">1</a>
+      </li>
+      <li id="step2tab" class=""><a href="#step2" data-toggle="tab" aria-expanded="false">2</a>
+      </li>
+      <li class=""><a >3</a>
+      </li>
+    </ul>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form', id:"myRegister"}) do |f| %>
+    <%= devise_error_messages! %>
+    	<div class="tab-content">
+    		<div class="tab-pane active" id="step1">
+          <!--première etape du formulaire-->
+          <div class="form_title">
+    				<h3><strong>1</strong>Etape 1</h3>
+    				<p>
+    					Qui êtes vous?
+    				</p>
+    			</div>
+          <div class="step">
+
+            <%= render 'shared/social_login' %>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <a href="#step1" class="btn_outline" data-toggle="tab" aria-expanded="true" onclick="animateTrigger( 'step1', 'step2', 'fadeInLeft', activeTab );" >
+                <span data-icon="&#x38;" onhover="animated infinate fadeOutRight"></span> Etape 1
+              </a>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <%= button_tag class: 'btn_full', type: :submit do %>
+               Etape 3 <span data-icon="9"></span></a>
+              <% end %>
+            </div>
+          </div>
+        <!--fin 2er etape-->
+        </>
+      </div>
+    <% end %><!--end form-->
+  </div>
+</div>
+
+<script type="text/javascript">
+  function activeTab( elOutId, elInId ) { disActivateClass( elOutId );
+    activateClass( elInId );
+  };
+
+  function animateTrigger( elOutId, elInId, animation, fn ) {
+    if (arguments[3]) {
+      fn( elInId+"tab", elOutId+"tab"  );
+    };
+    animate( elOutId, animation );
+  };
+
+  date_input = $('[data-toggle="datepicker"]');
+  date_input.datepicker({
+    format: 'dd/mm/yyyy',
+    autoHide: true,
+    weekStart: 1,
+    daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+    language: "fr-FR",
+    startView: 2,
+  });
+
+  $(document).ready(function(){
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
