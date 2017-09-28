@@ -252,15 +252,11 @@ Devise.setup do |config|
   # up on your models and hooks.
   if Rails.env == 'development' || Rails.env == 'test'
     # facebook
-    config.omniauth :facebook, Rails.application.secrets[:facebook_dev_app_id], Rails.application.secrets[:facebook_dev_secret],
-    info_fields: 'name,email,gender,birthday',
-    scope: 'public_profile,user_birthday', setup: true
+    config.omniauth :facebook, Rails.application.secrets[:facebook_dev_app_id], Rails.application.secrets[:facebook_dev_secret], info_fields: 'name,email,gender,birthday', scope: 'public_profile,user_birthday', setup: true
     config.omniauth :google_oauth2, Rails.application.secrets[:google_dev_app_id], Rails.application.secrets[:google_dev_secret], {}
   else
     # facebook
-    config.omniauth :facebook, ENV['FB_PRODUCTION_APP_ID'], ENV['FB_PRODUCTION_APP_SECRET'],
-    info_fields: 'name,email,gender,birthday',
-    scope: 'public_profile,user_birthday', setup: true
+    config.omniauth :facebook, ENV['FB_PRODUCTION_APP_ID'], ENV['FB_PRODUCTION_APP_SECRET'], info_fields: 'name,email,gender,birthday', scope: 'public_profile,user_birthday', setup: true
     config.omniauth :google_oauth2, ENV['GOOGLE_PRODUCTION_APP_ID'], ENV['GOOGLE_PRODUCTION_APP_SECRET'], {}
   end
 
