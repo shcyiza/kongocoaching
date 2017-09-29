@@ -45,11 +45,11 @@
                   <label>Sex:</label>
                   <div class="col-xs-6">
                     Femme
-                    <%= profile_f.radio_button :sex, 'femme', checked: true %>
+                    <%= profile_f.radio_button :sex, true  %>
                   </div>
                   <div class="col-xs-6">
                     Homme
-                    <%= profile_f.radio_button :sex, 'homme' %>
+                    <%= profile_f.radio_button :sex, false %>
                   </div>
                 </div>
               </div>

@@ -1,8 +1,11 @@
+<!--in the application.js file there is a function that open links in a popup.
+this this popup is triggered by a click on a link that have the social class (see the require_dom.js file)
+this is to make a seamless ajax like experience when they loggin-->
 <h3 class="text-center">Vous connectez par:</h3>
-<%= link_to user_facebook_omniauth_authorize_path, class: "btn_1 social facebook" do %>
+<%= link_to user_facebook_omniauth_authorize_path, class: "btn_1 social facebook", data: { width: "600", height: "600" } do %>
   <i class="icon-facebook"></i> <span class="pull-right">facebook</span>
 <% end %>
 <br>
-<%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn_1 social google" do %>
+<%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn_1 social google", data: { width: "600", height: "600" } do %>
   <i class="icon-google"></i> <span class="pull-right">Google</span>
 <% end %>

@@ -42,6 +42,7 @@ gem 'devise-i18n'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem 'exception_notification'
 #end Oauth
 
 group :production do
