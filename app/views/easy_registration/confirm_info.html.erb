@@ -38,7 +38,7 @@
                   <%= f.text_field :name, :autofocus => true, class: 'form-control', placeholder: "Nom" %>
                 </div>
                 <%= fields_for :profile do |profile_f| %>
-                  <%= render './profiles/form', profile: @profile, profile_f: profile_f  %>
+                  <%= render './profiles/create_form', profile_f: profile_f  %>
                 <% end %>
                 <div class="row">
                   <div class="col-sm-12">
