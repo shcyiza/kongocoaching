@@ -253,11 +253,11 @@ Devise.setup do |config|
   if Rails.env == 'development' || Rails.env == 'test'
     # facebook
     config.omniauth :facebook, Rails.application.secrets[:facebook_dev_app_id], Rails.application.secrets[:facebook_dev_secret], info_fields: 'name,email,gender,birthday', scope: 'public_profile,user_birthday'
-    config.omniauth :google_oauth2, Rails.application.secrets[:google_dev_app_id], Rails.application.secrets[:google_dev_secret], {}
+    config.omniauth :google_oauth2, Rails.application.secrets[:google_dev_app_id], Rails.application.secrets[:google_dev_secret], {scope: 'email,profile,plus.login'}
   else
     # facebook
     config.omniauth :facebook, ENV['FB_PRODUCTION_APP_ID'], ENV['FB_PRODUCTION_APP_SECRET'], info_fields: 'name,email,gender,birthday', scope: 'public_profile,user_birthday'
-    config.omniauth :google_oauth2, ENV['GOOGLE_PRODUCTION_APP_ID'], ENV['GOOGLE_PRODUCTION_APP_SECRET'], {}
+    config.omniauth :google_oauth2, ENV['GOOGLE_PRODUCTION_APP_ID'], ENV['GOOGLE_PRODUCTION_APP_SECRET'], {scope: 'email,profile,plus.login'}
   end
 
   # ==> Warden configuration

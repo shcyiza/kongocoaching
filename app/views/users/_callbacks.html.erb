@@ -1,4 +1,4 @@
-<% if current_user.profile == nil %>
+<% if @return_to.include?("easy_register") && current_user.sign_in_count <= 1 %>
   <script type="text/javascript">
     var redirect_path = '<%= @return_to %>'+'/create_profile'+'<%= @params_string %>';
     if (window.opener) {
@@ -9,7 +9,7 @@
     }
     window.close();
   </script>
-<% elsif current_user.sign_in_count >= 1 %>
+<% else %>
   <script type="text/javascript">
     if (window.opener) {
       window.opener.location = '<%= root_path %>';

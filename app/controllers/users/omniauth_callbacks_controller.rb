@@ -13,8 +13,28 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  def google_profile_info(token)
+    if Rails.env.production?
+      app_id = ENV['GOOGLE_PRODUCTION_APP_ID']
+      app_secret = ENV['GOOGLE_PRODUCTION_APP_SECRET']
+    else
+      app_id = Rails.application.secrets[:google_dev_app_id]
+      app_secret = Rails.application.secrets[:google_dev_secret]
+    end
+    api_endpoint = "https://www.googleapis.com/plus/v1/people/me"
+    client = OAuth2::Client.new(app_id, app_secret, site: api_endpoint)
+    hash_token = OAuth2::AccessToken.new(client, token)
+    info_hash = JSON.parse(hash_token.get(api_endpoint).body)
+    @raw_info = info_hash
+  end
+
   def google_oauth2
     @user = User.from_omniauth(request.env['omniauth.auth'])
+    if @user.profile == nil
+      google_profile_info(request.env['omniauth.auth'].credentials.token)
+      @users_birthday = @raw_info["birthday"]
+      @users_gender = @raw_info["gender"]
+    end
     if @user.persisted?
       after_success_actions
       set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?

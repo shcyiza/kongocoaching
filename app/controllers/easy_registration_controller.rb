@@ -14,8 +14,10 @@ class EasyRegistrationController < ApplicationController
         if params[:gender] == nil
         elsif params[:gender] == "male"
           profile.sex = false
-        else
+        elsif params[:gender] == "female"
           profile.sex = true
+        else
+          profile.sex = nil
         end
       end
       redirect_to "/#{@crew_as_client.id}/easy_register/confirm_info"
@@ -52,7 +54,7 @@ class EasyRegistrationController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(profile_attributes: [:birth_date, :sex, :phonenr, :address])
+    params.require(:profile).permit(:birth_date, :sex, :phonenr, :address)
   end
 
   def current_crew
