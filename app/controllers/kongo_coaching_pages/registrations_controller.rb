@@ -14,7 +14,7 @@ class KongoCoachingPages::RegistrationsController < Devise::RegistrationsControl
     if resource.persisted?
       user_attr = params[:profile]
       @crew = Crew.find(user_attr[:crew_id])
-      Profile.create( user: resource, phonenr: user_attr[:phonenr], birth_date: user_attr[:birth_date], birth_date: user_attr[:birth_date], sex: user_attr[:sex], crew: @crew )
+      Profile.create( user: resource, phonenr: user_attr[:phonenr], birth_date: user_attr[:birth_date], sex: user_attr[:sex], crew: @crew )
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
