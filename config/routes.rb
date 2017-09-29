@@ -1,3 +1,13 @@
+class DomainConstraint
+  def initialize(domain)
+    @domains = [domain].flatten
+  end
+
+  def matches?(request)
+    @domains.include? request.domain
+  end
+end
+
 Rails.application.routes.draw do
   resources :news_subscribers
   resources :clubs
