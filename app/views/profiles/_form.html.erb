@@ -1,15 +1,30 @@
-<%= simple_form_for(@profile) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.association :crew %>
-    <%= f.association :coaches_crew %>
-    <%= f.input :birth_date %>
-    <%= f.input :sex %>
+<div class="form-inputs row">
+  <div class="col-md-6 verticalLine">
+    <label>Date de naissance:</label>
+    <% if profile.birth_date %>
+      <%= profile_f.text_field :birth_date, value:  l(profile.birth_date), class: 'form-control', data: {toggle: 'datepicker'} %>
+    <% else %>
+      <%= profile_f.text_field :birth_date, placeholder: "jj/mm/aaaa", class: 'form-control', data: {toggle: 'datepicker'} %>
+    <% end %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="col-md-6">
+    <label>Sex:</label>
+    <div class="col-xs-6">
+      Femme
+        <%= profile_f.radio_button :sex, true %>
+    </div>
+    <div class="col-xs-6">
+      Homme
+        <%= profile_f.radio_button :sex, false %>
+    </div>
   </div>
-<% end %>
+</div>
+<br>
+<div class="form-group col-md-6 col-sm-12">
+  <label>Téléphone:</label>
+  <%= profile_f.text_field :phonenr, class: 'form-control', placeholder: "Téléphone" %>
+</div>
+<div class="form-group col-md-6 col-sm-12">
+  <label>Adresse:</label>
+  <%= profile_f.text_field :address, class: 'form-control', placeholder: "addresse" %>
+</div>

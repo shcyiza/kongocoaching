@@ -35,29 +35,7 @@
               <%= f.text_field :name, :autofocus => true, class: 'form-control', placeholder: "Nom" %>
             </div>
             <%= fields_for :profile do |profile_f| %>
-              <div class="form-inputs row">
-                <%= profile_f.hidden_field :crew_id, value: @crew.id, readonly: true %>
-                <div class="col-md-6 verticalLine">
-                  <label>Date de naissance:</label>
-                  <%= profile_f.text_field :birth_date, class: 'form-control', data: {toggle: 'datepicker'} %>
-                </div>
-                <div class="col-md-6">
-                  <label>Sex:</label>
-                  <div class="col-xs-6">
-                    Femme
-                    <%= profile_f.radio_button :sex, 'femme', checked: true %>
-                  </div>
-                  <div class="col-xs-6">
-                    Homme
-                    <%= profile_f.radio_button :sex, 'homme' %>
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="form-group">
-                <label>Téléphone:</label>
-                <%= profile_f.text_field :phonenr, class: 'form-control', placeholder: "Téléphone" %>
-              </div>
+              <%= render "profiles/create_form", profile_f: profile_f %>
             <% end %>
 
           </div>

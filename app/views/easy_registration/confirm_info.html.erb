@@ -1,0 +1,75 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/green.css", data-turbolinks-track="reload" />
+</head>
+<div class="hero">
+  <%= image_tag "back.jpg", class:"hero__background" %>
+    <h1 class="hero__title"><b>Commencez votre Kickstart</b></h1>
+    <h4 class="hero__title">Incription en quelque clique...</h4>
+  </p>
+
+  <div id="step-form" class="step-form animated fadeInDown">
+    <!--  Tabs -->
+    <ul class="nav nav-tabs">
+      <li class=""><a>1</a>
+      </li>
+      <li id="step2tab" class="active"><a href="#step2" data-toggle="tab" aria-expanded="false">2</a>
+      </li>
+      <li class=""><a>3</a>
+      </li>
+    </ul>
+    	<div class="tab-content">
+        <!--première etape du formulaire-->
+        <div class="tab-pane active" id="step2">
+          <div class="form_title">
+    				<h3><strong>2</strong>Etape 2</h3>
+    				<p>
+    					Verifier que ces informations sont juste, et ajouter votre numéro de telephone.
+    				</p>
+    			</div>
+          <div class="step">
+
+            <div class="form-group">
+              <%= simple_form_for(@user, url: "/#{@crew_as_client.id}/easy_register/submit_profile", method: 'post') do |f| %>
+              <%= devise_error_messages! %>
+
+                <div class="form-group">
+                  <label>Nom:</label>
+
+                  <%= f.text_field :name, :autofocus => true, class: 'form-control', placeholder: "Nom" %>
+                </div>
+                <%= fields_for :profile do |profile_f| %>
+                  <%= render './profiles/form', profile: @profile, profile_f: profile_f  %>
+                <% end %>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <%= button_tag class: 'btn_full', type: :submit do %>
+                     Enregister!
+                    <% end %>
+                  </div>
+                </div>
+              <% end %><!--end form-->
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  date_input = $('[data-toggle="datepicker"]');
+  date_input.datepicker({
+    format: 'dd/mm/yyyy',
+    autoHide: true,
+    weekStart: 1,
+    daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+    language: "fr-FR",
+    startView: 2,
+  });
+
+  $(document).ready(function(){
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>

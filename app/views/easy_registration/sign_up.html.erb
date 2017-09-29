@@ -17,53 +17,23 @@
       <li class=""><a >3</a>
       </li>
     </ul>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form', id:"myRegister"}) do |f| %>
-    <%= devise_error_messages! %>
     	<div class="tab-content">
     		<div class="tab-pane active" id="step1">
           <!--première etape du formulaire-->
-          <div class="form_title">
-    				<h3><strong>1</strong>Etape 1</h3>
-    				<p>
-    					Qui êtes vous?
-    				</p>
-    			</div>
-          <div class="step">
-
-            <%= render 'shared/social_login' %>
-
-          </div>
-          <div class="row">
-            <div class="col-md-6 col-sm-12">
-              <a href="#step1" class="btn_outline" data-toggle="tab" aria-expanded="true" onclick="animateTrigger( 'step1', 'step2', 'fadeInLeft', activeTab );" >
-                <span data-icon="&#x38;" onhover="animated infinate fadeOutRight"></span> Etape 1
-              </a>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <%= button_tag class: 'btn_full', type: :submit do %>
-               Etape 3 <span data-icon="9"></span></a>
-              <% end %>
-            </div>
-          </div>
-        <!--fin 2er etape-->
-        </>
+        <div class="form_title">
+  				<h3><strong>1</strong>Etape 1</h3>
+  				<p>
+  					Connectez-vous?
+  				</p>
+  			</div>
+        <div class="step">
+          <%= render 'shared/social_login' %>
+        </div>
       </div>
-    <% end %><!--end form-->
   </div>
 </div>
 
 <script type="text/javascript">
-  function activeTab( elOutId, elInId ) { disActivateClass( elOutId );
-    activateClass( elInId );
-  };
-
-  function animateTrigger( elOutId, elInId, animation, fn ) {
-    if (arguments[3]) {
-      fn( elInId+"tab", elOutId+"tab"  );
-    };
-    animate( elOutId, animation );
-  };
-
   date_input = $('[data-toggle="datepicker"]');
   date_input.datepicker({
     format: 'dd/mm/yyyy',

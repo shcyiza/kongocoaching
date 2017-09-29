@@ -7,32 +7,7 @@
       <%= f.text_field :name, :autofocus => true, class: 'form-control', placeholder: "Nom" %>
     </div>
     <%= fields_for :profile do |profile_f| %>
-      <div class="form-inputs row">
-        <div class="col-md-6 verticalLine">
-          <label>Date de naissance:</label>
-          <% if @profile.birth_date %>
-            <%= profile_f.text_field :birth_date, value:  l(@profile.birth_date), class: 'form-control', data: {toggle: 'datepicker'} %>
-          <% else %>
-            <%= profile_f.text_field :birth_date, placeholder: "jj/mm/aaaa", class: 'form-control', data: {toggle: 'datepicker'} %>
-          <% end %>
-        </div>
-        <div class="col-md-6">
-          <label>Sex:</label>
-          <div class="col-xs-6">
-            Femme
-            <%= profile_f.radio_button :sex, true %>
-          </div>
-          <div class="col-xs-6">
-            Homme
-            <%= profile_f.radio_button :sex, false %>
-          </div>
-        </div>
-      </div>
-      <br>
-      <div class="form-group">
-        <label>Téléphone:</label>
-        <%= profile_f.text_field :phonenr, class: 'form-control', placeholder: "Téléphone" %>
-      </div>
+      <%= render './profiles/form', profile: @profile, profile_f: profile_f  %>
     <% end %>
     <div class="row">
       <div class="col-sm-12">
@@ -44,17 +19,6 @@
   <% end %><!--end form-->
 </div>
 <script type="text/javascript">
-  function activeTab( elOutId, elInId ) { disActivateClass( elOutId );
-    activateClass( elInId );
-  };
-
-  function animateTrigger( elOutId, elInId, animation, fn ) {
-    if (arguments[3]) {
-      fn( elInId+"tab", elOutId+"tab"  );
-    };
-    animate( elOutId, animation );
-  };
-
   date_input = $('[data-toggle="datepicker"]');
   date_input.datepicker({
     format: 'dd/mm/yyyy',

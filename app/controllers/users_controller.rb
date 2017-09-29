@@ -18,15 +18,15 @@ class UsersController < ApplicationController
   end
 
   def update_profile
-    @profile = Profile.find_or_initialize_by(user_id: @user.id, crew_id: 1)
+    @profile = Profile.find_or_initialize_by(user_id: @user.id, crew_id: params[:id])
 
     respond_to do |format|
-      if @user.update(user_profile_params)
+      if @user.update(user_params)
         @profile.update_attributes!(profile_params)
         format.html { redirect_to @user, notice: 'Profile modifier avec success.' }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit }
+        format.html { render :edit_profile }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -39,8 +39,8 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def user_profile_params
-    params.require(:user).permit(:name, profile_attributes: [:birth_date, :sex, :phonenr, :address])
+  def user_params
+    params.require(:user).permit(:name)
   end
 
   def profile_params

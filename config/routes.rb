@@ -21,6 +21,12 @@ Rails.application.routes.draw do
   get '/home', to: 'visitors#index'
   get '/edit_profile' , to: 'users#edit_profile'
   post '/update_profile', to: 'users#update_profile'
+
+  get '/:crew_id/easy_register', to: 'easy_registration#sign_up'
+  get '/:crew_id/easy_register/create_profile', to: 'easy_registration#create_profile'
+  get '/:crew_id/easy_register/confirm_info', to: 'easy_registration#confirm_info'
+  post '/:crew_id/easy_register/submit_profile', to: 'easy_registration#submit_profile'
+
   get 'crews/:id/kickstarts', to: 'crews#kickstarts'
   get 'crews/:id/planner', to: 'crews#planner'
   get 'crews/:id/coaches', to: 'crews#coaches'

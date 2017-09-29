@@ -1,0 +1,22 @@
+<div class="form-inputs row">
+  <div class="col-md-6 verticalLine">
+    <label>Date de naissance:</label>
+    <%= profile_f.text_field :birth_date, placeholder: "jj/mm/aaaa", class: 'form-control', data: {toggle: 'datepicker'} %>
+  </div>
+  <div class="col-md-6">
+    <label>Sex:</label>
+    <div class="col-xs-6">
+      Femme
+        <%= profile_f.radio_button :sex, true %>
+    </div>
+    <div class="col-xs-6">
+      Homme
+        <%= profile_f.radio_button :sex, false %>
+    </div>
+  </div>
+</div>
+<br>
+<div class="form-group">
+  <label>Téléphone:</label>
+  <%= profile_f.text_field :phonenr, class: 'form-control', placeholder: "Téléphone" %>
+</div>
