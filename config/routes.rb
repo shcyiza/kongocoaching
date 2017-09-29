@@ -1,22 +1,21 @@
-class DomainConstraint
-  def initialize(domain)
-    @domains = [domain].flatten
-  end
-
-  def matches?(request)
-    @domains.include? request.domain
-  end
-end
-
 Rails.application.routes.draw do
-  resources :news_subscribers
-  resources :clubs
+  class DomainConstraint
+    def initialize(domain)
+      @domains = [domain].flatten
+    end
+
+    def matches?(request)
+      @domains.include? request.domain
+    end
+  end
+
   if Rails.env.production?
     root to: 'visitors#index'
   else
     root to: 'kongo_coaching_pages#home'
   end
-
+  resources :news_subscribers
+  resources :clubs
   resources :kickstarts
   resources :profile_variables
   resources :profiles
