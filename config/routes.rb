@@ -9,11 +9,8 @@ Rails.application.routes.draw do
     end
   end
 
-  if Rails.env.production?
-    root to: 'visitors#index'
-  else
-    root to: 'kongo_coaching_pages#home'
-  end
+  root to: 'visitors#index'
+
   resources :news_subscribers
   resources :clubs
   resources :kickstarts
