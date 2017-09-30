@@ -1,18 +1,12 @@
-class DomainConstraint
-  def initialize(domain)
-    @domains = [domain].flatten
-  end
-
-  def matches?(request)
-    @domains.include? request.domain
-  end
-end
-
 Rails.application.routes.draw do
-  root to: 'visitors#index'
-
   resources :news_subscribers
   resources :clubs
+  if Rails.env.production?
+    root to: 'visitors#index'
+  else
+    root to: 'kongo_coaching_pages#home'
+  end
+
   resources :kickstarts
   resources :profile_variables
   resources :profiles
@@ -40,32 +34,17 @@ Rails.application.routes.draw do
   get 'crews/:id/clubs', to: 'crews#clubs'
   get 'crews/:id/clubs/new', to: 'crews#club_new'
   get 'crews/:id/clubs/:key', to: 'crews#club_show'
-
-  if Rails.env.production?
-    constraints DomainConstraint.new('kongocoaching.be') do
-      root to: 'kongo_coaching_pages#home'
-      get '/contact', to: 'kongo_coaching_pages#contact'
-      get '/signup', to: 'kongo_coaching_pages#sign_up'
-      get '/login', to: 'kongo_coaching_pages#login'
-      get '/services', to: 'kongo_coaching_pages#services_index'
-      get '/services/:id', to: 'kongo_coaching_pages#services_show'
-      get '/coaches', to: 'kongo_coaching_pages#coaches_index'
-      get '/coaches/:id', to: 'kongo_coaching_pages#coaches_show'
-      get '/kickstarts/new', to: "kongo_coaching_pages#new_kickstart"
-      get '/kickstarts/:id', to: "kongo_coaching_pages#show_kickstart"
-    end
-  else
-    get '/1/home', to: 'kongo_coaching_pages#home'
-    get '/1/contact', to: 'kongo_coaching_pages#contact'
-    get '/1/signup', to: 'kongo_coaching_pages#sign_up'
-    get '/1/login', to: 'kongo_coaching_pages#login'
-    get '/1/services', to: 'kongo_coaching_pages#services_index'
-    get '/1/services/:id', to: 'kongo_coaching_pages#services_show'
-    get '/1/coaches', to: 'kongo_coaching_pages#coaches_index'
-    get '/1/coaches/:id', to: 'kongo_coaching_pages#coaches_show'
-    get '/1/kickstarts/new', to: "kongo_coaching_pages#new_kickstart"
-    get '/1/kickstarts/:id', to: "kongo_coaching_pages#show_kickstart"
-  end
+  
+  get '/1/home', to: 'kongo_coaching_pages#home'
+  get '/1/contact', to: 'kongo_coaching_pages#contact'
+  get '/1/signup', to: 'kongo_coaching_pages#sign_up'
+  get '/1/login', to: 'kongo_coaching_pages#login'
+  get '/1/services', to: 'kongo_coaching_pages#services_index'
+  get '/1/services/:id', to: 'kongo_coaching_pages#services_show'
+  get '/1/coaches', to: 'kongo_coaching_pages#coaches_index'
+  get '/1/coaches/:id', to: 'kongo_coaching_pages#coaches_show'
+  get '/1/kickstarts/new', to: "kongo_coaching_pages#new_kickstart"
+  get '/1/kickstarts/:id', to: "kongo_coaching_pages#show_kickstart"
 
   post '/add_motivation', to: 'kickstarts#add_motivation'
   post '/after_kickstart_creation', to: 'kickstarts#after_creation_actions'
