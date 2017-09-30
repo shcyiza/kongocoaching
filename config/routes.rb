@@ -1,14 +1,14 @@
-Rails.application.routes.draw do
-  class DomainConstraint
-    def initialize(domain)
-      @domains = [domain].flatten
-    end
-
-    def matches?(request)
-      @domains.include? request.domain
-    end
+class DomainConstraint
+  def initialize(domain)
+    @domains = [domain].flatten
   end
 
+  def matches?(request)
+    @domains.include? request.domain
+  end
+end
+
+Rails.application.routes.draw do
   root to: 'visitors#index'
 
   resources :news_subscribers
