@@ -1,0 +1,111 @@
+<div class="row margintop" style="transform: none;">
+
+	<aside class="col-md-3" id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+    <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; top: 80px; left: 382.5px;">
+			<div class="box_style_2">
+				<div id="total_cart">
+					<%= image_tag @client.image , class: "img-circle", size:"150x150" %>
+				</div>
+				<h2><b><%= @client.name %></b></h2>
+				<h4 style="color:white;"><b>info</b></h4>
+				  <b>age:</b> <%= @client.age %> (<%= @profile.birth_date %>)
+				  <b>Sex:</b> <%= @client.gender %>
+
+					<hr style="border-color:white;">
+
+					<h4 style="color:white;"><b>Contacts</b></h4>
+					<%= mail_to @client.email, class:"btn_outline" do %>
+						<i class="icon-mail-alt"></i>: <%= @client.email %>
+					<% end %>
+					<% if @client.profile.phonenr %>
+            <%= tel_to @client.tel, class:"btn_outline margintop" do %>
+              <i class="icon-mail-alt"></i> <%= @client.tel %>
+            <% end %>
+          <% else %>
+             <a class="btn disabled"> <%= @client.tel %> </>
+          <% end %>
+			</div>
+		</div>
+	<%= simple_form_for(@profile, url: "/crews/#{@crew.id}/clients/#{@client.id}/update", method: 'post') do |f| %>
+		<%= button_tag class: 'btn_full', type: :submit do %>
+		 <i class="icon-floppy"></i>Enregister!
+		<% end %>
+	</aside>
+
+		<div class="col-md-9 add_bottom_15">
+			<div class="form_title">
+				<h3><strong>1</strong>Infos de contact</h3>
+			</div>
+			<div class="step">
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<div class="form-group">
+							<label>Adresse du domicile <i class="icon-location-2"></i></label>
+							<%= f.input :address, label: false, placeholder: "rue X, XXX commnune, pays", input_html:{ id: "address-input"} %>
+							<%= f.input :proffesion, label: "Proféssion" %>
+						</div>
+					</div>
+					<div class="col-md-7 col-sm-6">
+						<div class="col-md-4">
+							<font color="green" size="200"><i class="icon-map"></i></font>
+							<div id="distance" data-from-address="<%= @crew.club.address %>" data-from-placename="<%= @crew.club.name %>"></div>
+						</div>
+					  <div class="col-md-8">
+							<div id="map"></div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<h4><div><i class="icon-warning"></i> Contacts importants</div></h4>
+				<div class="row emergency_box">
+					<h3>Contact en cas d'urgence</h3>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<%= f.input :emergency_contact, label: "Nom" %>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<%= f.input :emergency_contact_phone, label: "Numéro" %>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<%= f.input :emergency_contact_relation, label: "Relation" %>
+						</div>
+					</div>
+				</div>
+				<div class="row emergency_box">
+					<h3>Médecin traitant</h3>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<%= f.input :dr_name, label: "Nom" %>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<%= f.input :dr_phone, label: "Numéro" %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--End step -->
+
+			<div class="form_title">
+				<h3><strong>2</strong>Etat de forme</h3>
+			</div>
+			<div class="step">
+			</div>
+			<!--End step -->
+
+			<div class="form_title">
+				<h3><strong>3</strong>Aidez-nous à vous aider</h3>
+			</div>
+			<div class="step">
+			</div>
+			<!--End step -->
+		</div>
+	<% end %>
+
+</div>
+<%= render "/shared/distance_map" %>

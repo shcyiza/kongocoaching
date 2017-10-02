@@ -4,6 +4,6 @@ class Club < ApplicationRecord
   accepts_nested_attributes_for :avatars
 
   geocoded_by :address
-  after_validation :geocode,if: :address_changed?
+  after_validation :geocode, if: :address_changed?
 
 end

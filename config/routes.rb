@@ -34,7 +34,9 @@ Rails.application.routes.draw do
   get 'crews/:id/clubs', to: 'crews#clubs'
   get 'crews/:id/clubs/new', to: 'crews#club_new'
   get 'crews/:id/clubs/:key', to: 'crews#club_show'
-  
+  get 'crews/:id/clients/:client_id/edit', to: 'crews#edit_client_profile'
+  post 'crews/:id/clients/:client_id/update', to: 'crews#update_client_profile'
+
   get '/1/home', to: 'kongo_coaching_pages#home'
   get '/1/contact', to: 'kongo_coaching_pages#contact'
   get '/1/signup', to: 'kongo_coaching_pages#sign_up'

@@ -37,6 +37,6 @@ class Crew < ApplicationRecord
   end
 
   def clients
-    User.joins(:profiles).where("crew_id = ?", self.id)
+    User.joins(:profile).where("crew_id = ?", self.id)
   end
 end

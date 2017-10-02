@@ -1,0 +1,74 @@
+
+<!--<div id="distance"></div>-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"></script>
+<script type="text/javascript">
+  const AddressInput = document.getElementById('address-input');
+  const distance_el = document.getElementById('distance');
+  const map_el = document.getElementById('map')
+  var start_addres = distance_el.getAttribute('data-from-address')
+
+  function startPlacename() {
+    if ( distance_el.getAttribute('data-from-placename') != "" ) {
+      return distance_el.getAttribute('data-from-placename')
+    } else {
+      return "Votre point de départ"
+    }
+  };
+
+  function initMap() {
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(map_el, {
+    });
+    directionsDisplay.setMap(map);
+    // New York, NY, USA (40.7127837, -74.0059413)
+    var start = start_addres;
+    //Baltimore, MD, USA (39.2903848, -76.6121893)
+    var end = AddressInput.value;
+    calculateAndDisplayRoute(start, end, directionsService, directionsDisplay);
+  }
+
+  function calculateAndDisplayRoute(start, end, directionsService, directionsDisplay) {
+    directionsService.route({
+      origin: start,
+      destination: end,
+      travelMode: google.maps.TravelMode.DRIVING
+    }, function(response, status) {
+      if (status === google.maps.DirectionsStatus.OK) {
+        var totaldistance = 0;
+        var totalduration = 0;
+        var route = response.routes[0];
+        // display total distance information.
+        for (var i = 0; i < route.legs.length; i++) {
+          totaldistance = totaldistance + route.legs[i].distance.value;
+        }
+        for (var i = 0; i < route.legs.length; i++) {
+          totalduration = totalduration + route.legs[i].duration.value;
+        }
+        distance_el.innerHTML += "<b>" + (totaldistance / 1000).toFixed(2) + " km</b>" +
+        " et <b>"+ (totalduration / 60 ).toFixed(0) +" min</b> <br> en voiture de <u>"+ startPlacename() +"</u>";
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
+
+  function reloadMap () {
+    distance_el.innerHTML = "";
+    map_el.innerHTML = "";
+    initMap();
+  };
+
+  function checkMapable () {
+    if ( AddressInput.value !== "" ) {
+      initMap();
+    } else {
+      distance_el.innerHTML = "<b>Remplissez-une addresse a gauche...</b>";
+    };
+  };
+
+  google.maps.event.addDomListener(window, "turbolinks:load", checkMapable);
+  AddressInput.addEventListener("change", reloadMap)
+
+</script>

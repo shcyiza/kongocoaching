@@ -47,6 +47,17 @@ class User < ApplicationRecord
     return gender
   end
 
+  def age
+    now = Time.now.to_date
+    dob = self.profile.birth_date
+    base_year = now.year-dob.year
+    result = base_year
+    if now.month <= dob.month && now.day <= dob.day
+      result = base_year - 1
+    end
+    return result
+  end
+
   def tel
     tel = "Pas de numéro de telephone"
     if self.profile.phonenr

@@ -1,6 +1,7 @@
 class CrewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_crew, :except => [:index]
+  layout "crew_admin"
   # GET /crews
   # GET /crews.json
 
@@ -20,6 +21,26 @@ class CrewsController < ApplicationController
     @kickstart_count = @base_kickstars.count
     @kickstarts = @base_kickstars.paginate(:page => params[:page], :per_page => 7)
     authorize! :show, @crew
+  end
+
+  def edit_client_profile
+    @client = User.find(params[:client_id])
+    @profile = @client.profile
+    authorize! :crud, @client.profile
+  end
+
+  def update_client_profile
+    @client = User.find(params[:client_id])
+    @profile = @client.profile
+    respond_to do |format|
+      if @profile.update(profile_params)
+        format.html { redirect_to @crew, notice: 'Profile modifier avec success.' }
+        format.json { render :show, status: :ok, location: @profile }
+      else
+        format.html { render :edit_profile }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def kickstarts
@@ -225,5 +246,17 @@ class CrewsController < ApplicationController
 
     def club_params
       params.require(:club).permit(:name, :address)
+    end
+
+    def profile_params
+      params.require(:profile).permit(
+      :address,
+      :proffesion,
+      :emergency_contact,
+      :emergency_contact_relation,
+      :emergency_contact_phone,
+      :dr_name,
+      :dr_phone
+      )
     end
 end

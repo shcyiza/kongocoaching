@@ -12,8 +12,13 @@
   <body class="adminbg">
       <%= render 'layouts/navigation' %>
     <main role="main" class="margintop adminbg">
-      <div id="main">
-        <%= yield %>
+      <div id="wrapper">
+        <%= render 'layouts/sidebar' %>
+        <div id="main-wrapper" class="col-md-10 pull-right">
+          <div id="main">
+            <%= yield %>
+          </div>
+        </div>
       </div>
     </main>
   </body>

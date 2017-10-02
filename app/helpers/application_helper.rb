@@ -46,4 +46,41 @@ module ApplicationHelper
     return bg_path
   end
 
+  def link_map_for(place, options = {})
+    params = {
+      center: [place.latitude, place.longitude].join(","),
+      zoom: 17,
+      size: "300x300",
+      markers: [place.latitude, place.longitude].join(","),
+      sensor: true,
+      key: "AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"
+      }.merge(options)
+
+    query_string_img =  params.map{|k,v| "#{k}=#{v}"}.join("&")
+    query_string_address = CGI::escape place.address
+    link_to "https://www.google.be/maps/place/#{query_string_address}", target: "_blank" do
+      image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string_img}", :alt => place.name
+    end
+  end
+
+  def static_map_for(place, options = {})
+    params = {
+      center: [place.latitude, place.longitude].join(","),
+      zoom: 17,
+      size: "300x300",
+      markers: [place.latitude, place.longitude].join(","),
+      sensor: true,
+      key: "AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"
+      }.merge(options)
+
+    query_string_img =  params.map{|k,v| "#{k}=#{v}"}.join("&")
+    query_string_address = CGI::escape place.address
+      image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string_img}", :alt => place.name
+  end
+
+  def link_to_gmaps(place, text)
+    query_string = CGI::escape place.address
+    link_to text, "https://www.google.be/maps/place/#{query_string}", target: "_blank"
+  end
+
 end

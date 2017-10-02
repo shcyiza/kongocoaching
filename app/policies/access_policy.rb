@@ -32,7 +32,7 @@ class AccessPolicy
       can :create, Coach do |coach, user|
         user.has_crew? == true
       end
-      can [:show], Profile do |profile, user|
+      can :crud, Profile do |profile, user|
         user.crew_owner?(profile.crew) == true
       end
     end
