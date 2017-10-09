@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ad Media</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ad categories</th>
+      <th>Advertisable</th>
+      <th>Advertisable type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ad_media.each do |ad_medium| %>
+      <tr>
+        <td><%= ad_medium.name %></td>
+        <td><%= ad_medium.ad_categories %></td>
+        <td><%= ad_medium.advertisable_id %></td>
+        <td><%= ad_medium.advertisable_type %></td>
+        <td><%= link_to 'Show', ad_medium %></td>
+        <td><%= link_to 'Edit', edit_ad_medium_path(ad_medium) %></td>
+        <td><%= link_to 'Destroy', ad_medium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ad Medium', new_ad_medium_path %>

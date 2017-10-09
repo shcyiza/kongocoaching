@@ -1,0 +1,3 @@
+class ProfileReadyTo < ProfileSubModels
+
+end

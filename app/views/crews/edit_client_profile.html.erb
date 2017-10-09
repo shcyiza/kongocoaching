@@ -26,16 +26,16 @@
           <% end %>
 			</div>
 		</div>
-	<%= simple_form_for(@profile, url: "/crews/#{@crew.id}/clients/#{@client.id}/update", method: 'post') do |f| %>
-		<%= button_tag class: 'btn_full', type: :submit do %>
+		<button name="button" class="btn_full" id="fake_submit_btn">
 		 <i class="icon-floppy"></i>Enregister!
-		<% end %>
+		</button>
 	</aside>
 
 		<div class="col-md-9 add_bottom_15">
 			<div class="form_title">
 				<h3><strong>1</strong>Infos de contact</h3>
 			</div>
+			<%= simple_form_for(@profile, url: "/crews/#{@crew.id}/clients/#{@client.id}/update", method: :post, html: { multipart: true }) do |f| %>
 			<div class="step">
 				<div class="row">
 					<div class="col-md-5 col-sm-6">
@@ -43,6 +43,26 @@
 							<label>Adresse du domicile <i class="icon-location-2"></i></label>
 							<%= f.input :address, label: false, placeholder: "rue X, XXX commnune, pays", input_html:{ id: "address-input"} %>
 							<%= f.input :proffesion, label: "Proféssion" %>
+							<div class="kids">
+								<label for="">A t'il des enfant?</label>
+								<div class="row">
+									<div class="col-xs-4">
+										<%= f.input :has_kids, as: "integer", label: "Si oui combien?", input_html:{ id: "has_kids"}  %>
+									</div>
+									<div class="col-xs-8">
+										<%= link_to_add_association '+ ajouter des des enfants', f, :profile_kids_infos,
+										 data: { association_insertion_node: '.profile_kids_infos', association_insertion_method: :append },
+										 partial: './crews/client_profile/profile_kids_info_fields', class: "invisible", id: "add_kids_field"
+										%>
+									</div>
+								</div>
+								<hr>
+								<div class="profile_kids_infos">
+									<%= f.simple_fields_for :profile_kids_infos, @profile.profile_kids_infos do |k| %>
+										<%= render './crews/client_profile/profile_kids_info_fields', f: k %>
+									<% end %>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-7 col-sm-6">
@@ -104,8 +124,29 @@
 			<div class="step">
 			</div>
 			<!--End step -->
+				<%= button_tag class: 'invisible', id: "submit_btn", type: :submit do %>
+				 <i class="icon-floppy"></i>Enregister!
+				<% end %>
+			<% end %>
 		</div>
-	<% end %>
+
 
 </div>
 <%= render "/shared/distance_map" %>
+<script type="text/javascript">
+	function addKidsFields (e) {
+		let that_many = e.target.value;
+		document.querySelector(".profile_kids_infos").innerHTML = "";
+		for(var i = 0; i < that_many; i++) {
+			document.querySelector("a#add_kids_field").click()
+		};
+	};
+	var fake_btn = document.querySelector("#fake_submit_btn");
+	var kids_input = document.querySelector("#has_kids");
+	kids_input.addEventListener("change", addKidsFields);
+	fake_btn.addEventListener("click" ,function ()
+    {
+     document.querySelector("#submit_btn").click()
+    }
+	);
+</script>

@@ -1,3 +1,3 @@
-class ProfileVariable < ApplicationRecord
-  belongs_to :profile
+class ProfileVariable < ProfileSubModels
+
 end

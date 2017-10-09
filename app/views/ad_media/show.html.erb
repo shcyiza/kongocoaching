@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ad_medium.name %>
+</p>
+
+<p>
+  <strong>Ad categories:</strong>
+  <%= @ad_medium.ad_categories %>
+</p>
+
+<p>
+  <strong>Advertisable:</strong>
+  <%= @ad_medium.advertisable_id %>
+</p>
+
+<p>
+  <strong>Advertisable type:</strong>
+  <%= @ad_medium.advertisable_type %>
+</p>
+
+<%= link_to 'Edit', edit_ad_medium_path(@ad_medium) %> |
+<%= link_to 'Back', ad_media_path %>

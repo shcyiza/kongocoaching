@@ -24,6 +24,7 @@ gem 'cocoon'
 gem 'trix'
 gem 'truncate_html'
 gem 'geocoder'
+gem 'activeadmin', github: 'activeadmin'
 
 #gems for the emails
 gem 'sidekiq'

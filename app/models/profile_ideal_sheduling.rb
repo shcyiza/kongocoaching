@@ -1,0 +1,3 @@
+class ProfileIdealSheduling < ProfileSubModels
+
+end

@@ -1,0 +1,2 @@
+module AdMediaHelper
+end

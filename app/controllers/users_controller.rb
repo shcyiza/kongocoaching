@@ -14,7 +14,6 @@ class UsersController < ApplicationController
 
   def edit_profile
     @profile = Profile.find_or_initialize_by(user_id: @user.id)
-    authorize! :update, @profile
   end
 
   def update_profile
@@ -30,7 +29,6 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
-    authorize! :update, @profile
   end
 
   private

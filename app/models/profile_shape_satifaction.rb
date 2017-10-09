@@ -1,0 +1,3 @@
+class ProfileShapeSatifaction < ProfileSubModels
+
+end

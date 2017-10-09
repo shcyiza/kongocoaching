@@ -1,6 +1,6 @@
 class CrewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_crew, :except => [:index]
+  before_action :set_crew, except: [:index]
   layout "crew_admin"
   # GET /crews
   # GET /crews.json
@@ -140,7 +140,7 @@ class CrewsController < ApplicationController
     @new_service = @crew.training_types.build(training_type_params)
     if @new_service.save
       #create the default avatars
-      if  coaches_crew_params[:star_pic]
+      if  training_type_params[:star_pic]
         add_avatar @new_service, training_type_params[:star_pic], training_type_params[:vignette], true
       end
     end
@@ -239,8 +239,8 @@ class CrewsController < ApplicationController
     def coaches_crew_params
       params.require(:coaches_crew).permit(:name, :description, :star_pic, :vignette,
                     training_type_ids: [],
-                    avatars_attributes: [:photo, :vignette],
-                    video_links_attributes: [:video_path]
+                    avatars_attributes: [:id, :photo, :vignette],
+                    video_links_attributes: [:id, :video_path]
                     )
     end
 
@@ -256,7 +256,8 @@ class CrewsController < ApplicationController
       :emergency_contact_relation,
       :emergency_contact_phone,
       :dr_name,
-      :dr_phone
+      :dr_phone,
+      profile_kids_infos_attributes: [:id, :birthyear, :_destroy],
       )
     end
 end

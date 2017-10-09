@@ -1,0 +1,3 @@
+class ProfileKidsInfo < ProfileSubModels
+
+end

@@ -1,0 +1,14 @@
+<%= simple_form_for(@ad_medium) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.association :ad_categories %>
+    <%= f.input :advertisable_id %>
+    <%= f.input :advertisable_type %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

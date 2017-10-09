@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  resources :ad_media
   resources :news_subscribers
   resources :clubs
   if Rails.env.production?

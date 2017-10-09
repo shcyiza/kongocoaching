@@ -10,10 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001133533) do
+ActiveRecord::Schema.define(version: 20171009173741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace"
+    t.text     "body"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.string   "author_type"
+    t.integer  "author_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  end
+
+  create_table "ad_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ad_media", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "ad_category_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["ad_category_id"], name: "index_ad_media_on_ad_category_id", using: :btree
+  end
+
+  create_table "ad_reaches", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "ad_medium_id"
+    t.integer  "advertisable_id"
+    t.string   "advertisable_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["ad_medium_id"], name: "index_ad_reaches_on_ad_medium_id", using: :btree
+    t.index ["profile_id"], name: "index_ad_reaches_on_profile_id", using: :btree
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  end
 
   create_table "avatars", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -112,6 +168,43 @@ ActiveRecord::Schema.define(version: 20171001133533) do
     t.string   "enrollable_type"
   end
 
+  create_table "profile_ideal_shedulings", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "weekday"
+    t.integer  "dayperiod"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_profile_ideal_shedulings_on_profile_id", using: :btree
+  end
+
+  create_table "profile_kids_infos", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.string   "birthyear"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_profile_kids_infos_on_profile_id", using: :btree
+  end
+
+  create_table "profile_ready_tos", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.boolean  "work_on_diet"
+    t.boolean  "work_physically"
+    t.boolean  "work_on_lifestyle"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["profile_id"], name: "index_profile_ready_tos_on_profile_id", using: :btree
+  end
+
+  create_table "profile_shape_satifactions", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "shape_rating"
+    t.boolean  "shape_satification"
+    t.integer  "current_activity_frequency"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["profile_id"], name: "index_profile_shape_satifactions_on_profile_id", using: :btree
+  end
+
   create_table "profile_variables", force: :cascade do |t|
     t.integer  "profile_id"
     t.string   "name"
@@ -140,6 +233,7 @@ ActiveRecord::Schema.define(version: 20171001133533) do
     t.string   "emergency_contact_phone"
     t.string   "dr_name"
     t.string   "dr_phone"
+    t.string   "proffession_address"
     t.index ["coaches_crew_id"], name: "index_profiles_on_coaches_crew_id", using: :btree
     t.index ["crew_id"], name: "index_profiles_on_crew_id", using: :btree
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -212,11 +306,18 @@ ActiveRecord::Schema.define(version: 20171001133533) do
     t.boolean  "is_default",     default: false
   end
 
+  add_foreign_key "ad_media", "ad_categories"
+  add_foreign_key "ad_reaches", "ad_media"
+  add_foreign_key "ad_reaches", "profiles"
   add_foreign_key "clubs_crews", "clubs"
   add_foreign_key "clubs_crews", "crews"
   add_foreign_key "kickstarts", "coaches_crews"
   add_foreign_key "kickstarts", "crews"
   add_foreign_key "news_subscribers", "crews"
+  add_foreign_key "profile_ideal_shedulings", "profiles"
+  add_foreign_key "profile_kids_infos", "profiles"
+  add_foreign_key "profile_ready_tos", "profiles"
+  add_foreign_key "profile_shape_satifactions", "profiles"
   add_foreign_key "profile_variables", "profiles"
   add_foreign_key "profiles", "coaches_crews"
   add_foreign_key "profiles", "crews"
