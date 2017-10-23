@@ -20,8 +20,14 @@ class Profile < ApplicationRecord
   validates :user_id, uniqueness: true, if: :new_record?
   attr_accessor :has_kids
 
-  geocoded_by :address
+  geocoded_by :address, latitude: :latitude, longitude: :longitude
+  geocoded_by :proffession_address, latitude: :proffession_latitude, longitude: :proffession_longitude
   after_validation :geocode, if: :address_changed?
+  after_validation :geocode, if: :proffession_address_changed?
+
+  def kids
+    self.profile_kids_infos.order('birthyear ASC')
+  end
 
 
 end

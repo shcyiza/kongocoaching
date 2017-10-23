@@ -83,4 +83,13 @@ module ApplicationHelper
     link_to text, "https://www.google.be/maps/place/#{query_string}", target: "_blank"
   end
 
+  def odinal_count instance, collection
+    ordinal = collection.index(instance) + 1
+    if collection.index(instance) == 0
+      return "#{ordinal}er"
+    else
+      return "#{ordinal}ème"
+    end
+  end
+
 end

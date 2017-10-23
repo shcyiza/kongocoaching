@@ -252,6 +252,7 @@ class CrewsController < ApplicationController
       params.require(:profile).permit(
       :address,
       :proffesion,
+      :proffession_address,
       :emergency_contact,
       :emergency_contact_relation,
       :emergency_contact_phone,

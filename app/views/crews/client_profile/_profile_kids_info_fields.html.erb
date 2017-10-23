@@ -1,7 +1,13 @@
-<div class="nested-fields col-md-3">
+<div class="nested-fields col-md-4">
   <div form-inline>
-    <%= f.input :birthyear %>
+    <% if f.object.id != nil %>
+      <label>Année de naissance du <br>
+        <%= odinal_count f.object, @profile.kids %>
+      </label>
+    <% else %>
+      <label>Année de naissance:</label>
+    <% end %>
+    <%= f.input :birthyear, label: false %>
     <%= link_to_remove_association "x", f , class: "trash"%>
-
   </div>
 </div>

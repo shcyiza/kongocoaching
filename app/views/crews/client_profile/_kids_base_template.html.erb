@@ -1,0 +1,51 @@
+<% if @profile.kids.count > 0 %>
+  <label for="">A t'il des enfant?</label>
+  <h4>Ce client a <b><%= @profile.kids.count %></b> enfant(s)</h4>
+  <br>
+  <div class="profile_kids_infos">
+    <%= f.simple_fields_for :profile_kids_infos, @profile.kids  do |k| %>
+      <%= render './crews/client_profile/profile_kids_info_fields', f: k %>
+    <% end %>
+  </div>
+  <hr>
+  <div class="col-xs-12">
+    <%= link_to_add_association '+ ajouter un enfant', f, :profile_kids_infos,
+     data: { association_insertion_node: '.profile_kids_infos', association_insertion_method: :append },
+     partial: './crews/client_profile/profile_kids_info_fields', class: "btn_1 shadowed", id: "add_kids_field"
+    %>
+  </div>
+<% else %>
+  <label for="">A t'il des enfant?</label>
+  <div class="row">
+    <div class="col-xs-4">
+      <%= f.input :has_kids, as: "integer", label: "Si oui combien?", input_html:{ id: "has_kids"}  %>
+    </div>
+    <div class="col-xs-8">.</div>
+    <div class="col-xs-8">
+      <%= link_to_add_association '+ ajouter un enfant', f, :profile_kids_infos,
+       data: { association_insertion_node: '.profile_kids_infos', association_insertion_method: :append },
+       partial: './crews/client_profile/profile_kids_info_fields', class: "invisible", id: "add_kids_field"
+      %>
+    </div>
+    <br>
+    <br>
+    
+    <hr>
+    <div class="profile_kids_infos">
+      <%= f.simple_fields_for :profile_kids_infos, @profile.profile_kids_infos do |k| %>
+        <%= render './crews/client_profile/profile_kids_info_fields', f: k %>
+      <% end %>
+    </div>
+  </div>
+  <script type="text/javascript">
+  	function addKidsFields (e) {
+  		let that_many = e.target.value;
+  		document.querySelector(".profile_kids_infos").innerHTML = "";
+  		for(var i = 0; i < that_many; i++) {
+  			document.querySelector("a#add_kids_field").click()
+  		};
+  	};
+    var kids_input = document.querySelector("#has_kids");
+    kids_input.addEventListener("change", addKidsFields);
+  </script>
+<% end %>
