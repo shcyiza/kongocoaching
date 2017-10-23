@@ -50,12 +50,26 @@
 						</div>
 					</div>
 					<div class="col-md-7 col-sm-6">
-						<div class="col-md-4">
-							<font color="green" size="200"><i class="icon-map"></i></font>
-							<div id="distance" data-from-address="<%= @crew.club.address %>" data-from-placename="<%= @crew.club.name %>"></div>
-						</div>
-					  <div class="col-md-8">
-							<div id="map"></div>
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#home" data-toggle="tab" aria-expanded="true"> <i class="icon-location-2"></i> Club -> domicile client</a>
+							</li>
+							<li class=""><a href="#proffession" data-toggle="tab" aria-expanded="false"><i class="icon-location-2"></i> Club -> Travaille client</a>
+							</li>
+						</ul>
+						<div class="tab-content" style="min-height: 300px">
+							<div class="tab-pane active" id="home">
+								<div class="col-md-4">
+									<font color="green" size="200"><i class="icon-map"></i></font>
+									<div id="distance" data-from-address="<%= @crew.club.address %>" data-from-placename="<%= @crew.club.name %>">
+									</div>
+								</div>
+								<div class="col-md-8">
+									<div id="map"></div>
+								</div>
+							</div>
+							<div class="tab-pane" id="proffession">
+								Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapi
+							</div>
 						</div>
 					</div>
 				</div>
