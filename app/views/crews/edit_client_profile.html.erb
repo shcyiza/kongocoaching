@@ -68,7 +68,7 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="proffession">
-								Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapi
+
 							</div>
 						</div>
 					</div>
@@ -113,6 +113,13 @@
 				<h3><strong>2</strong>Etat de forme</h3>
 			</div>
 			<div class="step">
+				<%= f.simple_fields_for :profile_shape_satifactions, @profile.initialize_shape_satifaction  do |k| %>
+					<div class="row">
+						<div class="col-md-2"><%= k.input :shape_rating %></div>
+						<div class="col-md-2"><label>Etes vous satifait de votre êtat de forme?</label><%= k.check_box :shape_satification %></div>
+						<div class="col-md-2"><%= k.input :current_activity_frequency %></div>
+					</div>
+				<% end %>
 			</div>
 			<!--End step -->
 
@@ -120,6 +127,14 @@
 				<h3><strong>3</strong>Aidez-nous à vous aider</h3>
 			</div>
 			<div class="step">
+				<%= f.simple_fields_for :profile_ready_to, @profile.find_or_initialize_ready_to  do |k| %>
+					<div class="row">
+						<div class="col-md-3"><label>Sur quelle point est-il pret à travailler?</label></div>
+						<div class="col-md-2"><%= k.check_box :work_physically %><label>Sport</label></div>
+						<div class="col-md-2"><%= k.check_box :work_on_diet %><label>Alimentation</label></div>
+						<div class="col-md-2"><%= k.check_box :work_on_lifestyle %><label>Hygiène de vie</label></div>
+					</div>
+				<% end %>
 			</div>
 			<!--End step -->
 				<%= button_tag class: 'invisible', id: "submit_btn", type: :submit do %>
