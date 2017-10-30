@@ -88,7 +88,7 @@
         <% @coaches.each do |coach| %>
           <div class="team-item">
             <div class="team-item-img" style="height: 400px;">
-              <%= show_his_pic_or_default coach %>
+              <%= show_his_pic_or_default coach, "slider" %>
               <div class="team-item-detail">
                 <div class="team-item-detail-inner">
                   <h4><%= coach.get_name %></h4>
