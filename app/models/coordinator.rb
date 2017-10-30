@@ -6,6 +6,6 @@ class Coordinator < ApplicationRecord
   validates :user_id, uniqueness: true, if: :new_record?
 
   def self.all_users
-    Coordinator.all.map { |c| c.user }
+    User.joins(:coordinator)
   end
 end

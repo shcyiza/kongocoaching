@@ -58,7 +58,6 @@ class Profile < ApplicationRecord
         result = true
       end
     end
-    binding.pry
     return result
   end
 

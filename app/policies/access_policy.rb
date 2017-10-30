@@ -15,6 +15,15 @@ class AccessPolicy
     # The most important role should be at the top.
     # In this case an administrator.
     #
+    role :sudo, proc { |user| user.sudo? } do
+      can :create, TrainingType
+      can :index, User
+      can :index, Crew
+      can [:create, :show, :update, :destroy], Crew
+      can [:create, :show, :update, :destroy], CoachesCrew
+      can :crud, Profile
+    end
+
     role :coordinator, proc { |user| user.coordinator? } do
       can :create, Crew
       can :create, TrainingType

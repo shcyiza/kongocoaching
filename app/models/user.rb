@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :participants, dependent: :destroy
   has_many :trainings, through: :participants, source: :enrollable, source_type: "Training" #As a client he can participates to many trainings
   has_many :kickstarts, through: :participants, source: :enrollable, source_type: "Kickstart" #As a client he can do many kickstart
+  has_one :sudo, dependent: :destroy
   has_one :coordinator, dependent: :destroy #a user can be a crew coordinator only once
   has_one :coach, dependent: :destroy #a user be assigned coach only once
   has_many :crews, through: :coordinator #As a coordinator which crew does he manage?
@@ -17,8 +18,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
    #validation for omniauth
-  validates_presence_of :uid, :provider
-  validates_uniqueness_of :uid, :scope => :provider
+  validates_presence_of :uid, on: :from_omniauth
+  validates_presence_of :provider, on: :from_omniauth
+  validates_uniqueness_of :uid, scope: :provider, on: :from_omniauth
 
   #Method for the OmniAuth strategies with devise
   #check https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
@@ -70,14 +72,14 @@ class User < ApplicationRecord
    def coordinator? #is the selected user a coordinator?
      result = false
      if self
-       if self != nil && self.coordinator
+       if self.id != nil && self.coordinator
          result = true
        end
      end
      return result
    end
 
-   def chief_id # Method to find the id of coordinator without having to type to much each time we need it
+   def chief_id # Method to find the id of coordinator id
      if self.coordinator?
        return self.coordinator.id
      else
@@ -198,6 +200,14 @@ class User < ApplicationRecord
   end
 
 #----------------------methods for all -----------------------------------
+  def sudo? #is he a client??
+    result = false
+    if self.sudo
+      result = true
+    end
+    return result
+  end
+
   def actif?
     if CoachesCrew.where(coach_id: self.coach.id).count >= 1 || self.has_crew?
       return true

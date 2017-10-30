@@ -10,7 +10,7 @@
       </div>
       <div class="useravatar">
         <% if coach.avatars.count != 0 %>
-          <%= image_tag coach.photo.url :thumb, class: "img-responsive" %>
+          <%= image_tag coach.photo.url, class: "img-responsive", size: "25x25" %>
         <% else %>
           <%= image_tag "http://irontrainer.co/wp-content/uploads/2017/01/personal-trainer-demonstrating-squat-lLas-Vegas-256x256.jpg" %>
         <% end %>
@@ -18,10 +18,10 @@
       <div class="coach-info">
         <span class="coach-title">
           <div class="dropdown">
-            <a class="btn_1 pull-left dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <a class="btn_1 pull-left dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 50px 15px;">
               <i class=" icon-cog"></i>
             </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"style="position: relative; margin: 20px 0 0;">
               <li>
                 <a class="text-center" href="#0" data-toggle="modal" data-target="#edit_coach<%= coach.id %>">
                   <i class="icon-edit-2"></i> editer...

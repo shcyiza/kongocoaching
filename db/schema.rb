@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023173708) do
+ActiveRecord::Schema.define(version: 20171030085623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,13 @@ ActiveRecord::Schema.define(version: 20171023173708) do
     t.index ["training_type_id"], name: "index_specialties_on_training_type_id", using: :btree
   end
 
+  create_table "sudos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sudos_on_user_id", using: :btree
+  end
+
   create_table "training_types", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -325,5 +332,6 @@ ActiveRecord::Schema.define(version: 20171023173708) do
   add_foreign_key "profiles", "crews"
   add_foreign_key "profiles", "users"
   add_foreign_key "specialties", "training_types"
+  add_foreign_key "sudos", "users"
   add_foreign_key "training_types", "crews"
 end
