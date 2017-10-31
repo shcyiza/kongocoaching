@@ -106,13 +106,7 @@
       <br>
         <% @coach.avatars.each do |pic| %>
           <div class="col-md-4">
-            <div class="wrapper16_9">
-              <div class="picture_frame">
-                <a class="magnific-picture notboldhover" href="<%= pic.photo.url %>" title="<%= pic.vignette %>">
-                  <%= image_tag pic.photo.url %>
-                </a>
-              </div>
-            </div>
+						<%= render "./shared/gallery_pic_instance", attached: pic %>
           </div>
         <% end %>
       </div>
