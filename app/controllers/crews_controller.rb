@@ -248,6 +248,13 @@ class CrewsController < ApplicationController
       params.require(:club).permit(:name, :address)
     end
 
+    def crew_params
+      params.require(:club).permit(
+        :name,
+        avatars_attributes: [:id, :photo, :is_default],
+      )
+    end
+
     def profile_params
       params.require(:profile).permit(
       :address,
