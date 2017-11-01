@@ -9,7 +9,7 @@
 </section>
 <div class="breadcrums">
   <%= link_to "Acceille", "/1/home", data: { turbolinks: false } %> >>
-  <%= link_to "Nos Service", "/1/services" %> >>
+  <%= link_to "Nos Services", "/1/services" %> >>
   <u><%= link_to @service.get_name, "", disabled: true %></u>
 </div>
 <div class="container margin_60">
@@ -51,7 +51,7 @@
       <div class="indent_title_in">
 			  <i class="icon-group"></i>
         <br>
-				<h3>Les coaches de ce service</h3>
+				<h3>Les coachs de ce service</h3>
 			</div>
 
           <% @service.its_coaches.each do |coach| %>
