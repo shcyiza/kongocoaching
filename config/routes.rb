@@ -4,11 +4,9 @@ Rails.application.routes.draw do
   resources :ad_media
   resources :news_subscribers
   resources :clubs
-  if Rails.env.production?
-    root to: 'visitors#index'
-  else
-    root to: 'kongo_coaching_pages#home'
-  end
+
+  root to: 'kongo_coaching_pages#home'
+
 
   resources :kickstarts
   resources :profile_variables
