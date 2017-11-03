@@ -41,7 +41,7 @@ class KongoCoachingPagesController < ApplicationController
   end
 
   def contact
-    #code
+    @contact = Contact.new
   end
 
   def about
