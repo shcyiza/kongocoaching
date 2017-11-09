@@ -37,7 +37,7 @@ class CrewsController < ApplicationController
         format.html { redirect_to @crew, notice: 'Profile modifier avec success.' }
         format.json { render :show, status: :ok, location: @profile }
       else
-        format.html { render :edit_profile }
+        format.html { redirect_back fallback_location: root_path }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
