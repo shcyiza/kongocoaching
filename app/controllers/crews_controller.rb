@@ -37,7 +37,7 @@ class CrewsController < ApplicationController
         format.html { redirect_to @crew, notice: 'Profile modifier avec success.' }
         format.json { render :show, status: :ok, location: @profile }
       else
-        format.html { redirect_back fallback_location: root_path }
+        format.html { redirect_back fallback_location: root_path, notice: "#{@profile.errors.full_messages }" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -184,9 +184,6 @@ class CrewsController < ApplicationController
     @crew = Crew.new(crew_params)
     respond_to do |format|
       if @crew.save
-        format.html { redirect_to @crew, notice: 'Crew was successfully created.' }
-        format.json { render :show, status: :created, location: @crew }
-      else
         format.html { render :new }
         format.json { render json: @crew.errors, status: :unprocessable_entity }
       end
@@ -267,7 +264,8 @@ class CrewsController < ApplicationController
       :dr_phone,
       profile_kids_infos_attributes: [:id, :birthyear, :_destroy],
       profile_ready_to_attributes: [:work_on_diet, :work_physically, :work_on_lifestyle],
-      profile_shape_satifactions_attributes: [:shape_rating, :shape_satification, :current_activity_frequency]
+      profile_shape_satifactions_attributes: [:shape_rating, :shape_satification, :current_activity_frequency],
+      ad_reach_attributes: [:ad_medium_id, :advertisable_id, :advertisable_type],
       )
     end
 end

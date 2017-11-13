@@ -13,6 +13,7 @@ class Crew < ApplicationRecord
   has_many :coaches_crews, dependent: :destroy
   has_many :coaches, through: :coaches_crews
   has_many :coach_placeholders, dependent: :destroy
+  has_many :ad_reaches, as: :advertisable, dependent: :destroy
 
   has_many :avatars, as: :attachable, dependent: :destroy
   has_many :video_links, as: :watchable, dependent: :destroy

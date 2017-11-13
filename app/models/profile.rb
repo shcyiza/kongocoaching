@@ -3,23 +3,27 @@ class Profile < ApplicationRecord
   belongs_to :crew
   belongs_to :coaches_crew, optional: true
 
-  has_many :profile_variables, dependent: :destroy, dependent: :destroy
-  has_many :profile_kids_infos, dependent: :destroy, dependent: :destroy
-  has_many :profile_shape_satifactions, dependent: :destroy
-  has_one :profile_ready_to, dependent: :destroy
-  has_many :profile_ideal_schedulings, dependent: :destroy
-
-  has_many :ad_reaches, dependent: :destroy
-  has_many :avatars, as: :attachable, dependent: :destroy
-
+  has_one :avatars, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :avatars, reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :profile_kids_infos, reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :profile_shape_satifactions, reject_if: :all_blank , reject_if: :check_if_same_as_last, allow_destroy: true
+
+  # Model that are dependent on the profile model and views
+  has_one :profile_ready_to, dependent: :destroy
+  has_one :ad_reach, dependent: :destroy
+  has_many :profile_kids_infos, dependent: :destroy
+  has_many :profile_shape_satifactions, dependent: :destroy
+  has_many :profile_ideal_schedulings, dependent: :destroy
   accepts_nested_attributes_for :profile_ready_to, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :ad_reach, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :profile_kids_infos, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :profile_shape_satifactions, reject_if: [:all_blank ,:check_if_same_as_last], allow_destroy: true
   accepts_nested_attributes_for :profile_ideal_schedulings, reject_if: :all_blank, allow_destroy: true
+
+  has_many :profile_variables, dependent: :destroy
+
   validates :user_id, uniqueness: true, if: :new_record?
   attr_accessor :has_kids
 
+  # initilize geocoding
   geocoded_by :address, latitude: :latitude, longitude: :longitude
   geocoded_by :proffession_address, latitude: :proffession_latitude, longitude: :proffession_longitude
   after_validation :geocode, if: :address_changed?
@@ -33,7 +37,15 @@ class Profile < ApplicationRecord
     if self.profile_ready_to != nil
       self.profile_ready_to
     else
-      ProfileReadyTo.new(profile: self)
+      ProfileReadyTo.new
+    end
+  end
+
+  def find_or_initialize_ad_reach
+    if self.ad_reach != nil
+      self.ad_reach
+    else
+      AdReach.new
     end
   end
 
@@ -46,7 +58,7 @@ class Profile < ApplicationRecord
         current_activity_frequency: last_saved.current_activity_frequency
       )
     else
-      ProfileShapeSatifaction.new(profile: self)
+      ProfileShapeSatifaction.new
     end
   end
 

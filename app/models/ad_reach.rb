@@ -1,5 +1,4 @@
-class AdReach < ApplicationRecord
-  belongs_to :profile
-  belongs_to :ad_medium
+class AdReach < ProfileSubModels
+  belongs_to :ad_medium, optional: true
   belongs_to :advertisable, polymorphic: true, optional: true
 end

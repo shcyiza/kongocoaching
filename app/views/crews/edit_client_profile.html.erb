@@ -4,7 +4,9 @@
     <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; top: 80px; left: 382.5px;">
 			<div class="box_style_2">
 				<div id="total_cart">
-					<%= image_tag @client.image , class: "img-circle", size:"150x150" %>
+					<%= if @client.image
+						image_tag @client.image, class: "img-circle", size:"150x150"
+					end %>
 				</div>
 				<h2><b><%= @client.name %></b></h2>
 				<h4 style="color:white;"><b>info</b></h4>
@@ -108,9 +110,29 @@
 				</div>
 			</div>
 			<!--End step -->
-
 			<div class="form_title">
-				<h3><strong>2</strong>Etat de forme</h3>
+				<h3><strong>2</strong>Comment vous nous connaissez?</h3>
+			</div>
+			<div class="step">
+				<%= f.simple_fields_for :ad_reach, @profile.find_or_initialize_ad_reach  do |k| %>
+					<%= k.input :advertisable_id, as: :hidden, input_html: { value: @crew.id } %>
+					<%= k.input :advertisable_type, as: :hidden, input_html: { value: @crew.class.name } %>
+					<div class="row">
+						<% AdCategory.all.each do |cat| %>
+							<div class="col-md-2">
+								<h3><%= cat.name %></h3>
+								<% cat.ad_media.each do |media| %>
+								<%= k.label :ad_medium_id, media.name %>
+								<%= k.radio_button :ad_medium_id, media.id %>
+								<% end %>
+							</div>
+						<% end %>
+					</div>
+				<% end %>
+			</div>
+			<!--End step -->
+			<div class="form_title">
+				<h3><strong>3</strong>Etat de forme</h3>
 			</div>
 			<div class="step">
 				<%= f.simple_fields_for :profile_shape_satifactions, @profile.initialize_shape_satifaction  do |k| %>
@@ -152,7 +174,7 @@
 			<!--End step -->
 
 			<div class="form_title">
-				<h3><strong>3</strong>Aidez-nous à vous aider</h3>
+				<h3><strong>4</strong>Aidez-nous à vous aider</h3>
 			</div>
 			<div class="step">
 				<%= f.simple_fields_for :profile_ready_to, @profile.find_or_initialize_ready_to  do |k| %>
@@ -188,7 +210,7 @@
 
 	function checkValue (event) {
 		var input = event.currentTarget
-		if (input.value >= 8) {
+		if (input.value >= 11) {
 			input.value = 10
 		} else if (input.value < 1){
 			input.value = 1
