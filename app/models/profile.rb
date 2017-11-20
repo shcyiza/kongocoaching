@@ -11,12 +11,12 @@ class Profile < ApplicationRecord
   has_one :ad_reach, dependent: :destroy
   has_many :profile_kids_infos, dependent: :destroy
   has_many :profile_shape_satifactions, dependent: :destroy
-  has_many :profile_ideal_schedulings, dependent: :destroy
+  has_many :profile_ideal_shedulings, dependent: :destroy
   accepts_nested_attributes_for :profile_ready_to, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :ad_reach, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :profile_kids_infos, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :profile_shape_satifactions, reject_if: [:all_blank ,:check_if_same_as_last], allow_destroy: true
-  accepts_nested_attributes_for :profile_ideal_schedulings, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :profile_ideal_shedulings, reject_if: :all_blank, allow_destroy: true
 
   has_many :profile_variables, dependent: :destroy
 
@@ -46,6 +46,14 @@ class Profile < ApplicationRecord
       self.ad_reach
     else
       AdReach.new
+    end
+  end
+
+  def find_or_initialize_ideal_shedule profile
+    if self.profile_ideal_shedulings.count != 0
+      self.profile_ideal_shedulings
+    else
+      return ProfileIdealSheduling.new(profile: profile)
     end
   end
 

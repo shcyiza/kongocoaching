@@ -92,4 +92,26 @@ module ApplicationHelper
     end
   end
 
+  def weekdays_array
+    [
+      {id: 1, name: "lundi"},
+      {id: 2, name: "mardi"},
+      {id: 3, name: "mercreudi"},
+      {id: 4, name: "jeudi"},
+      {id: 5, name: "vendredi"},
+      {id: 6, name: "samedi" },
+      {id: 7, name: "dimanche"}
+    ]
+  end
+
+  def day_periods_array
+    [
+      {id: 0, name: "n'importe quelle moment"},
+      {id: 1, name: "matin (entre 8 et 11h)"},
+      {id: 2, name: "midi (entre 11 et 14h)"},
+      {id: 3, name: "après-midi (entre 14 et 17h)"},
+      {id: 4, name: "soir (entre 17h et 20h)"},
+    ]
+  end
+
 end

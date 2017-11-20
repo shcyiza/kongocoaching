@@ -185,6 +185,12 @@
 						<div class="col-md-2"><%= k.check_box :work_on_lifestyle %><label>Hygiène de vie</label></div>
 					</div>
 				<% end %>
+
+				<div class="idealdays">
+					<h3>Sur quelle sont les jours ideale pour vous?</h3></div>
+					<br>
+					<%= render "/crews/client_profile/ideal_day_base", f:f %>
+				</div>
 			</div>
 			<!--End step -->
 				<%= button_tag class: 'invisible', id: "submit_btn", type: :submit do %>

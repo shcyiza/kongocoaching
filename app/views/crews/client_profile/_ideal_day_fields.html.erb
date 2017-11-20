@@ -1,0 +1,17 @@
+<div class="nested-fields row">
+  <div class="col-sm-3">
+    <%=
+    f.select :weekday,
+    weekdays_array.map { |u| [u[:name], u[:id]] },
+    { include_blank: true }
+    %>
+  </div>
+  <div class="col-sm-3">
+    <%=
+    f.select :dayperiod,
+    day_periods_array.map { |u| [u[:name], u[:id]] },
+    { include_blank: true }
+    %>
+    <%= link_to_remove_association "<i class='icon-trash'></i>".html_safe, f , class: "trash"%>
+  </div>
+</div>

@@ -263,6 +263,7 @@ class CrewsController < ApplicationController
       :dr_name,
       :dr_phone,
       profile_kids_infos_attributes: [:id, :birthyear, :_destroy],
+      profile_ideal_shedulings_attributes: [:id, :weekday, :dayperiod, :_destroy],
       profile_ready_to_attributes: [:work_on_diet, :work_physically, :work_on_lifestyle],
       profile_shape_satifactions_attributes: [:shape_rating, :shape_satification, :current_activity_frequency],
       ad_reach_attributes: [:ad_medium_id, :advertisable_id, :advertisable_type],
