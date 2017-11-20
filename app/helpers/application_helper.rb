@@ -59,7 +59,7 @@ module ApplicationHelper
     query_string_img =  params.map{|k,v| "#{k}=#{v}"}.join("&")
     query_string_address = CGI::escape place.address
     link_to "https://www.google.be/maps/place/#{query_string_address}", target: "_blank" do
-      image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string_img}", :alt => place.name
+      image_tag "https://maps.googleapis.com/maps/api/staticmap?#{query_string_img}", :alt => place.name
     end
   end
 
@@ -75,7 +75,7 @@ module ApplicationHelper
 
     query_string_img =  params.map{|k,v| "#{k}=#{v}"}.join("&")
     query_string_address = CGI::escape place.address
-      image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string_img}", :alt => place.name
+      image_tag "https://maps.googleapis.com/maps/api/staticmap?#{query_string_img}", :alt => place.name
   end
 
   def link_to_gmaps(place, text)
