@@ -53,7 +53,7 @@ module DescriptibleModels
 
   def html_description
     if self.get_description != nil
-      return self.description.html_safe
+      ActionController::Base.helpers.sanitize(self.description)
     end
   end
 
