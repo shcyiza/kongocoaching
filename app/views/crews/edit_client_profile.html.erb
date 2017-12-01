@@ -1,3 +1,5 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"></script>
+<%= javascript_include_tag 'gmapper', 'data-turbolinks-track' => 'load' %>
 <div class="row margintop" style="transform: none;">
 
 	<aside class="col-md-3" id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
@@ -43,9 +45,9 @@
 					<div class="col-md-5 col-sm-6">
 						<div class="form-group">
 							<label>Adresse du domicile <i class="icon-location-2"></i></label>
-							<%= f.input :address, label: false, placeholder: "rue X, XXX commnune, pays", input_html:{ id: "address-input"} %>
+							<%= f.input :address, label: false, placeholder: "rue X, XXX commnune, pays", input_html:{ id: "home"} %>
 							<%= f.input :proffesion, label: "Proféssion" %>
-							<%= f.input :proffession_address, label: "addresse où il exerce cette proféssion" %>
+							<%= f.input :proffession_address, label: "addresse où il exerce cette proféssion", input_html:{ id: "work"} %>
 							<div class="kids">
 								<%= render './crews/client_profile/kids_base_template', f: f %>
 							</div>
@@ -53,29 +55,42 @@
 					</div>
 					<div class="col-md-7 col-sm-6">
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="#home" data-toggle="tab" aria-expanded="true"> <i class="icon-location-2"></i> Club -> domicile client</a>
+							<li class="active">
+								<a href="#tab2home" data-toggle="tab" id="show_gmapper_4home">
+									<i class="icon-location-2"></i> Club -> domicile client
+								</a>
 							</li>
-							<li class=""><a href="#proffession" data-toggle="tab" aria-expanded="false"><i class="icon-location-2"></i> Club -> Travaille client</a>
+							<li>
+								<a href="#tab2work" data-toggle="tab" id="show_gmapper_4work">
+									<i class="icon-location-2"></i> Club -> Travaille client
+								</a>
 							</li>
 						</ul>
-						<div class="tab-content" style="min-height: 300px">
-							<div class="tab-pane active" id="home">
-								<div class="col-md-4">
-									<font color="green" size="200"><i class="icon-map"></i></font>
-									<div id="distance" data-from-address="<%= @crew.club.address %>" data-from-placename="<%= @crew.club.name %>">
-									</div>
-								</div>
-								<div class="col-md-8">
-									<div id="map"></div>
+					<div class="tab-content" style="min-height: 300px">
+						<div class="tab-pane active" id="tab2home">
+							<div class="col-md-4">
+								<font color="green" size="200"><i class="icon-map"></i></font>
+								<div id="distance_home" data-gmapper-endpoint="<%= @crew.club.address %>" data-gmapper-placename="<%= @crew.club.name %>" home>
 								</div>
 							</div>
-							<div class="tab-pane" id="proffession">
-
+							<div class="col-md-8">
+								<div id="map" home ></div>
+							</div>
+						</div>
+						<div class="tab-pane" id="tab2work">
+							<div class="col-md-4">
+								<font color="green" size="200"><i class="icon-map"></i></font>
+								<div id="distance_work" data-gmapper-endpoint="<%= @crew.club.address %>" data-gmapper-placename="<%= @crew.club.name %>" work>
+								</div>
+							</div>
+							<div class="col-md-8 active">
+								<div id="map" work></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<hr>
+			</div>
+			<hr>
 				<h4><div><i class="icon-warning"></i> Contacts importants</div></h4>
 				<div class="row emergency_box">
 					<h3>Contact en cas d'urgence</h3>
@@ -201,8 +216,36 @@
 
 
 </div>
-<%= render "/shared/distance_map" %>
+
 <script type="text/javascript">
+
+	var Club2home = new G_mapper(document.querySelector("input#home"), document.querySelector("#distance_home"), document.querySelector("#map[home]"));
+	var Club2work = new G_mapper(document.querySelector("input#work"), document.querySelector("#distance_work"), document.querySelector("#map[work]"));
+	Club2home.init();
+
+	document.querySelector("#show_gmapper_4work").addEventListener("click", tabClicked);
+
+	function tabClicked(){
+		setTimeout(function(){Club2work.init()}, 100);
+		document.querySelector("#show_gmapper_4work").removeEventListener("click", tabClicked);
+	};
+
+	Club2work.input_field.addEventListener("change", function(){
+		Club2work.reloadMap()
+	});
+
+	Club2home.input_field.addEventListener("change", function(){
+		Club2home.reloadMap()
+	});
+
+	Club2work.input_field.addEventListener("click" , function (){
+	 document.querySelector("#show_gmapper_4work").click()
+	});
+
+	Club2home.input_field.addEventListener("click" , function (){
+	 document.querySelector("#show_gmapper_4home").click()
+	});
+
 	var fake_btn = document.querySelector("#fake_submit_btn");
 	var shape_input = document.querySelector("#profile_profile_shape_satifactions_attributes_0_shape_rating");
 
