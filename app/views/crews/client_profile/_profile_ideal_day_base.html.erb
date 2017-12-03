@@ -1,7 +1,7 @@
 
 <%= link_to_add_association 'Ajoutez un jours idéal', f, :profile_ideal_shedulings,
  data: { association_insertion_node: "#days", association_insertion_method: :append },
- partial: './crews/client_profile/ideal_day_fields', class: "btn_1", id: "add_ideal_days_field"
+ partial: './crews/client_profile/profile_ideal_day_fields', class: "btn_1", id: "add_ideal_days_field"
 %>
 
 <br>
@@ -17,6 +17,6 @@
 
 <div id="days">
   <%= f.simple_fields_for :profile_ideal_shedulings, @profile.find_or_initialize_ideal_shedule(@profile)  do |s| %>
-    <%= render "/crews/client_profile/ideal_day_fields", f:s %>
+    <%= render "/crews/client_profile/profile_ideal_day_fields", f:s %>
   <% end %>
 </div>

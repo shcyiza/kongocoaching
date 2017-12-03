@@ -1,0 +1,8 @@
+<%= f.simple_fields_for :profile_ready_to, @profile.find_or_initialize_ready_to  do |k| %>
+  <div class="row">
+    <div class="col-md-3"><label>Sur quelle point est-il pret à travailler?</label></div>
+    <div class="col-md-2"><%= k.check_box :work_physically %><label>Sport</label></div>
+    <div class="col-md-2"><%= k.check_box :work_on_diet %><label>Alimentation</label></div>
+    <div class="col-md-2"><%= k.check_box :work_on_lifestyle %><label>Hygiène de vie</label></div>
+  </div>
+<% end %>

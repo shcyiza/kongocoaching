@@ -1,0 +1,35 @@
+<%= f.simple_fields_for :profile_shape_satifactions, @profile.initialize_shape_satifaction  do |k| %>
+  <div class="row">
+    <div class="col-md-3">
+      <label>Comment évaluez vous votre forme phisque actuelle?(de 1 à 10)</label>
+      <div class="col-md-5">
+        <%= k.input :shape_rating, label: false, input_html: { min: '1', max: '10' }  %>
+      </div>
+      <div class="col-md-7">
+        <h4><strong>/10</strong></h4>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label>Etes vous satifait de votre êtat de forme?</label>
+      <%= k.check_box :shape_satification %>
+    </div>
+    <div class="col-md-7"><%= k.label :current_activity_frequency, "Actuellement combien de fois par semaine pratiqué vous une activité phisique?" %>
+      <div class="col-md-3">
+        <%= k.label :current_activity_frequency, "5 à 7 fois" %>
+        <%= k.radio_button :current_activity_frequency, "4" %>
+      </div>
+      <div class="col-md-3">
+        <%= k.label :current_activity_frequency, "3 à 4 fois" %>
+        <%= k.radio_button :current_activity_frequency, "3" %>
+      </div>
+      <div class="col-md-3">
+        <%= k.label :current_activity_frequency, "1 à 2 fois" %>
+        <%= k.radio_button :current_activity_frequency, "2" %>
+      </div>
+      <div class="col-md-3">
+        <%= k.label :current_activity_frequency, "aucune lors des 6 dernier mois" %>
+        <%= k.radio_button :current_activity_frequency, "1" %>
+      </div>
+    </div>
+  </div>
+<% end %>

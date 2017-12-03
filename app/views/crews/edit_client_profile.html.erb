@@ -1,5 +1,3 @@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"></script>
-<%= javascript_include_tag 'gmapper', 'data-turbolinks-track' => 'load' %>
 <div class="row margintop" style="transform: none;">
 
 	<aside class="col-md-3" id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
@@ -35,190 +33,131 @@
 		</button>
 	</aside>
 
-		<div class="col-md-9 add_bottom_15">
-			<div class="form_title">
-				<h3><strong>1</strong>Infos de contact</h3>
-			</div>
-			<%= simple_form_for(@profile, url: "/crews/#{@crew.id}/clients/#{@client.id}/update", method: :post, html: { multipart: true }) do |f| %>
-			<div class="step">
-				<div class="row">
-					<div class="col-md-5 col-sm-6">
-						<div class="form-group">
-							<label>Adresse du domicile <i class="icon-location-2"></i></label>
-							<%= f.input :address, label: false, placeholder: "rue X, XXX commnune, pays", input_html:{ id: "home"} %>
-							<%= f.input :proffesion, label: "Proféssion" %>
-							<%= f.input :proffession_address, label: "addresse où il exerce cette proféssion", input_html:{ id: "work"} %>
-							<div class="kids">
-								<%= render './crews/client_profile/kids_base_template', f: f %>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-7 col-sm-6">
-						<ul class="nav nav-tabs">
-							<li class="active">
-								<a href="#tab2home" data-toggle="tab" id="show_gmapper_4home">
-									<i class="icon-location-2"></i> Club -> domicile client
-								</a>
-							</li>
-							<li>
-								<a href="#tab2work" data-toggle="tab" id="show_gmapper_4work">
-									<i class="icon-location-2"></i> Club -> Travaille client
-								</a>
-							</li>
-						</ul>
-					<div class="tab-content" style="min-height: 300px">
-						<div class="tab-pane active" id="tab2home">
-							<div class="col-md-4">
-								<font color="green" size="200"><i class="icon-map"></i></font>
-								<div id="distance_home" data-gmapper-endpoint="<%= @crew.club.address %>" data-gmapper-placename="<%= @crew.club.name %>" home>
-								</div>
-							</div>
-							<div class="col-md-8">
-								<div id="map" home ></div>
-							</div>
-						</div>
-						<div class="tab-pane" id="tab2work">
-							<div class="col-md-4">
-								<font color="green" size="200"><i class="icon-map"></i></font>
-								<div id="distance_work" data-gmapper-endpoint="<%= @crew.club.address %>" data-gmapper-placename="<%= @crew.club.name %>" work>
-								</div>
-							</div>
-							<div class="col-md-8 active">
-								<div id="map" work></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-				<h4><div><i class="icon-warning"></i> Contacts importants</div></h4>
-				<div class="row emergency_box">
-					<h3>Contact en cas d'urgence</h3>
-					<div class="col-md-4 col-sm-6">
-						<div class="form-group">
-							<%= f.input :emergency_contact, label: "Nom" %>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6">
-						<div class="form-group">
-							<%= f.input :emergency_contact_phone, label: "Numéro" %>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6">
-						<div class="form-group">
-							<%= f.input :emergency_contact_relation, label: "Relation" %>
-						</div>
-					</div>
-				</div>
-				<div class="row emergency_box">
-					<h3>Médecin traitant</h3>
-					<div class="col-md-6 col-sm-6">
-						<div class="form-group">
-							<%= f.input :dr_name, label: "Nom" %>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6">
-						<div class="form-group">
-							<%= f.input :dr_phone, label: "Numéro" %>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--End step -->
-			<div class="form_title">
-				<h3><strong>2</strong>Comment vous nous connaissez?</h3>
-			</div>
-			<div class="step">
-				<%= f.simple_fields_for :ad_reach, @profile.find_or_initialize_ad_reach  do |k| %>
-					<%= k.input :advertisable_id, as: :hidden, input_html: { value: @crew.id } %>
-					<%= k.input :advertisable_type, as: :hidden, input_html: { value: @crew.class.name } %>
-					<div class="row">
-						<% AdCategory.all.each do |cat| %>
-							<div class="col-md-2">
-								<h3><%= cat.name %></h3>
-								<% cat.ad_media.each do |media| %>
-								<%= k.label :ad_medium_id, media.name %>
-								<%= k.radio_button :ad_medium_id, media.id %>
-								<% end %>
-							</div>
-						<% end %>
-					</div>
-				<% end %>
-			</div>
-			<!--End step -->
-			<div class="form_title">
-				<h3><strong>3</strong>Etat de forme</h3>
-			</div>
-			<div class="step">
-				<%= f.simple_fields_for :profile_shape_satifactions, @profile.initialize_shape_satifaction  do |k| %>
-					<div class="row">
-						<div class="col-md-3">
-							<label>Comment évaluez vous votre forme phisque actuelle?(de 1 à 10)</label>
-							<div class="col-md-5">
-								<%= k.input :shape_rating, label: false, input_html: { min: '1', max: '10' }  %>
-							</div>
-							<div class="col-md-7">
-								<h4><strong>/10</strong></h4>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<label>Etes vous satifait de votre êtat de forme?</label>
-							<%= k.check_box :shape_satification %>
-						</div>
-						<div class="col-md-7"><%= k.label :current_activity_frequency, "Actuellement combien de fois par semaine pratiqué vous une activité phisique?" %>
-							<div class="col-md-3">
-								<%= k.label :current_activity_frequency, "5 à 7 fois" %>
-								<%= k.radio_button :current_activity_frequency, "4" %>
-							</div>
-							<div class="col-md-3">
-								<%= k.label :current_activity_frequency, "3 à 4 fois" %>
-								<%= k.radio_button :current_activity_frequency, "3" %>
-							</div>
-							<div class="col-md-3">
-								<%= k.label :current_activity_frequency, "1 à 2 fois" %>
-								<%= k.radio_button :current_activity_frequency, "2" %>
-							</div>
-							<div class="col-md-3">
-								<%= k.label :current_activity_frequency, "aucune lors des 6 dernier mois" %>
-								<%= k.radio_button :current_activity_frequency, "1" %>
-							</div>
-						</div>
-					</div>
-				<% end %>
-			</div>
-			<!--End step -->
-
-			<div class="form_title">
-				<h3><strong>4</strong>Aidez-nous à vous aider</h3>
-			</div>
-			<div class="step">
-				<%= f.simple_fields_for :profile_ready_to, @profile.find_or_initialize_ready_to  do |k| %>
-					<div class="row">
-						<div class="col-md-3"><label>Sur quelle point est-il pret à travailler?</label></div>
-						<div class="col-md-2"><%= k.check_box :work_physically %><label>Sport</label></div>
-						<div class="col-md-2"><%= k.check_box :work_on_diet %><label>Alimentation</label></div>
-						<div class="col-md-2"><%= k.check_box :work_on_lifestyle %><label>Hygiène de vie</label></div>
-					</div>
-				<% end %>
-
-				<div class="idealdays">
-					<h3>Sur quelle sont les jours ideale pour vous?</h3></div>
-					<br>
-					<%= render "/crews/client_profile/ideal_day_base", f:f %>
-				</div>
-			</div>
-			<!--End step -->
-				<%= button_tag class: 'invisible', id: "submit_btn", type: :submit do %>
-				 <i class="icon-floppy"></i>Enregister!
-				<% end %>
-			<% end %>
+	<div class="col-md-9 add_bottom_15">
+		<div class="form_title">
+			<h3><strong>1</strong>Infos de contact</h3>
 		</div>
+		<%= simple_form_for(@profile, url: "/crews/#{@crew.id}/clients/#{@client.id}/update", method: :post, html: { multipart: true }) do |f| %>
+		<div class="step">
+			<div class="row">
+				<div class="col-md-5 col-sm-6">
+					<div class="form-group">
+						<label>Adresse du domicile <i class="icon-location-2"></i></label>
+						<%= f.input :address, label: false, placeholder: "rue X, XXX commnune, pays", input_html:{ id: "home"} %>
+						<%= f.input :proffesion, label: "Proféssion" %>
+						<%= f.input :proffession_address, label: "addresse où il exerce cette proféssion", input_html:{ id: "work"} %>
+						<div class="kids">
+							<%= render './crews/client_profile/kids_base_template', f: f %>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-7 col-sm-6">
+					<ul class="nav nav-tabs">
+						<li class="active">
+							<a href="#tab2home" data-toggle="tab" id="show_gmapper_4home">
+								<i class="icon-location-2"></i> Club -> domicile client
+							</a>
+						</li>
+						<li>
+							<a href="#tab2work" data-toggle="tab" id="show_gmapper_4work">
+								<i class="icon-location-2"></i> Club -> Travaille client
+							</a>
+						</li>
+					</ul>
+				<div class="tab-content" style="min-height: 300px">
+					<div class="tab-pane active" id="tab2home">
+						<div class="col-md-4">
+							<font color="green" size="200"><i class="icon-map"></i></font>
+							<div id="distance_home" data-gmapper-endpoint="<%= @crew.club.address %>" data-gmapper-placename="<%= @crew.club.name %>" home>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div id="map" home ></div>
+						</div>
+					</div>
+					<div class="tab-pane" id="tab2work">
+						<div class="col-md-4">
+							<font color="green" size="200"><i class="icon-map"></i></font>
+							<div id="distance_work" data-gmapper-endpoint="<%= @crew.club.address %>" data-gmapper-placename="<%= @crew.club.name %>" work>
+							</div>
+						</div>
+						<div class="col-md-8 active">
+							<div id="map" work></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+			<h4><div><i class="icon-warning"></i> Contacts importants</div></h4>
+			<div class="row emergency_box">
+				<h3>Contact en cas d'urgence</h3>
+				<div class="col-md-4 col-sm-6">
+					<div class="form-group">
+						<%= f.input :emergency_contact, label: "Nom" %>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="form-group">
+						<%= f.input :emergency_contact_phone, label: "Numéro" %>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="form-group">
+						<%= f.input :emergency_contact_relation, label: "Relation" %>
+					</div>
+				</div>
+			</div>
+			<div class="row emergency_box">
+				<h3>Médecin traitant</h3>
+				<div class="col-md-6 col-sm-6">
+					<div class="form-group">
+						<%= f.input :dr_name, label: "Nom" %>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<div class="form-group">
+						<%= f.input :dr_phone, label: "Numéro" %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--End step -->
+		<div class="form_title">
+			<h3><strong>2</strong>Comment vous nous connaissez?</h3>
+		</div>
+		<div class="step">
+			<%= render "/crews/client_profile/ad_reach", f:f %>
+		</div>
+		<!--End step -->
+		<div class="form_title">
+			<h3><strong>3</strong>Etat de forme</h3>
+		</div>
+		<div class="step">
+			<%= render "/crews/client_profile/profile_shape_satifaction", f:f %>
+		</div>
+		<!--End step -->
 
+		<div class="form_title">
+			<h3><strong>4</strong>Aidez-nous à vous aider</h3>
+		</div>
+		<div class="step">
+			<%= render "/crews/client_profile/profile_ready_tos_field", f:f %>
 
+			<div class="idealdays">
+				<h3>Sur quelle sont les jours ideale pour vous?</h3></div>
+				<br>
+				<%= render "/crews/client_profile/profile_ideal_day_base", f:f %>
+			</div>
+			<!--End step -->
+			<%= button_tag class: 'invisible', id: "submit_btn", type: :submit do %>
+			 <i class="icon-floppy"></i>Enregister!
+			<% end %>
+		<% end %>
+	</div>
 </div>
-
+<%= javascript_include_tag 'gmapper', 'data-turbolinks-track' => 'load' %>
 <script type="text/javascript">
-
 	var Club2home = new G_mapper(document.querySelector("input#home"), document.querySelector("#distance_home"), document.querySelector("#map[home]"));
 	var Club2work = new G_mapper(document.querySelector("input#work"), document.querySelector("#distance_work"), document.querySelector("#map[work]"));
 	Club2home.init();
@@ -238,12 +177,12 @@
 		Club2home.reloadMap()
 	});
 
-	Club2work.input_field.addEventListener("click" , function (){
-	 document.querySelector("#show_gmapper_4work").click()
+	addMultipleListener(Club2work.input_field, 'click select', function(){
+		document.querySelector("#show_gmapper_4work").click()
 	});
 
-	Club2home.input_field.addEventListener("click" , function (){
-	 document.querySelector("#show_gmapper_4home").click()
+	addMultipleListener(Club2home.input_field, 'click select', function(){
+		document.querySelector("#show_gmapper_4home").click()
 	});
 
 	var fake_btn = document.querySelector("#fake_submit_btn");

@@ -1,7 +1,16 @@
+
 function G_mapper (input_field, distance_node, map_node) {
   this.input_field = input_field;
   this.distance_node = distance_node;
   this.map_node = map_node;
+};
+
+function loadGmapsScript(){
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.id = "gmapper_dependencies";
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg&libraries=places";
+  document.getElementsByTagName("head")[0].appendChild(script);
 };
 
 function calculateAndDisplayRoute(Obj, directionsService, directionsDisplay) {
@@ -47,11 +56,13 @@ G_mapper.prototype = {
     }
   },
   initMap: function() {
+    var autocomplete = new google.maps.places.Autocomplete(this.input_field);
     if ( this.getGeopointA() !== "" ) {
       var directionsService = new google.maps.DirectionsService;
       var directionsDisplay = new google.maps.DirectionsRenderer;
       directionsDisplay.setMap(new google.maps.Map(this.map_node, {}));
       calculateAndDisplayRoute(this, directionsService, directionsDisplay);
+      console.log("map initialized");
     } else {
       this.distance_node.innerHTML = "<b>Remplissez-une addresse a gauche...</b>";
     };
@@ -63,7 +74,13 @@ G_mapper.prototype = {
   },
   init: function() {
     var self = this
-    self.initMap();
-    console.log("map initialized")
+    if (document.getElementById("gmapper_dependencies")) {
+      self.initMap();
+    } else {
+      loadGmapsScript();
+      document.getElementById("gmapper_dependencies").addEventListener("load", function(){
+        self.initMap();
+      });
+    }
   },
 };

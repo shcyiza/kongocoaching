@@ -94,3 +94,10 @@ function popupCenter(url, width, height, name) {
   var top = (screen.height/2)-(height/2);
   return window.open(url, name, "menubar=no,toolbar=no,status=no,width="+width+",height="+height+",toolbar=no,left="+left+",top="+top);
 }
+
+function addMultipleListener(element, eventNames, listener) {
+  var events = eventNames.split(' ');
+  for (var i=0, iLen=events.length; i<iLen; i++) {
+    element.addEventListener(events[i], listener, false);
+  }
+}

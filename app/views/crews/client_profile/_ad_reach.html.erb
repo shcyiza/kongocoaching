@@ -1,0 +1,15 @@
+<%= f.simple_fields_for :ad_reach, @profile.find_or_initialize_ad_reach  do |k| %>
+  <%= k.input :advertisable_id, as: :hidden, input_html: { value: @crew.id } %>
+  <%= k.input :advertisable_type, as: :hidden, input_html: { value: @crew.class.name } %>
+  <div class="row">
+    <% AdCategory.all.each do |cat| %>
+      <div class="col-md-2">
+        <h3><%= cat.name %></h3>
+        <% cat.ad_media.each do |media| %>
+        <%= k.label :ad_medium_id, media.name %>
+        <%= k.radio_button :ad_medium_id, media.id %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
