@@ -1,15 +1,16 @@
 
-function G_mapper (input_field, distance_node, map_node) {
+function G_mapper (input_field, distance_node, map_node, gmaps_key) {
   this.input_field = input_field;
   this.distance_node = distance_node;
   this.map_node = map_node;
+  this.gmaps_key = gmaps_key
 };
 
-function loadGmapsScript(){
+function loadGmapsApi(gmaps_key){
   var script = document.createElement("script");
   script.type = "text/javascript";
   script.id = "gmapper_dependencies";
-  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg&libraries=places";
+  script.src = "https://maps.googleapis.com/maps/api/js?key=" + gmaps_key + "&libraries=places";
   document.getElementsByTagName("head")[0].appendChild(script);
 };
 
@@ -74,10 +75,11 @@ G_mapper.prototype = {
   },
   init: function() {
     var self = this
+    // only run the map if google maps API is loaded
     if (document.getElementById("gmapper_dependencies")) {
       self.initMap();
     } else {
-      loadGmapsScript();
+      loadGmapsApi(this.gmaps_key);
       document.getElementById("gmapper_dependencies").addEventListener("load", function(){
         self.initMap();
       });

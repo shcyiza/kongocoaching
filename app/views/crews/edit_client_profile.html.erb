@@ -158,8 +158,18 @@
 </div>
 <%= javascript_include_tag 'gmapper', 'data-turbolinks-track' => 'load' %>
 <script type="text/javascript">
-	var Club2home = new G_mapper(document.querySelector("input#home"), document.querySelector("#distance_home"), document.querySelector("#map[home]"));
-	var Club2work = new G_mapper(document.querySelector("input#work"), document.querySelector("#distance_work"), document.querySelector("#map[work]"));
+	var Club2home = new G_mapper(
+		document.querySelector("input#home"),
+		document.querySelector("#distance_home"),
+		document.querySelector("#map[home]"),
+		"<%= google_places_key %>"
+	);
+	var Club2work = new G_mapper(
+		document.querySelector("input#work"),
+		document.querySelector("#distance_work"),
+		document.querySelector("#map[work]"),
+		"<%= google_places_key %>"
+	);
 	Club2home.init();
 
 	document.querySelector("#show_gmapper_4work").addEventListener("click", tabClicked);

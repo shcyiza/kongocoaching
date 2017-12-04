@@ -46,6 +46,14 @@ module ApplicationHelper
     return bg_path
   end
 
+  def google_places_key
+    if Rails.env == 'development' || Rails.env == 'test'
+      return Rails.application.secrets[:google_places_key]
+    else
+      return ENV['GOOGLE_PLACE_KEY']
+    end
+  end
+
   def link_map_for(place, options = {})
     params = {
       center: [place.latitude, place.longitude].join(","),
@@ -53,7 +61,7 @@ module ApplicationHelper
       size: "300x300",
       markers: [place.latitude, place.longitude].join(","),
       sensor: true,
-      key: "AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"
+      key: "#{google_places_key}"
       }.merge(options)
 
     query_string_img =  params.map{|k,v| "#{k}=#{v}"}.join("&")
@@ -70,7 +78,7 @@ module ApplicationHelper
       size: "300x300",
       markers: [place.latitude, place.longitude].join(","),
       sensor: true,
-      key: "AIzaSyAvb2OQWipY6XeXhNeHRSgFl5xT-_Z8_rg"
+      key: "#{google_places_key}"
       }.merge(options)
 
     query_string_img =  params.map{|k,v| "#{k}=#{v}"}.join("&")
