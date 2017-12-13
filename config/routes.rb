@@ -68,10 +68,18 @@ Rails.application.routes.draw do
   post 'crews/:id/destroypic/:media_id', to: 'multimedia#destroy_picture'
   post 'crews/:id/setdefaultpic/:media_id', to: 'multimedia#make_this_pic_default'
   post 'crews/:id/setdefaultvid/:media_id', to: 'multimedia#make_this_vid_default'
-  #those routes is so complicated to keep it polymorphic, therefore the class names and the id of the polymorphic owner had to be passed as wel
+  #Sinds those routes are meant to create polymorphic records,
+  #the class name and the id of the polymorphic owner had to be passed as wel
   post 'crews/:id/add_avatar/:attachable_type/:key', to: 'multimedia#add_avatar'
   post 'crews/:id/add_videolink/:watchable_type/:key', to: 'multimedia#add_videolink'
 
   post 'crews/:id/edit_avatar/:media_id', to: 'multimedia#update_this_pic'
   post 'crews/:id/edit_video/:media_id', to: 'multimedia#update_this_vid'
+
+  scope '/v1' do
+    scope '/storefront' do
+      get '/get_crew' => 'api/v1/storefront_api_responder#index'
+    end
+  end
+
 end

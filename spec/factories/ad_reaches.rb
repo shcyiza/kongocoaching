@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :ad_reach do
     profile nil
     ad_medium nil

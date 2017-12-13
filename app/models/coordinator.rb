@@ -8,4 +8,8 @@ class Coordinator < ApplicationRecord
   def self.all_users
     User.joins(:coordinator)
   end
+
+  def name
+    self.user.name
+  end
 end

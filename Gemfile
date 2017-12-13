@@ -14,7 +14,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'modernizr-rails'
 gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
 gem "paperclip", git: "https://github.com/thoughtbot/paperclip.git"
 gem 'access-granted', '~> 1.1.0'
 gem "time_splitter"
@@ -25,6 +24,13 @@ gem 'trix'
 gem 'truncate_html'
 gem 'geocoder'
 gem 'activeadmin', github: 'activeadmin'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'bootstrap-sass'
+gem 'devise'
+gem 'high_voltage'
+gem 'pg'
+gem 'simple_form'
+gem 'therubyracer', :platform=>:ruby
 
 #gems for the emails
 gem 'sidekiq'
@@ -45,32 +51,22 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 #end Oauth
 
+#api gems
+gem 'jbuilder', '~> 2.5'
+gem 'rack-cors', :require => 'rack/cors'
+gem 'json_api_responders'
+#end api gems
+
 group :production do
   gem 'aws-sdk', '~> 2.3'
   gem 'exception_notification'
 end
 
-group :development, :test do
-  gem 'byebug', platform: :mri
-  gem 'pry-byebug'
-  gem "letter_opener"
-  gem 'capybara-email'
-end
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap-sass'
-gem 'devise'
-gem 'high_voltage'
-gem 'pg'
-gem 'simple_form'
-gem 'therubyracer', :platform=>:ruby
-
-group :development do
   gem 'better_errors'
   gem 'guard-bundler'
   gem 'guard-rails'
@@ -81,10 +77,15 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
+  gem 'byebug', platform: :mri
+  gem 'pry-byebug'
+  gem "letter_opener"
+  gem 'capybara-email'
 end
 
+
 group :development, :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
 end

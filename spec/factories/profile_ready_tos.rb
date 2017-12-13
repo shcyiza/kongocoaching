@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :profile_ready_to do
     profile nil
     work_on_diet false

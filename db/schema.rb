@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030085623) do
+ActiveRecord::Schema.define(version: 20171211210136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,15 @@ ActiveRecord::Schema.define(version: 20171030085623) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "crew_storefront_keys", force: :cascade do |t|
+    t.integer  "crew_id"
+    t.string   "public_key"
+    t.string   "secret_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crew_id"], name: "index_crew_storefront_keys_on_crew_id", using: :btree
   end
 
   create_table "crews", force: :cascade do |t|
@@ -320,6 +329,7 @@ ActiveRecord::Schema.define(version: 20171030085623) do
   add_foreign_key "ad_reaches", "profiles"
   add_foreign_key "clubs_crews", "clubs"
   add_foreign_key "clubs_crews", "crews"
+  add_foreign_key "crew_storefront_keys", "crews"
   add_foreign_key "kickstarts", "coaches_crews"
   add_foreign_key "kickstarts", "crews"
   add_foreign_key "news_subscribers", "crews"

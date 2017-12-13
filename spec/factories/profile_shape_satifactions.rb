@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :profile_shape_satifaction do
     profile nil
     shape_rating 1

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :video_link do
     video_path "MyString"
     filmable_id ""

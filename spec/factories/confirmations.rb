@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :confirmation do
     confirmed false
     confirmable_type "MyString"

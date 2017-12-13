@@ -6,6 +6,7 @@ class Crew < ApplicationRecord
   has_many :news_subscribers, dependent: :destroy
 
   has_many :profiles
+  has_many :crew_storefront_keys, dependent: :destroy
 
   has_many :clubs_crews, dependent: :destroy
   has_many :clubs, through: :clubs_crews

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :kickstart do
     coaches_crew nil
     crew nil
