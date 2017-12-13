@@ -78,7 +78,9 @@ Rails.application.routes.draw do
 
   scope '/v1' do
     scope '/storefront' do
-      get '/get_crew' => 'api/v1/storefront_api_responder#index'
+      get '/home', to: 'api/v1/storefront_api_responder#index'
+      get '/coaches', to: 'api/v1/storefront_api_responder#coaches_index'
+      get '/services', to: 'api/v1/storefront_api_responder#services_index'
     end
   end
 

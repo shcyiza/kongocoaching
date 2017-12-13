@@ -1,7 +1,7 @@
 class Api::V1::StorefrontApiResponderController < Api::V1::ApiBaseController
-  before_action :restrict_access
+  before_action :set_authorized_crew
 
-  def restrict_access
+  def set_authorized_crew
     public_key = request.headers["HTTP_PUBLIC_KEY"]
     private_key = request.headers["HTTP_SECRET_KEY"]
     @authorize_crew_id = CrewStorefrontKey.check_credentials_and_return_crew public_key, private_key
@@ -13,8 +13,15 @@ class Api::V1::StorefrontApiResponderController < Api::V1::ApiBaseController
   end
 
   def index
-   render :partial => "api/v1/storefront/index.json"
+   render partial: "api/v1/storefront/index.json"
   end
 
+  def coaches_index
+    render partial: "api/v1/storefront/coaches_index.json"
+  end
+
+  def services_index
+    render partial: "api/v1/storefront/services_index.json"
+  end
 
 end
