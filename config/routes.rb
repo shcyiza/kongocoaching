@@ -81,6 +81,8 @@ Rails.application.routes.draw do
       get '/home', to: 'api/v1/storefront_api_responder#index'
       get '/coaches', to: 'api/v1/storefront_api_responder#coaches_index'
       get '/services', to: 'api/v1/storefront_api_responder#services_index'
+      get '/coaches/:id', to: 'api/v1/storefront_api_responder#coaches_show'
+      get '/services/:id', to: 'api/v1/storefront_api_responder#services_show'
     end
   end
 

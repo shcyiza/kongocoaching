@@ -8,7 +8,7 @@ class CoachesCrew < ApplicationRecord
   #DescriptibleModels is a module that contain all the inheritance of the models who has columns name, description and is attachable or watchable
   #attachable is the polymorphic owner of the avatar model and watchable of video_links
   include DescriptibleModels
-  
+
   accepts_nested_attributes_for :specialties, reject_if: :all_blank, allow_destroy: true
   #avoid that one coach can be assigned more than once to one crew
   validates_presence_of :coach, if: :validate_new_cc?
@@ -30,6 +30,14 @@ class CoachesCrew < ApplicationRecord
       unless self.coach.description == nil
         result = true
       end
+    end
+    return result
+  end
+
+  def coach_for?(crew)
+    result = false
+    if self.crew.id == crew.id
+      result = true
     end
     return result
   end

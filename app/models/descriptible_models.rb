@@ -26,6 +26,14 @@ module DescriptibleModels
     end
   end
 
+  def default_avatar
+    if self.avatars.has_default
+      self.avatars.get_default
+    else
+      self.avatars.first
+    end
+  end
+
   def video
     #test on va changer eventuellement
     self.video_links.get_default
