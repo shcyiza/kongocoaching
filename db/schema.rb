@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211210136) do
+ActiveRecord::Schema.define(version: 20171220105556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,18 @@ ActiveRecord::Schema.define(version: 20171211210136) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "annoncements", force: :cascade do |t|
+    t.integer  "crew_id"
+    t.string   "titel"
+    t.string   "cta"
+    t.text     "description"
+    t.date     "begin_date"
+    t.date     "end_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["crew_id"], name: "index_annoncements_on_crew_id", using: :btree
   end
 
   create_table "avatars", force: :cascade do |t|
@@ -250,6 +262,23 @@ ActiveRecord::Schema.define(version: 20171211210136) do
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 
+  create_table "social_links", force: :cascade do |t|
+    t.string   "url"
+    t.integer  "social_medium_id"
+    t.string   "socilizable_type"
+    t.integer  "socializable_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["social_medium_id"], name: "index_social_links_on_social_medium_id", using: :btree
+  end
+
+  create_table "social_media", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "specialties", force: :cascade do |t|
     t.integer  "training_type_id"
     t.integer  "specializable_id"
@@ -327,6 +356,7 @@ ActiveRecord::Schema.define(version: 20171211210136) do
   add_foreign_key "ad_media", "ad_categories"
   add_foreign_key "ad_reaches", "ad_media"
   add_foreign_key "ad_reaches", "profiles"
+  add_foreign_key "annoncements", "crews"
   add_foreign_key "clubs_crews", "clubs"
   add_foreign_key "clubs_crews", "crews"
   add_foreign_key "crew_storefront_keys", "crews"
@@ -341,6 +371,7 @@ ActiveRecord::Schema.define(version: 20171211210136) do
   add_foreign_key "profiles", "coaches_crews"
   add_foreign_key "profiles", "crews"
   add_foreign_key "profiles", "users"
+  add_foreign_key "social_links", "social_media"
   add_foreign_key "specialties", "training_types"
   add_foreign_key "sudos", "users"
   add_foreign_key "training_types", "crews"

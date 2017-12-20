@@ -3,6 +3,7 @@ class Crew < ApplicationRecord
   has_many :training_types, dependent: :destroy
   has_many :trainings, through: :coaches_crews
   has_many :kickstarts, dependent: :destroy
+  has_many :annoncements, dependent: :destroy
   has_many :news_subscribers, dependent: :destroy
 
   has_many :profiles
@@ -15,12 +16,15 @@ class Crew < ApplicationRecord
   has_many :coaches, through: :coaches_crews
   has_many :coach_placeholders, dependent: :destroy
   has_many :ad_reaches, as: :advertisable, dependent: :destroy
+  has_many :social_links, as: :socializable, dependent: :destroy
 
   has_many :avatars, as: :attachable, dependent: :destroy
   has_many :video_links, as: :watchable, dependent: :destroy
-  accepts_nested_attributes_for :avatars
-  accepts_nested_attributes_for :video_links
+
+  accepts_nested_attributes_for :avatars, allow_destroy: true
+  accepts_nested_attributes_for :video_links, allow_destroy: true
   accepts_nested_attributes_for :coaches, allow_destroy: true
+  accepts_nested_attributes_for :social_links, allow_destroy: true
 
   def owner
     self.coordinator.user
