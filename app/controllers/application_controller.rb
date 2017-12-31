@@ -33,6 +33,11 @@ class ApplicationController < ActionController::Base
     VideoLink.create! video_path: link, watchable: watchable
   end
 
+  def add_social_link sm_id, url, socializable
+    network_id = SocialMedium.find(sm_id).id
+    SocialLink.create! social_medium_id: network_id,url: url, socializable: socializable
+  end
+
   def set_as_confirmable confirmable
     Confirmation.create! confirmable: confirmable
   end

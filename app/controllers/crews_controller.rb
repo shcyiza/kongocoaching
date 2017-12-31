@@ -220,7 +220,11 @@ class CrewsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_crew
-      @crew = Crew.find(params[:id])
+      if params[:crew_id]
+        @crew = Crew.find(params[:crew_id])
+      else
+        @crew = Crew.find(params[:id])
+      end
       authorize! :show, @crew
     end
 

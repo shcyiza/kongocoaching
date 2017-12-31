@@ -17,7 +17,10 @@ Rails.application.routes.draw do
   resources :trainings
   resources :training_types
   resources :coaches
-  resources :crews
+  
+  resources :crews do
+    resources :annoncements
+  end
 
   get '/home', to: 'visitors#index'
   get '/edit_profile' , to: 'users#edit_profile'
@@ -39,6 +42,7 @@ Rails.application.routes.draw do
   get 'crews/:id/clubs/:key', to: 'crews#club_show'
   get 'crews/:id/clients/:client_id/edit', to: 'crews#edit_client_profile'
   post 'crews/:id/clients/:client_id/update', to: 'crews#update_client_profile'
+
 
   get '/1/home', to: 'kongo_coaching_pages#home'
   get '/1/contact', to: 'kongo_coaching_pages#contact'
