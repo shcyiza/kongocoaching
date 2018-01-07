@@ -8,7 +8,7 @@
     </h2>
 </section>
 <div class="breadcrums">
-  <%= link_to "Acceille", "/1/home", data: { turbolinks: false } %> >>
+  <%= link_to "Accueil", "/1/home", data: { turbolinks: false } %> >>
   <%= link_to "Notre équipe", "/1/coaches" %> >>
   <u><%= link_to @coach.get_name, "", disabled: true %></u>
 </div>
@@ -48,7 +48,7 @@
 				<div class="indent_title_in">
 				  <i class="icon_document_alt"></i>
 					<br>
-					<h3>Ses Service et Entrainement</h3>
+					<h3>Ses services et entrainements</h3>
 				</div>
 				<% @coach.training_types.each do |srvc| %>
 					<div class="col-md-6">
