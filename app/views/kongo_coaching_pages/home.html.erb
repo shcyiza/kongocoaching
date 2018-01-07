@@ -98,6 +98,7 @@
     <div class="container">
       <div class="owl-carousel team-carousel">
         <% @coaches.each do |coach| %>
+
           <div class="team-item">
             <div class="team-item-img" style="height: 300px;">
               <%= show_his_pic_or_default coach %>
@@ -118,6 +119,7 @@
               <p>Personal Trainer</p>
             </div>
           </div>
+
         <% end %>
       </div>
       <a href="/1/coaches" class="btn_full">Voir toute notre équipe</a>
